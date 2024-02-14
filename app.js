@@ -1,34 +1,36 @@
-///////////////////////////////////
-// Step1] Node Server 환경 구축 단계
-///////////////////////////////////
-// Express 모듈을 불러옵니다.
+const express = require('express')
+const path = require('path')
+const app = express()
+const port = 3000
 
-const express = require('express');
-//경로 관련 유틸리티 모듈
-const path = require('path');
 
-//Express 애플리케이션 생성
-const app = express();
+app.set('view engine', 'ejs');
 
-//애플리케이션 포트 설정
-//process.env.PORT : express 설치시 설정된 포트의 환경변수값
-//Node.js의 기본포트 default값은 3000
-app.set('port', process.env.PORT || 3000);
+// root 폴더는 Proj1 으로 설정
+app.use(express.static(__dirname));
 
-////////////////////////////////////////
-// Step2] 사용자 요청에 대한 서비스 준비 단계
-////////////////////////////////////////
-// 루트경로(서버의 IP 또는 도메인 이름 또는 localhost)에 대한 GET 요청 핸들러를 정의
+// req.body 해독을 위한 미들웨어 장착
+app.use(express.urlencoded({ extended: true }));
+
+// views 폴더 경로 변경
+app.set('views', path.join(__dirname, 'public', 'views'));
+
+
+// 메인페이지는 index.html
 app.get('/', (req, res) => {
-    //__dirname : 현재 js 파일이 있는 경로
-    res.sendFile(path.join(__dirname,'/index.html'));
-});
-
-//////////////////////////////////////
-// Step3] 서비스 시작 단계
-//////////////////////////////////////
-//애플리케이션을 지정된 포트에서 실행
-app.listen(app.get('port'), () => {
-    console.log(app.get('port'), '번 포트에서 대기중')
+    res.sendFile(__dirname, 'index.html')
 })
 
+// 로그인 시도시 데시보드로 이동
+app.post('/dashboard',(req,res)=>{
+    const {username, password} = req.body
+
+    if (username==='kang' && password==="1111"){
+        res.render('dashboard',{username})
+    }
+
+})
+
+app.listen(port, () => {
+    console.log(`Example app listening at http://localhost:${port}`);
+});

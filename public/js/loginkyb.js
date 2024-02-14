@@ -12,12 +12,12 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 // 정적 파일을 제공하기 위해 'public' 디렉토리를 정적으로 설정
 // join, path.join 복습합시다.
-app.use(express.static(path.join(__dirname,'public', 'login_kyb.html')));
-// console.log(path.join(__dirname, '../longin_kyb.html'))
+app.use(express.static(path.join(__dirname, '../login_kyb.html')));
+console.log(path.join(__dirname, '../longin_kyb.html'))
 // 라우트 정의
 app.get('/', (req, res) => {
-    res.sendFile(path.join(path.dirname(__dirname),'public', 'login_kyb.html')); // Send the HTML file
-    // console.log(path.join(path.dirname(__dirname), 'login_kyb.html'))
+    res.sendFile(path.join(path.dirname(__dirname), 'login_kyb.html')); // Send the HTML file
+    console.log(path.join(path.dirname(__dirname), 'login_kyb.html'))
 });
 
 app.post('../login_kyb', (req, res) => {
