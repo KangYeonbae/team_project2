@@ -8,10 +8,7 @@ a, a:link, a:visited{
     color: inherit;
     text-decoration: none;
 }
-li{
-    list-style: none;
-}
-.container{
+.container {
     width: 100%;
     margin: 0 auto;
     position: absolute;
@@ -21,51 +18,49 @@ li{
     text-shadow: -1px 0px black, 0px 1px black, 1px 0px black, 0px -1px black;
     padding: 1rem;
     z-index: 1;
-    background: #3c3c3c;
+    background: none;
 }
-ul{
-    text-align: center;
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
 }
 .nav-item {
-    list-style: none;
-    float: none;
     padding: 10px;
-    display: inline-block;
-    align-items: center;
-    margin: 5px 10px;
-    justify-content: center;
-    width: 150px;
     position: relative;
     font-weight: bold;
 }
-header button{
-    background: transparent;
-    border: 0;
-    cursor: pointer;
+
+.nav-item h1 {
+    margin: 0;
+    padding-right: 20px; /* "Trip" 텍스트와 다음 요소 간의 간격을 설정 */
 }
-header button{
-    font-size: 2rem;
-    font-weight: bold;
+
+.nav-item:first-child {
+    margin-right: auto; /* 마지막 요소를 오른쪽으로 밀어줍니다. */
 }
+
 nav h2 {
+    float: right;
+    margin: 0;
     font-size: 2rem;
 }
+
 .sub-nav {
     display: none;
+    width: 150px;
     background-color: #555;
     padding: 10px;
-    margin: auto;
-}
-.nav-item:hover .sub-nav {
-    display: inline-block;
     position: absolute;
     top: 100%;
     left: 0;
 }
-nav {
-    position: sticky;
-    top: 0;
-    z-index: 1000;
+.nav-item:hover .sub-nav {
+    display: block;
 }
 .nav-link:hover{
     color: yellow;
