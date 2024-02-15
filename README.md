@@ -13,7 +13,7 @@
 다만 좀더 디테일하게 자료들이 들어가야하기에
 큼직한 도시들에서 서울시로 지역 변동이 되었습니다.
 
-![MainPage](readmeimg/1차회의.jpg)  
+![first](readmeimg/1.JPG)  
 
 <hr>
 
