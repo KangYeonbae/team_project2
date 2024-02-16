@@ -203,7 +203,7 @@ html 에 <script>로 js 파일을 넣어 실행시킬 수 있듯
 js 안에도 js 를 넣어 실행시킬수 있다는 내용을 찾앗습니다.
 
 명령어는
-```[js]
+```js
 app.use('/', require('./routes/post.js') );
 ```
 
