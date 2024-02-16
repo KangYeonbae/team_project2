@@ -53,7 +53,7 @@
 - 실패시 실패 메세지 나오기
 - 성공 후 연결페이지는 영상페이지가 아닌 일반페이지.
 
-### 기존코드
+### 기존코드(Oracle 연결전 NodeJS로만 로그인페이지 처리 코드)
 ```js
 const express = require('express')
 const path = require('path')
@@ -63,7 +63,7 @@ const port = 3000
 
 app.set('view engine', 'ejs');
 
-// root 폴더는 Proj1 으로 설정
+// root 폴더는 현재폴더로 설정
 app.use(express.static(__dirname));
 
 // req.body 해독을 위한 미들웨어 장착
@@ -93,7 +93,7 @@ app.listen(port, () => {
 });
 ```
 
-### 새로 작성되어진 코드
+### 새로 작성되어진 코드 (Oracle과 연결되어진코드)
 ```js
 const express = require('express');
 const bodyParser = require('body-parser');
