@@ -38,3 +38,174 @@
 
 약 46초간 진행되며, 영상이끝나면 자동으로 다음페이지로 넘어갈 수 있도록 되어져있습니다.
 
+## 2월 16일
+
+### Oracle 과 로그인페이지 연결완료!!!
+
+처음 Oracle과 연결없이, ![NODE JS](https://img.shields.io/badge/Node.js-339933?style=flat-square&logo=Node.js&logoColor=white) 에 if, else 값으로 로그인 연결을 해두었었는데,
+이번에는 로그인페이지를 Oracle 과 연결 성공 하였습니다.!
+
+기본 기존에 nodeJS 에서 했던 코드와는 좀 많이달라졌습니다.
+>> 내가 원한것
+- localhost:3000 을 실행하였을때 제일먼저뜨는것이 메인 영상페이지
+- 영상실행 후 자동으로 로그인페이지로 넘어가기
+- 로그인은 Oracle table 에 저장되어져있는 ID와 Password 값으로 로그인성공하기.
+- 실패시 실패 메세지 나오기
+- 성공 후 연결페이지는 영상페이지가 아닌 일반페이지.
+
+### 기존코드
+```js
+const express = require('express')
+const path = require('path')
+const app = express()
+const port = 3000
+
+
+app.set('view engine', 'ejs');
+
+// root 폴더는 Proj1 으로 설정
+app.use(express.static(__dirname));
+
+// req.body 해독을 위한 미들웨어 장착
+app.use(express.urlencoded({ extended: true }));
+
+// views 폴더 경로 변경
+app.set('views', path.join(__dirname, 'public', 'views'));
+
+
+// 메인페이지는 index.html
+app.get('/', (req, res) => {
+    res.sendFile(__dirname, 'index.html')
+})
+
+// 로그인 시도시 데시보드로 이동
+app.post('/dashboard',(req,res)=>{
+    const {username, password} = req.body
+
+    if (username==='kang' && password==="1111"){
+        res.render('dashboard',{username})
+    }
+
+})
+
+app.listen(port, () => {
+    console.log(`Example app listening at http://localhost:${port}`);
+});
+```
+
+### 새로 작성되어진 코드
+```js
+const express = require('express');
+const bodyParser = require('body-parser');
+const oracledb = require('oracledb');
+const session = require('express-session');
+const dbConfig = require('./dbconfig');
+const path = require('path'); // path 모듈 추가
+
+oracledb.autoCommit = true;
+
+const app = express();
+const port = 3000;
+
+// express-session 미들웨어 설정
+app.use(session({
+    secret: 'mySecretKey', // 세션을 암호화하기 위한 임의의 키
+    resave: false,
+    saveUninitialized: true,
+    //세션의 유지시간 기본값은 브러우져 종료시까지 유지
+    cookie: {
+        maxAge: 5000 // 단위는 밀리세컨드
+    }
+}));
+
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'public', 'views')); // views 디렉토리 설정
+
+const server = app.listen(3000, () => {
+    console.log(`Server is running at http://localhost:3000`);
+});
+// 정적인 파일 참조를 nginx html 폴더로 지정 (이 파일을 참조해야 오라클에서 db를 불러올수있음 꼭필요함!!!)
+// 개발환경
+const WEB_SERVER_HOME = 'C:\\KYB\\Util\\nginx-1.24.0\\html';
+// AWS환경
+// const WEB_SERVER_HOME = '/usr/share/nginx/html';
+
+app.use(express.static(__dirname)); //서버를 구동시켰을때 기준되는 폴더구조 :(__dirname) > 현재폴더 : index.html을 기본으로 잡아줌
+
+app.set('views', path.join(__dirname, 'public', 'views')); // views 폴더 위치 지정.
+
+
+// 개발환경
+oracledb.initOracleClient({liDir: '../intantclient_21_13'});
+// AWS환경
+// oracledb.initOracleClient({liDir: '/usr/lib/oracle/21/client64/lib/'});
+
+app.post('/dashboard', bodyParser.urlencoded({ extended: false }), async (req, res) => {
+    // 위에서 app.set('views', path.join(__dirname, 'public', 'views')); 이거로 views 폴더위치를 지정해주었기때문에,
+    // /dashboard 만 적어도 현재폴더 > public > views 폴더 안에있는 dashboard 를 잡아준다.
+    // 로그인시 페이지를 의미한다.
+
+     const {username, password} = req.body;
+
+    // 사용자 인증 작업
+   const authenticatedUser = await varifyID(username, password);
+
+    //인증 성공시 웰컴 페이지로 라우팅
+    if(authenticatedUser){
+        req.session.loggedIn = true; // 세션에 loggedIN 이라는 변수 생성 및 초기화
+        req.session.username = username;
+        res.render('dashboard',{username});
+    }else{
+        res.render('loginFail', {username})
+    }
+
+});
+
+async function varifyID(username, password) {
+    let connection;
+
+    try{
+        connection = await oracledb.getConnection(dbConfig);
+        sql_query = 'select * from users where username = :username and password = :password';
+        //execute([SQL 쿼리],[바인딩 정보],[옵션]);
+        // 바인딩 정보는 기존 SQL 쿼리에서 자바스크립트 변수를 사용할 수 있게 하는 매핑 정보
+        const result = await connection.execute(sql_query, {username,password})
+
+        if(result.rows.length > 0){
+            console.log(result.rows[0]);
+            // 간단한 쿼리의 경우는 execute 함수에 3번째 인자 생략해도 컬럼명으로 접근 가능.
+            return{
+                id : result.rows[0].ID,
+                username: result.rows[0].USERNAME,
+                name: result.rows[0].NAME
+            };
+        }else {
+            return null; //인증이 실패한 경우
+        }
+
+    }catch(error){
+        console.error('오류발생 : ', error);
+
+    }finally {
+
+    }
+
+}
+
+```
+
+열심히 로그인용 nodeJS 코드를 뜯어보고 공부한결과 원하는 형태의 페이지를 완성했습니다.
+이제 남은것은 이후 팀원들에게 요청한 차트가 들어간페이지와 게시판 페이지 연결,
+그리고 3000 포트를 실행시 login과 게시판여러개가 모두 한번에실행되어질 수 있도록 NodeJS 합쳐보기입니다.
+
+찾아보니 3000번 포트가 실행될수있는 메인 index.js 를만들고 그안에 
+html 에 <script>로 js 파일을 넣어 실행시킬 수 있듯
+js 안에도 js 를 넣어 실행시킬수 있다는 내용을 찾앗습니다.
+
+명령어는
+```[js]
+app.use('/', require('./routes/post.js') );
+```
+
+하여 이부분도 프로젝트 기간동안 열심히 고민하여 성공해보도록 하겠습니다.
+방법이 눈에 보이는만큼 빠르게 나도 게시판을 하나 만들어 로그인과 게시판을 한포트로 합치는것을 공부할예정이다.
