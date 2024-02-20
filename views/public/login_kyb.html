@@ -1,0 +1,93 @@
+<DOCTYPE html>
+    <html lang="ko">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="generator" content="Hugo 0.118.2">
+        <title>login</title>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,600,1,0" />
+        <link rel="stylesheet" href="css/header_test.css">
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="https://kit.fontawesome.com/a4dc7026e0.js" crossorigin="anonymous"></script>
+        <style>
+            main{
+                margin-top: 200px;
+                width: 100%;
+                height: 100vh;
+                text-align: center;
+            }
+            main .login_box input{
+                width: 200px;
+                height: 30px;
+                margin-top: 20px;
+            }
+            .login_button button{
+                margin-top: 20px;
+                padding: 10px 40px;
+                font-size: 2rem;
+                border-radius: 20px;
+            }
+            .join_us_button button{
+                margin-top: 20px;
+            }
+        </style>
+</head>
+<body>
+<div class="container">
+    <nav>
+        <a class="nav-item" href="./public/index.html"><h1>Trip</h1></a>
+        <div class="nav-item">
+            <a class="nav-link" href="../html/login_kyb.html"><h2>로그인</h2></a>
+            <div class="sub-nav">
+                <a class="nav-item" href="public/nav_goong.html">경복궁</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <a class="nav-link" href="public/main2.html"><h2>강릉</h2></a>
+            <div class="sub-nav">
+                <a class="nav-item" href="public/ganTasty.html">맛집</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <a class="nav-link" href="public/Gunsan_Main.html"><h2>군산</h2></a>
+            <div class="sub-nav">
+                <a class="nav-item" href="public/Gunsan_Travel.html">금강권</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <a class="nav-link" href="public/busanMain.html"><h2>부산</h2></a>
+            <div class="sub-nav">
+                <a class="nav-item" href="../views/index.ejs">게시판</a>
+            </div>
+        </div>
+    </nav>
+</div>
+
+<main>
+    <div class = "container_main">
+        <div class = main_background>
+         <h1>로그인</h1>
+        <form action = "/login" method="post">
+            <div class="login_box">
+            <label for="username">사용자명:</label>
+            <input type="text" id="username" name="username" required><br>
+            </div>
+            <div class = "login_box">
+            <label for="password">비밀번호:</label>
+            <input type="password" id="password" name="password" required><br>
+            </div>
+        <div class="login_button">
+            <button type="submit">로그인</button>
+        </div>
+        </form>
+        </div>
+    </div>
+        <div class = "join_us_button">
+            <button type="submit">회원가입</button>
+        </div>
+
+</main>
+</body>
+</html>
+</DOCTYPE>

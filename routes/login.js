@@ -38,11 +38,11 @@ async function varifyID(username, password) {
 
 router.get('/', async (req, res) => {
     // '/' 경로로의 요청은 Nginx에서 login.html을 처리하도록 리다이렉트
-    res.redirect('./../html/login_kyb.html');
+    res.redirect('./../public/login_kyb.html');
 });
 router.post('/', bodyParser.urlencoded({ extended: false }), async (req, res) => {
-        // 위에서 app.set('views', path.join(__dirname, 'public', 'views')); 이거로 views 폴더위치를 지정해주었기때문에,
-        // /dashboard 만 적어도 현재폴더 > public > views 폴더 안에있는 dashboard 를 잡아준다.
+        // 위에서 app.set('views', path.join(__dirname, 'views')); 이거로 views 폴더위치를 지정해주었기때문에,
+        // / 만 적어도 현재폴더 > views 폴더 안에있는 index.ejs 를 잡아준다.
         const {username, password} = req.body;
 
         // 사용자 인증 작업
