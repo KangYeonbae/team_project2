@@ -30,7 +30,7 @@ async  function getTotalData() {
     }
 }
 
-oracledb.initOracleClient({ libDir: '../CHART/instantclient_21_13' });
+oracledb.initOracleClient({ libDir: 'C:\\instantclient_21_13' });
 app.get('/api/total', async (req, res) => {
     try {
         const data = await getTotalData();
