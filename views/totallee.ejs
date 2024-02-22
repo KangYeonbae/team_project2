@@ -56,67 +56,35 @@
         </div>
     </nav>
 </div>
-<div class = "chart_box">
-<canvas id="myChart" width="700" height="400">
+
+<div class = "chart_box1">
+<h1>Seoul Top12 Station</h1>
+<canvas id="totalChart"></canvas>
 
 <script>
-    var ctx = document.getElementById('myChart').getContext('2d');
-    var myChart = new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels:<%- labels%>,
-            datasets: [{
-                label: 'Chart Data',
-                data:<%- data%>,
-                backgroundColor: 'rgba(255, 99, 132, 0.2)',
-                borderColor: 'rgba(255, 99, 132, 1)',
-                borderWidth: 1
-            }]
-        },
-        options: {
-            scales: {
-                y: {
-                    beginAtZero: true
-                }
-            }
-        }
-    });
+    var ctx = document.getElementById('totalChart').getContext('2d');
+    var totalChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels:<%- stationName%>,
+                    datasets: [{
+                        label: 'total top12',
+                        data:<%- totalData%>,
+                        backgroundColor: 'rgba(152, 23, 12, 0.2)',
+                        borderColor: 'rgba(255, 9, 12, 1)',
+                        borderWidth: 1
+                    }],
+                },
+                    options: {
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            }
+                        }
+                    }
+              });
+
 </script>
-</canvas>
 </div>
-<div class="container1">
-    <div class="chat-bar collapsed">
-        <div class="btn3">
-            <button><i class="fa-sharp fa-solid fa-comments">chat us!</i></button>
-        </div>
-        <div class="content">
-            <div class="full-chat-block">
-                <div class="outer-container">
-                    <div class="chat-container">
-                        <div id="chatbox">
-                            <h5 id="chat-timestamp"></h5>
-                            <p id="botStarterMessage" class="botText"><span>Loading...</span></p>
-                        </div>
-                        <div class="chat-bar-input-block">
-                            <div id="userInput">
-                                <input id="textInput" class="input-box" type="text" name="msg" placeholder="엔터(Enter)키를 눌러 메세지를 보내세요!">
-                                <p></p>
-                            </div>
-                            <div class="chat-bar-icons">
-                                <i id="chat-icon" style="color: crimson;" class="fa fa-fw fa-heart" onclick="heartButton()"></i>
-                                <i id="chat-icon" style="color: #333;" class="fa fa-fw fa-send" onclick="sendButton()"></i>
-                            </div>
-                        </div>
-                        <div id="chat-bar-bottom">
-                            <p></p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<script src="../public/js/chat.js"></script>
-<script src="../public/js/Reply.js"></script>
 </body>
 </html>
