@@ -42,7 +42,7 @@ router.get('/', async (req, res) => {
 });
 router.post('/', bodyParser.urlencoded({ extended: false }), async (req, res) => {
         // 위에서 app.set('views', path.join(__dirname, 'views')); 이거로 views 폴더위치를 지정해주었기때문에,
-        // / 만 적어도 현재폴더 > views 폴더 안에있는 index.ejs 를 잡아준다.
+        // / 만 적어도 현재폴더 > views 폴더 안에있는 index_1.ejs 를 잡아준다.
         const {username, password} = req.body;
 
         // 사용자 인증 작업
@@ -55,9 +55,8 @@ router.post('/', bodyParser.urlencoded({ extended: false }), async (req, res) =>
         req.session.loggedInUserId = authenticatedUser.id; // 사용자 테이블의 ID (PK) 저장
         req.session.loggedInUserName = username;           // 사용자 테이블의 username
         req.session.loggedInUserRealName = authenticatedUser.name; // 사용자 테이블에서 실제 이름 저장
-            res.render('login',{username});
+            res.render('video',{username});
         }else{
-            console.log("여기옴1.2.")
             res.render('loginFail', {username})
         }
 

@@ -10,6 +10,36 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://kit.fontawesome.com/a4dc7026e0.js" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
+    <style>
+        .slide_container {
+            margin-top: 20px;
+            width: 500px;
+            height: 300px;
+            overflow: hidden;
+            display: flex;
+            /* 슬라이드를 가로 방향으로 배치 */
+            flex-direction: row;
+        }
+
+        .slides {
+            display: flex;
+            /* 슬라이드 컨테이너 내에서 슬라이드들을 가로 방향으로 배치 */
+            flex-direction: row;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .slide {
+            width: 500px; /* 각 슬라이드의 너비 */
+            height: 300px;
+            display: inline-block; /* 가로로 배치되도록 설정 */
+        }
+
+        /* 2. 차트 컨테이너도 가로로 배치 */
+        .chart_box {
+            width: 500px; /* 차트의 너비 */
+            height: 300px;
+        }
+    </style>
     <script>
         $(document).ready(function() {
             $(".btn3 button").on("click", function() {
@@ -24,6 +54,19 @@
                 }
             });
         });
+
+        let currentSlide = 0;
+        const numberOfSlides = 2; // 슬라이드의 총 개수
+        const slideWidth = 500; // 각 슬라이드의 너비
+
+        function showNextSlide() {
+            currentSlide = (currentSlide + 1) % numberOfSlides; // 다음 슬라이드로 이동
+            const chartBox = document.querySelector('.slides');
+            chartBox.style.transform = `translateX(-${currentSlide * slideWidth}px)`;
+        }
+
+        setInterval(() => showNextSlide(''),2000);
+
     </script>
 </head>
 <body>
@@ -56,34 +99,70 @@
         </div>
     </nav>
 </div>
-<div class = "chart_box">
-<canvas id="myChart" width="700px" height="400px">
 
-<script>
-    var ctx = document.getElementById('myChart').getContext('2d');
-    var myChart = new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels:<%- labels%>,
-            datasets: [{
-                label: 'Chart Data',
-                data:<%- data%>,
-                backgroundColor: 'rgba(255, 99, 132, 0.2)',
-                borderColor: 'rgba(255, 99, 132, 1)',
-                borderWidth: 1
-            }]
-        },
-        options: {
-            scales: {
-                y: {
-                    beginAtZero: true
-                }
-            }
-        }
-    });
-</script>
-</canvas>
+<div class="slide_container">
+    <div class="slides animate">
+        <div class="slide"> <!-- .slide 클래스 추가 -->
+            <div class="chart_box">
+                <canvas id="myChart" ></canvas>
+                <script>
+                    // 첫 번째 차트 생성
+                    var ctx1 = document.getElementById('myChart').getContext('2d');
+                    var myChart = new Chart(ctx1, {
+                        type: 'bar',
+                        data: {
+                            labels:[1,2,3],
+                            datasets: [{
+                                label: 'Chart Data',
+                                data:[1,2,3],
+                                backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                                borderColor: 'rgba(255, 99, 132, 1)',
+                                borderWidth: 1
+                            }]
+                        },
+                        options: {
+                            scales: {
+                                y: {
+                                    beginAtZero: true
+                                }
+                            }
+                        }
+                    });
+                </script>
+            </div>
+        </div>
+        <div class="slide">
+            <div class="chart_box">
+                <canvas id="totalChart"></canvas>
+                <script>
+                    // 두 번째 차트 생성
+                    var ctx2 = document.getElementById('totalChart').getContext('2d');
+                    var totalChart = new Chart(ctx2, {
+                        type: 'bar',
+                        data: {
+                            labels:[1,2,3],
+                            datasets: [{
+                                label: 'total top12',
+                                data:[1,2,3],
+                                backgroundColor: 'rgba(152, 23, 12, 0.2)',
+                                borderColor: 'rgba(255, 9, 12, 1)',
+                                borderWidth: 1
+                            }],
+                        },
+                        options: {
+                            scales: {
+                                y: {
+                                    beginAtZero: true
+                                }
+                            }
+                        }
+                    });
+                </script>
+            </div>
+        </div>
+    </div>
 </div>
+
 <div class="container1">
     <div class="chat-bar collapsed">
         <div class="btn3">

@@ -31,7 +31,7 @@
     <nav>
         <a class="nav-item" href="/main"><h1>Trip</h1></a>
         <div class="nav-item">
-            <a class="nav-link" href="../public/login_kyb.html"><h2>로그인</h2></a>
+            <a class="nav-link" href="/chartKYB"><h2>차트</h2></a>
             <div class="sub-nav">
                 <a class="nav-item" href="/total">이지우님차트</a>
             </div>
@@ -49,9 +49,9 @@
             </div>
         </div>
         <div class="nav-item">
-            <a class="nav-link" href="public/busanMain.html"><h2>부산</h2></a>
+            <a class="nav-link" href="../public/login_kyb.html"><h2>로그인</h2></a>
             <div class="sub-nav">
-                <a class="nav-item" href="/chartkyb">게시판</a>
+                <a class="nav-item" href="/video">홍보영상</a>
             </div>
         </div>
     </nav>
@@ -59,7 +59,7 @@
 
 <div class = "chart_box1">
 <h1>Seoul Top12 Station</h1>
-<canvas id="totalChart"></canvas>
+<canvas id="totalChart">
 
 <script>
     var ctx = document.getElementById('totalChart').getContext('2d');
@@ -85,6 +85,41 @@
               });
 
 </script>
+</canvas>
 </div>
+<div class="container1">
+    <div class="chat-bar collapsed">
+        <div class="btn3">
+            <button><i class="fa-sharp fa-solid fa-comments">chat us!</i></button>
+        </div>
+        <div class="content">
+            <div class="full-chat-block">
+                <div class="outer-container">
+                    <div class="chat-container">
+                        <div id="chatbox">
+                            <h5 id="chat-timestamp"></h5>
+                            <p id="botStarterMessage" class="botText"><span>Loading...</span></p>
+                        </div>
+                        <div class="chat-bar-input-block">
+                            <div id="userInput">
+                                <input id="textInput" class="input-box" type="text" name="msg" placeholder="엔터(Enter)키를 눌러 메세지를 보내세요!">
+                                <p></p>
+                            </div>
+                            <div class="chat-bar-icons">
+                                <i id="chat-icon" style="color: crimson;" class="fa fa-fw fa-heart" onclick="heartButton()"></i>
+                                <i id="chat-icon" style="color: #333;" class="fa fa-fw fa-send" onclick="sendButton()"></i>
+                            </div>
+                        </div>
+                        <div id="chat-bar-bottom">
+                            <p></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../public/js/chat.js"></script>
+<script src="../public/js/Reply.js"></script>
 </body>
 </html>
