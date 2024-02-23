@@ -10,6 +10,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://kit.fontawesome.com/a4dc7026e0.js" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
         $(document).ready(function() {
             $(".btn3 button").on("click", function() {
@@ -59,30 +60,69 @@
 
 <div class = "chart_box1">
 <h1>Seoul Top12 Station</h1>
+<h2>현재 데이터는 <span id="chartName"></span> 입니다.</h2>
 <canvas id="totalChart">
 
 <script>
+    const chartData = <%- chartData %>
+    const element_chartName = document.getElementById('chartName');
+    const chartName = ['전체', '1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'];
+    element_chartName.textContent = chartName[0]; // 초기 값 설정
+
+    let currentMonthIndex = 0; // 현재 월을 나타내는 인덱스입니다.
+    let labels = Object.keys(chartData); // 역 이름을 라벨로 설정합니다.
+
+    // 'total' 데이터만 추출하여 고정된 막대 차트 데이터로 설정합니다.
+    let totalData = labels.map(key => chartData[key][0]); // 가정: chartData에서 0번 인덱스가 'total'을 나타냅니다.
+
+    // 초기 월별 데이터 설정
+    let monthlyData = labels.map(key => chartData[key][currentMonthIndex + 1]); // 첫 번째 월의 데이터로 설정
+
     var ctx = document.getElementById('totalChart').getContext('2d');
     var totalChart = new Chart(ctx, {
-                type: 'bar',
-                data: {
+            type: 'bar',
+            data: {
                     labels:<%- stationName%>,
-                    datasets: [{
-                        label: 'total top12',
-                        data:<%- totalData%>,
-                        backgroundColor: 'rgba(152, 23, 12, 0.2)',
-                        borderColor: 'rgba(255, 9, 12, 1)',
-                        borderWidth: 1
-                    }],
-                },
-                    options: {
-                        scales: {
-                            y: {
-                                beginAtZero: true
-                            }
+                    datasets: [
+                        {
+                            label: 'Total',
+                            data: totalData,
+                            type: 'bar', // 이 데이터셋을 막대 차트로 설정
+                            backgroundColor: 'rgba(0, 123, 255, 0.5)',
+                            borderColor: 'rgba(0, 123, 255, 1)',
+                            borderWidth: 1,
+                        },
+                    {
+                        label: 'Monthly',
+                        data: monthlyData,
+                        type: 'line', // 이 데이터셋을 선 차트로 설정
+                        fill: false,
+                        borderColor: 'rgba(255, 99, 132, 1)',
+                        borderWidth: 2,
+                    }
+                ],
+            },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
                         }
                     }
-              });
+                }
+          });
+
+    function updateMonthlyData() {
+        currentMonthIndex = (currentMonthIndex + 1) % 12; // 월 인덱스 업데이트
+        element_chartName.textContent = chartName[currentMonthIndex + 1]; // 현재 월 표시 업데이트
+
+        // 현재 월에 해당하는 월별 데이터로 선 차트 데이터셋 업데이트
+        monthlyData = labels.map(key => chartData[key][currentMonthIndex + 1]);
+        chart.data.datasets[1].data = monthlyData; // 두 번째 데이터셋(월별 데이터) 업데이트
+        chart.update();
+    }
+
+    setInterval(updateMonthlyData, 1000); // 1초마다 updateMonthlyData 함수 호출로 차트 데이터 업데이트
+
 
 </script>
 </canvas>

@@ -17,7 +17,7 @@ router.get('/boarkyb', async (req, res) => {
         conn = await oracledb.getConnection(dbconfig);
         let result = await conn.execute(
             //execute : 오라클과  nodejs 상호작용시킬때 필요한 함수.
-            `select cont`
+
         );
     }
 });

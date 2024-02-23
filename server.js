@@ -46,5 +46,5 @@ app.use('/sliedChart', require('./routes/slideTest_chartKYB'))
 // app.use('/', require('./routes/board'));  // 게시판 js 에는  마지막에 module.exports = router; 를 입력해주면 끝(단, 게시판에는 포트넘버를 입력하지 않거나, 3000번과 다른 포트넘버를 사용하여야함)
 
 const server = app.listen(port, () => {
-    console.log(`Server is running at http://localhost:${port}/sliedChart`);
+    console.log(`Server is running at http://localhost:${port}`);
 });
