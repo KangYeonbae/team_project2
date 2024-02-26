@@ -5,7 +5,7 @@
     <title>Chart.js Example</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/SeoulNamsanM.woff">
     <link rel="stylesheet" href="../public/css/header_test.css">
-    <link rel="stylesheet" href="../public/css/main.css">
+    <link rel="stylesheet" href="../public/css/chartlee.css">
     <link rel="stylesheet" href="../public/css/chat.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://kit.fontawesome.com/a4dc7026e0.js" crossorigin="anonymous"></script>
@@ -29,33 +29,47 @@
 <body>
 <div class="container">
     <nav>
-        <a class="nav-item" href="/main"><h1>Trip</h1></a>
+        <a class="nav-item" href="/main_2"><h1>Trip</h1></a>
         <div class="nav-item">
-            <a class="nav-link" href="/chartKYB"><h2>차트</h2></a>
+            <a class="nav-link" href="/sliedChart"><h2>차트</h2></a>
             <div class="sub-nav">
                 <a class="nav-item" href="/total">이지우님차트</a>
+                <a class="nav-item" href="/chartkyb">강연배님차트</a>
             </div>
         </div>
         <div class="nav-item">
-            <a class="nav-link" href="public/main2.html"><h2>강릉</h2></a>
+            <a class="nav-link" href="public/main2.html"><h2>강남</h2></a>
             <div class="sub-nav">
                 <a class="nav-item" href="public/ganTasty.html">맛집</a>
             </div>
         </div>
         <div class="nav-item">
-            <a class="nav-link" href="public/Gunsan_Main.html"><h2>군산</h2></a>
+            <a class="nav-link" href="public/main2.html"><h2>명동</h2></a>
+            <div class="sub-nav">
+                <a class="nav-item" href="public/ganTasty.html">맛집</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <a class="nav-link" href="/boardkyb"><h2>공지사항</h2></a>
             <div class="sub-nav">
                 <a class="nav-item" href="public/Gunsan_Travel.html">금강권</a>
             </div>
         </div>
         <div class="nav-item">
-            <a class="nav-link" href="../public/login_kyb.html"><h2>로그인</h2></a>
+            <div class = "login_box">
+                <% if (username) { %>
+                    <p><%= username %>님<a href="/logout" class="button"><h2>로그아웃</h2></a></p>
+                <% } else { %>
+                    <a href="/login" class="button"><h2>로그인</h2></a>
+                <% } %>
+            </div>
             <div class="sub-nav">
                 <a class="nav-item" href="/video">홍보영상</a>
             </div>
         </div>
     </nav>
 </div>
+<div class ="container1">
 <div class = "chart_box">
 <canvas id="myChart" width="700px" height="400px">
 
@@ -84,7 +98,8 @@
 </script>
 </canvas>
 </div>
-<div class="container1">
+</div>
+<div class="container2">
     <div class="chat-bar collapsed">
         <div class="btn3">
             <button><i class="fa-sharp fa-solid fa-comments">chat us!</i></button>

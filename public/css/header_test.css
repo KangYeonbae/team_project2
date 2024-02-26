@@ -60,15 +60,20 @@ nav h2 {
 .sub-nav {
     display: none;
     width: 150px;
+    height: auto;
     background-color: #555;
     padding: 10px;
     position: absolute;
     top: 100%;
     left: 0;
 }
+.sub-nav .nav-item{
+    /*height: 30px;*/
+    display: inline-block;
+}
 .nav-item:hover .sub-nav {
     display: block;
 }
-.nav-link:hover{
+.container a:hover{
     color: yellow;
 }

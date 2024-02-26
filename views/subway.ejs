@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!-- 추가된 부분: Chart.js 라이브러리 CDN 링크 -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* CSS 스타일은 이전과 동일하게 유지됨 */
+        .container {
+            position: relative;
+            display: flex;
+            width: 80%;
+            margin: 0 auto;
+            align-items: center;
+            justify-content: center;
+        }
+        .line_2, .line_4{
+            flex-grow: 1;
+            width: 40%;
+            position: relative;
+        }
+        img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        /* 추가된 부분: 왼쪽 사이드바 스타일 */
+        .left_sidebar {
+            position: fixed;
+            top: 0;
+            left: -800px; /* 초기에는 왼쪽에 숨김 */
+            width: 800px;
+            height: 100%;
+            background-color: #f0f0f0;
+            transition: left 0.5s; /* 왼쪽 위치 변경에 대한 애니메이션 설정 */
+            z-index: 999; /* 다른 요소 위에 표시되도록 z-index 설정 */
+        }
+        /* 추가된 부분: left_sidebar 내부 컨테이너 스타일 */
+        .container1 {
+            padding: 20px;
+        }
+        /* 추가된 부분: 차트 박스 스타일 */
+        .chart_box {
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="line_2">
+        <!-- 첫 번째 그림에 클릭 이벤트 추가 -->
+        <img src="../public/images/line_2.jpg" onclick="toggleSidebar()">
+    </div>
+    <div class="line_4">
+        <img src="../public/images/line_4.jpg">
+    </div>
+</div>
+
+<!-- 추가된 부분: 왼쪽 사이드바 -->
+<div class="left_sidebar" id="leftSidebar">
+    <div class="container1">
+        <div class="chart_box">
+            <canvas id="myChart" width="400px" height="400px"></canvas>
+        </div>
+    </div>
+</div>
+
+<script>
+    // 추가된 부분: 사이드바 토글 함수
+    function toggleSidebar() {
+        var sidebar = document.getElementById('leftSidebar');
+        if (sidebar.style.left === '0px') {
+            sidebar.style.left = '-800px'; // 왼쪽으로 이동하여 숨김
+        } else {
+            sidebar.style.left = '0px'; // 왼쪽에서 나타남
+            drawChart(); // 사이드바가 나타날 때 차트 그리기 함수 호출
+        }
+    }
+
+    // 추가된 부분: 차트 그리기 함수
+    function drawChart() {
+        var ctx = document.getElementById('myChart').getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: [<%- labels %>],
+                datasets: [{
+                    label: 'Chart Data',
+                    data: [<%- data %>],
+                    backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                    borderColor: 'rgba(255, 99, 132, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    }
+</script>
+</body>
+</html>

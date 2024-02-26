@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .container {
+            position: relative;
+            display: flex;
+            width: 80%;
+            margin: 0 auto;
+            align-items: center;
+            justify-content: center;
+        }
+        .line_2, .line_4{
+            flex-grow: 1;
+            width: 40%;
+            position: relative;
+        }
+        img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        .icon {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+        }
+        /* 추가된 부분: 왼쪽 사이드바 스타일 */
+        .left_sidebar {
+            display: none; /* 초기에는 숨김 상태로 설정 */
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 300px; /* 원하는 너비로 조정 */
+            height: 100%;
+            background-color: #f0f0f0;
+            z-index: 999; /* 다른 요소 위에 표시되도록 z-index 설정 */
+        }
+        /* 추가된 부분: left_sidebar 내부 컨테이너 스타일 */
+        .container1 {
+            padding: 20px;
+        }
+        /* 추가된 부분: 차트 박스 스타일 */
+        .chart_box {
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+<div class = "line_2">
+    <img src="../public/images/line_2.jpg">
+    <button class ="icon1" onclick="buttonClicked()">
+    <i class="fa-regular fa-location-dot"></i>
+    </button>
+</div>
+<div class = "line_4">
+    <img src = "../public/images/line_4.jpg">
+    <button class ="icon2" onclick="buttonClicked()">
+        <i class="fa-regular fa-location-dot"></i>
+    </button>
+</div>
+</div>
+<div class = "left_sidebar">
+    <div class ="container1">
+        <div class = "chart_box">
+            <canvas id="myChart" width="700px" height="400px">
+            </canvas>
+        </div>
+    </div>
+</div>
+<script>
+    // 추가된 부분: 왼쪽 사이드바 표시 함수
+    function showSidebar() {
+        var sidebar = document.getElementById('leftSidebar');
+        sidebar.style.display = 'block'; // 왼쪽 사이드바 표시
+        drawChart(); // 차트 그리기 함수 호출
+    }
+
+    // 추가된 부분: 차트 그리기 함수
+    function drawChart() {
+        var ctx = document.getElementById('myChart').getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: [<%- labels %>], // 라벨 데이터
+        datasets: [{
+            label: 'Chart Data',
+            data: [<%- data %>], // 차트 데이터
+        backgroundColor: 'rgba(255, 99, 132, 0.2)',
+            borderColor: 'rgba(255, 99, 132, 1)',
+            borderWidth: 1
+    }]
+    },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+    }
+</script>
+</body>
+</html>

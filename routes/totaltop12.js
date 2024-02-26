@@ -9,6 +9,11 @@ const router = express.Router();
 
 router.get('/', async (req, res) => {
     let connection;
+    const loggedInUserId = req.session.loggedInUserId;
+    const loggedInUserName = req.session.loggedInUserName;
+    const loggedInUserRealName = req.session.loggedInUserRealName;
+
+
     try {
         // Oracle 데이터베이스에 연결
         const connection = await oracledb.getConnection(dbConfig);
@@ -25,7 +30,11 @@ router.get('/', async (req, res) => {
 
 
     res.render('totallee', {
-        chartData: JSON.stringify(chartData), "stationName": JSON.stringify(stationName)
+        chartData: JSON.stringify(chartData),
+        stationName: JSON.stringify(stationName),
+        userId: loggedInUserId,
+        username: loggedInUserName,
+        userRealName: loggedInUserRealName
     });
 
       // 연결 닫기

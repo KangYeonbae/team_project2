@@ -23,7 +23,7 @@ const router = express.Router();
             // const values = result.rows.map(row => row[1]);
 
             // EJS 템플릿 렌더링
-            res.render('chartkyb', { labels: JSON.stringify(labels),
+            res.render('subway', { labels: JSON.stringify(labels),
                                                     data: JSON.stringify(data),
                                                   userId: loggedInUserId,
                                                 username: loggedInUserName,

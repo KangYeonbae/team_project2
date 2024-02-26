@@ -18,19 +18,26 @@
     <nav>
         <a class="nav-item" href="/main_2"><h1>Trip</h1></a>
         <div class="nav-item">
-            <a class="nav-link" href="/chartKYB"><h2>차트</h2></a>
+            <a class="nav-link" href="/sliedChart"><h2>차트</h2></a>
             <div class="sub-nav">
                 <a class="nav-item" href="/total">이지우님차트</a>
+                <a class="nav-item" href="/chartkyb">강연배님차트</a>
             </div>
         </div>
         <div class="nav-item">
-            <a class="nav-link" href="public/main2.html"><h2>강릉</h2></a>
+            <a class="nav-link" href="public/main2.html"><h2>강남</h2></a>
             <div class="sub-nav">
                 <a class="nav-item" href="public/ganTasty.html">맛집</a>
             </div>
         </div>
         <div class="nav-item">
-            <a class="nav-link" href="public/Gunsan_Main.html"><h2>군산</h2></a>
+            <a class="nav-link" href="public/main2.html"><h2>명동</h2></a>
+            <div class="sub-nav">
+                <a class="nav-item" href="public/ganTasty.html">맛집</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <a class="nav-link" href="/boardkyb"><h2>공지사항</h2></a>
             <div class="sub-nav">
                 <a class="nav-item" href="public/Gunsan_Travel.html">금강권</a>
             </div>
@@ -38,9 +45,9 @@
         <div class="nav-item">
             <div class = "login_box">
                 <% if (username) { %>
-                    <p><%= username %>님<a href="/logout" class="button">로그아웃</a></p>
+                    <p><%= username %>님<a href="/logout" class="button"><h2>로그아웃</h2></a></p>
                 <% } else { %>
-                    <a href="/login" class="button">로그인</a>
+                    <a href="/login" class="button"><h2>로그인</h2></a>
                 <% } %>
             </div>
             <div class="sub-nav">

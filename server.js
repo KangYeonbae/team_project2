@@ -31,6 +31,14 @@ const dbConfig = {
     password: '1111',
     connectString: 'localhost:1521/xe'
 };
+
+
+app.use(session({
+    secret: 'mySecretKey', // 세션을 암호화하기 위한 임의의 키
+    resave: false,
+    saveUninitialized: true,
+}));
+
 app.get('/main', async (req, res) => {
     res.render('main', {'username':null});
 });
@@ -43,8 +51,10 @@ app.use('/login', require('./routes/login'));  // 로그인페이지 연결
 app.use('/chartKYB', require('./routes/chartKYB'));  // 게시판 연결
 app.use('/total', require('./routes/totaltop12'));
 app.use('/sliedChart', require('./routes/slideTest_chartKYB'))
-// app.use('/', require('./routes/board'));  // 게시판 js 에는  마지막에 module.exports = router; 를 입력해주면 끝(단, 게시판에는 포트넘버를 입력하지 않거나, 3000번과 다른 포트넘버를 사용하여야함)
+app.use('/boardkyb', require('./routes/board_KYB'));// 게시판 js 에는  마지막에 module.exports = router; 를 입력해주면 끝(단, 게시판에는 포트넘버를 입력하지 않거나, 3000번과 다른 포트넘버를 사용하여야함)
+app.use('/boarDetailkyb', require('./routes/detail_KYB'))
+app.use('/subway', require('./routes/testchart_kyb'))
 
 const server = app.listen(port, () => {
-    console.log(`Server is running at http://localhost:${port}`);
+    console.log(`Server is running at http://localhost:${port}/subway`);
 });

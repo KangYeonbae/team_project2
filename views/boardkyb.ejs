@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="ko-kr">
+<head>
+    <meta charset="UTF-8">
+    <title>Chart.js Example</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/SeoulNamsanM.woff">
+    <link rel="stylesheet" href="../public/css/header_test.css">
+    <link rel="stylesheet" href="../public/css/main.css">
+    <link rel="stylesheet" href="../public/css/chat.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://kit.fontawesome.com/a4dc7026e0.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
+    <style>
+        .container1 {
+            margin-top: 80px;
+            width: 80%;
+        }
+        .container1 table{
+            border: 1px solid black;
+            width: 100%;
+        }
+        .container1 th{
+             box-shadow: 5px 5px 5px 5px grey ;
+        }
+        .button-container a{
+            font-size: larger;
+            float: right;
+        }
+    </style>
+    <script>
+        $(document).ready(function() {
+            $(".btn3 button").on("click", function() {
+                console.log("Button clicked!");
+                $(".content").toggleClass("expanded");
+            });
+
+            // content 외의 영역을 클릭하면 content 닫기
+            $(document).on("click", function(event) {
+                if (!$(event.target).closest(".btn3, .content").length) {
+                    $(".content").removeClass("expanded");
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+<<div class="container">
+    <nav>
+        <a class="nav-item" href="/main_2"><h1>Trip</h1></a>
+        <div class="nav-item">
+            <a class="nav-link" href="/sliedChart"><h2>차트</h2></a>
+            <div class="sub-nav">
+                <a class="nav-item" href="/total">이지우님차트</a>
+                <a class="nav-item" href="/chartkyb">강연배님차트</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <a class="nav-link" href="public/main2.html"><h2>강남</h2></a>
+            <div class="sub-nav">
+                <a class="nav-item" href="public/ganTasty.html">맛집</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <a class="nav-link" href="public/main2.html"><h2>명동</h2></a>
+            <div class="sub-nav">
+                <a class="nav-item" href="public/ganTasty.html">맛집</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <a class="nav-link" href="/boardkyb"><h2>공지사항</h2></a>
+            <div class="sub-nav">
+                <a class="nav-item" href="public/Gunsan_Travel.html">금강권</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <div class = "login_box">
+                <% if (username) { %>
+                    <p><%= username %>님<a href="/logout" class="button"><h2>로그아웃</h2></a></p>
+                <% } else { %>
+                    <a href="/login" class="button"><h2>로그인</h2></a>
+                <% } %>
+            </div>
+            <div class="sub-nav">
+                <a class="nav-item" href="/video">홍보영상</a>
+            </div>
+        </div>
+    </nav>
+</div>
+<div class = "container1">
+    <h1>공지사항</h1>
+    <table>
+        <thead>
+        <tr>
+            <th>구분</th>
+            <th>제목</th>
+            <th>작성일</th>
+            <th onclick="toggleSort()" onmouseover="this.style.textDecoration = 'underline';" onmouseout="this.style.textDecoration = 'none';">조회수 ▼</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        <% for (let i = 0; i < posts.length; i++) { %>
+        <tr>
+            <td><%= posts[i][6]%></td>
+            <td><a href="/boarDetailkyb/<%= posts[i][0] %>" class="post-link"><%= posts[i][1] %> [<%= posts[i][6] %>]</a></td>
+            <td><%= posts[i][3] %></td>
+            <td><%= posts[i][4] %></td>
+        </tr>
+        <% } %>
+        </tbody>
+    </table>
+
+<script>
+    // 단순히 한 번만 초기화되도록 변수.
+    // 한 번 설정된 값은 그 후에 페이지가 재로드되어도 바뀌지 않는다.
+    let sortByViews = false;
+
+    // 페이지 로드 또는 재로드 될 때마다 초기화를 위한 함수
+    window.onload = function() {
+        // 현재 페이지의 URL에서 쿼리 문자열을 반환
+        const queryParams = new URLSearchParams(window.location.search);
+
+        // 'sort' 쿼리 파라메터 값을 확인
+        const sortParam = queryParams.get('sort');
+
+        if (sortParam === 'views_desc') {
+            sortByViews = true;
+        }
+    };
+
+    function toggleSort() {
+        // sortByViews라는 플래그 변수(상태를 저장하는 변수)를 지정하여 정렬상태를 토글(반전) 시킴
+        sortByViews = !sortByViews;
+        const sortParam = sortByViews ? 'views_desc' : ''; // 정렬 방식에 따른 쿼리 파라미터
+        // location 객체를 사용하여 지정된 URL로 이동 및 화면 갱신
+        window.location.href = `/boardkyb?sort=${sortParam}`;
+    }
+</script>
+
+
+<!-- 글쓰기 버튼 -->
+<div class="button-container">
+    <% if (username === 'system') { %>
+    <a href="/create" class="button">글쓰기</a>
+    <% } %>
+</div>
+
+<!-- 페이징 -->
+<div class="paging-container">
+    <% if (currentPage > 1) { %>
+    <a href="/boardkyb/?page=<%= currentPage - 1 %>">이전</a>
+    <% } %>
+
+    <% for (let i = startPage; i <= endPage; i++) { %>
+    <% if (i === currentPage) { %>
+    <span class="current-page"><%= i %></span>
+    <% } else { %>
+    <a href="/boardkyb/?page=<%= i %>"><%= i %></a>
+    <% } %>
+    <% } %>
+
+    <% if ((totalPages - currentPage + 1) > maxPageNumber) { %>
+    <a href="/bboardkyb/?page=<%= currentPage + 1 %>">다음</a>
+    <% } %>
+</div>
+
+
+<div id="searchContainer">
+    <form action="/boardkyb" method="GET">
+        <label for="searchType">검색 조건:</label>
+        <select id="searchType" name="searchType">
+            <option value="title" selected>제목</option>
+            <option value="content">게시글 내용</option>
+            <option value="class_post">구분</option>
+        </select>
+        <input type="text" id="searchInput" name="searchInput">
+        <button type="submit">검색</button>
+    </form>
+</div>
+</div>
+</body>
+</html>
