@@ -3,11 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/SeoulNamsanM.woff">
+    <link rel="stylesheet" href="../public/css/header_test.css">
+<!--    <link rel="stylesheet" href="../public/css/main.css">-->
+    <link rel="stylesheet" href="../public/css/chat.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://kit.fontawesome.com/a4dc7026e0.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
     <!-- 추가된 부분: Chart.js 라이브러리 CDN 링크 -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
     <style>
         /* CSS 스타일은 이전과 동일하게 유지됨 */
-        .container {
+        .container3 {
             position: relative;
             display: flex;
             width: 80%;
@@ -37,7 +45,7 @@
             z-index: 999; /* 다른 요소 위에 표시되도록 z-index 설정 */
         }
         /* 추가된 부분: left_sidebar 내부 컨테이너 스타일 */
-        .container1 {
+        .container3 {
             padding: 20px;
         }
         /* 추가된 부분: 차트 박스 스타일 */
@@ -46,9 +54,66 @@
             height: 100%;
         }
     </style>
+    <script>
+        $(document).ready(function() {
+            $(".btn3 button").on("click", function() {
+                console.log("Button clicked!");
+                $(".content").toggleClass("expanded");
+            });
+
+            // content 외의 영역을 클릭하면 content 닫기
+            $(document).on("click", function(event) {
+                if (!$(event.target).closest(".btn3, .content").length) {
+                    $(".content").removeClass("expanded");
+                }
+            });
+        });
+    </script>
 </head>
 <body>
 <div class="container">
+    <nav>
+        <a class="nav-item" href="/main_2"><h1>Trip</h1></a>
+        <div class="nav-item">
+            <a class="nav-link" href="/subway"><h2>2호선,4호선</h2></a>
+            <div class="sub-nav">
+                <a class="nav-item" href="/total">이지우님차트</a>
+                <a class="nav-item" href="/chartkyb">강연배님차트</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <a class="nav-link" href="public/main2.html"><h2>강남</h2></a>
+            <div class="sub-nav">
+                <a class="nav-item" href="public/ganTasty.html">맛집</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <a class="nav-link" href="public/main2.html"><h2>명동</h2></a>
+            <div class="sub-nav">
+                <a class="nav-item" href="public/ganTasty.html">맛집</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <a class="nav-link" href="/boardkyb"><h2>공지사항</h2></a>
+            <div class="sub-nav">
+                <a class="nav-item" href="public/Gunsan_Travel.html">금강권</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <div class = "login_box">
+                <% if (username) { %>
+                    <p><%= username %>님<a href="/logout" class="button"><h2>로그아웃</h2></a></p>
+                <% } else { %>
+                    <a href="/login" class="button"><h2>로그인</h2></a>
+                <% } %>
+            </div>
+            <div class="sub-nav">
+                <a class="nav-item" href="/video">홍보영상</a>
+            </div>
+        </div>
+    </nav>
+</div>
+<div class="container3">
     <div class="line_2">
         <!-- 첫 번째 그림에 클릭 이벤트 추가 -->
         <img src="../public/images/line_2.jpg" onclick="toggleSidebar()">
@@ -66,7 +131,6 @@
         </div>
     </div>
 </div>
-
 <script>
     // 추가된 부분: 사이드바 토글 함수
     function toggleSidebar() {
@@ -104,5 +168,40 @@
         });
     }
 </script>
+
+<div class="container1">
+    <div class="chat-bar collapsed">
+        <div class="btn3">
+            <button><i class="fa-sharp fa-solid fa-comments">chat us!</i></button>
+        </div>
+        <div class="content">
+            <div class="full-chat-block">
+                <div class="outer-container">
+                    <div class="chat-container">
+                        <div id="chatbox">
+                            <h5 id="chat-timestamp"></h5>
+                            <p id="botStarterMessage" class="botText"><span>Loading...</span></p>
+                        </div>
+                        <div class="chat-bar-input-block">
+                            <div id="userInput">
+                                <input id="textInput" class="input-box" type="text" name="msg" placeholder="엔터(Enter)키를 눌러 메세지를 보내세요!">
+                                <p></p>
+                            </div>
+                            <div class="chat-bar-icons">
+                                <i id="chat-icon" style="color: crimson;" class="fa fa-fw fa-heart" onclick="heartButton()"></i>
+                                <i id="chat-icon" style="color: #333;" class="fa fa-fw fa-send" onclick="sendButton()"></i>
+                            </div>
+                        </div>
+                        <div id="chat-bar-bottom">
+                            <p></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../public/js/chat.js"></script>
+<script src="../public/js/Reply.js"></script>
 </body>
 </html>
