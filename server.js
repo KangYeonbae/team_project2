@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 const session = require('express-session');
 // const cookieParser = require('cookie-parser');
 const oracledb = require("oracledb");
+// const fs = require('fs');
 
 // app.use(cookieParser());
 
@@ -42,19 +43,28 @@ app.use(session({
 app.get('/main', async (req, res) => {
     res.render('main', {'username':null});
 });
+
 app.get('/video', async (req, res) => {
     res.render('video',{'username':null});
 });
 
 // 라우팅 설정
 app.use('/login', require('./routes/login'));  // 로그인페이지 연결
-app.use('/chartKYB', require('./routes/chartKYB'));  // 게시판 연결
-app.use('/total', require('./routes/totaltop12'));
-app.use('/sliedChart', require('./routes/slideTest_chartKYB'))
-app.use('/boardkyb', require('./routes/board_KYB'));// 게시판 js 에는  마지막에 module.exports = router; 를 입력해주면 끝(단, 게시판에는 포트넘버를 입력하지 않거나, 3000번과 다른 포트넘버를 사용하여야함)
-app.use('/boarDetailkyb', require('./routes/detail_KYB'))
-app.use('/subway', require('./routes/testchart_kyb'))
+app.use('/logout', require('./routes/logout')); // 로그아웃페이지
+app.use('/chartKYB', require('./routes/chartKYB'));  // 차트페이지연결 연결
+app.use('/total', require('./routes/totaltop12')); // 재우님 차트페이지연결
+app.use('/subway', require('./routes/testchart_kyb')); // 강연배 차트페이지
+app.use('/sliedChart', require('./routes/slideTest_chartKYB')); //슬라이드바 되어져있는 차트페이지
+app.use('/boardkyb', require('./routes/board_KYB'));// // 강연배 게시판메인페이지
+app.use('/boarDetailkyb', require('./routes/detail_KYB')); //강연베 게시판 세부내용페이지
+app.use('/create_kyb', require('./routes/createKYB')); //강연배 게시글작성페이지
+app.use('/deletnotice', require('./routes/deletnotice')); //강연배 글삭제페이지
+app.use('/editKYB', require('./routes/editKYB')); //강연배 글수정
+app.use('/addComment', require('./routes/commentKYB')); //강연배 덧글
+app.use('/deleteComKYB', require('./routes/deleteComKYB')) //강연배 덧글 삭제
+app.use('/editComKYB', require('./routes/editComKYB')) //강연배 덧글 수정
+
 
 const server = app.listen(port, () => {
-    console.log(`Server is running at http://localhost:${port}/subway`);
+    console.log(`Server is running at http://localhost:${port}/main`);
 });

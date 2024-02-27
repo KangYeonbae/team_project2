@@ -10,7 +10,7 @@ async function varifyID(username, password) {
 
     try{
         connection = await oracledb.getConnection(dbConfig);
-        sql_query = 'select * from users where username = :username and password = :password';
+        sql_query = 'select id, username, name from users where username = :username and password = :password';
         //execute([SQL 쿼리],[바인딩 정보],[옵션]);
         // 바인딩 정보는 기존 SQL 쿼리에서 자바스크립트 변수를 사용할 수 있게 하는 매핑 정보
         const result = await connection.execute(sql_query, {username,password})
@@ -19,9 +19,9 @@ async function varifyID(username, password) {
             console.log(result.rows[0]);
             // 간단한 쿼리의 경우는 execute 함수에 3번째 인자 생략해도 컬럼명으로 접근 가능.
             return{
-                id : result.rows[0].ID,
-                username: result.rows[0].USERNAME,
-                name: result.rows[0].NAME
+                id : result.rows[0][0],
+                username: result.rows[0][1],
+                name: result.rows[0][2]
             };
         }else {
             return null; //인증이 실패한 경우
@@ -48,6 +48,7 @@ router.post('/', bodyParser.urlencoded({ extended: false }), async (req, res) =>
         // 사용자 인증 작업
         console.log("로그인")
         const authenticatedUser = await varifyID(username, password);
+        console.log('authenticatedUser '+JSON.stringify(authenticatedUser))
 
         //인증 성공시 웰컴 페이지로 라우팅
     if (authenticatedUser) {

@@ -4,9 +4,7 @@ const oracledb = require('oracledb');
 const dbConfig = require('../dbConfig');
 
 const router = express.Router();
-// GET 요청 처리
-// 분리를 한 경우 호출한 쪽의 경로가 prefix 로 처리 되기 때문에
-// 아래 별도로 router.get('/addComment' 하지 않아도 된다.
+
 router.get('/', async (req, res) => {
     let conn;
 
@@ -16,22 +14,22 @@ router.get('/', async (req, res) => {
     try {
         conn = await oracledb.getConnection(dbConfig);
         let result = await conn.execute(
-            `SELECT COUNT(*) AS total FROM posts`
+            `SELECT COUNT(*) AS total FROM notice`
         );
-        const totalPosts = result.rows[0];
-        const postsPerPage = 10; // 한 페이지에 표시할 게시글 수
-        const totalPages = Math.ceil(totalPosts / postsPerPage); // 총 페이지 수 계산
+        const totalnotice = result.rows[0];
+        const noticePerPage = 10; // 한 페이지에 표시할 게시글 수
+        const totalPages = Math.ceil(totalnotice / noticePerPage); // 총 페이지 수 계산
 
         let currentPage = req.query.page ? parseInt(req.query.page) : 1; // 현재 페이지 번호
-        const startRow = (currentPage - 1) * postsPerPage + 1;
-        const endRow = currentPage * postsPerPage;
+        const startRow = (currentPage - 1) * noticePerPage + 1;
+        const endRow = currentPage * noticePerPage;
         console.log(`startRow: ${startRow}, endRow: ${endRow}, 정렬방식: ${req.query.sort} `);
 
         // 정렬 방식에 따른 SQL 쿼리 작성
-        let orderByClause = 'ORDER BY p.created_at DESC'; // 기본적으로 최신순 정렬
+        let orderByClause = 'ORDER BY n.created_at DESC'; // 기본적으로 최신순 정렬
 
         if (req.query.sort === 'views_desc') {
-            orderByClause = 'ORDER BY p.views DESC, p.created_at DESC'; // 조회수 내림차순, 최신순
+            orderByClause = 'ORDER BY n.views DESC, n.created_at DESC'; // 조회수 내림차순, 최신순
         }
 
         // 검색 조건에 따른 SQL 쿼리 작성
@@ -53,19 +51,17 @@ router.get('/', async (req, res) => {
         //if() 다음블록에 들어가는 조건 : true, truesy, (false가 아닌 모든값
         // if () 다음블록이 수행되지 않는 조건 : false, falsy*0, null, non)
         const sql_query = `SELECT
-                 id,title,author,to_char(created_at,'YYYY-MM-DD'),views, likes, class_post,
-                 (SELECT COUNT(*) FROM comments c WHERE c.post_id = p.id) AS comments_count
-             FROM (
-                      SELECT
-                          p.id, p.title, u.username AS author, p.created_at, p.views, p.likes, p.class_post,
-                          ROW_NUMBER() OVER (${orderByClause}) AS rn
-                      FROM posts p
-                               JOIN users u ON p.author_id = u.id
-                      WHERE 1=1    --여러가지 
-                      ${searchCondition} 
-                  ) p
-             WHERE rn BETWEEN :startRow AND :endRow
-            `;
+                               id, title, to_char(created_at,'YYYY-MM-DD'), views, class_post,
+                               (SELECT COUNT(*) FROM comments c WHERE c.post_id = p.id) AS comments_count
+                           FROM (
+                                    SELECT
+                                        n.id, n.title, n.created_at, n.views, n.class_post,
+                                        ROW_NUMBER() OVER (ORDER BY n.created_at DESC) AS rn
+                                    FROM notice n
+                                ) p
+                       WHERE rn BETWEEN :startRow AND :endRow
+        `;
+
         result = await conn.execute(sql_query,
             {
                 startRow: startRow,
@@ -83,7 +79,7 @@ router.get('/', async (req, res) => {
             userId: loggedInUserId,
             username: loggedInUserName,
             userRealName: loggedInUserRealName,
-            posts: result.rows,
+            notice: result.rows,
             startPage: startPage,
             currentPage: currentPage,
             endPage: endPage,
@@ -105,7 +101,4 @@ router.get('/', async (req, res) => {
 });
 
 
-// router.post('/', async (req, res) => {
-//     // 로그인 여부 확인
-// });
 module.exports = router;

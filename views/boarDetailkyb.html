@@ -26,15 +26,8 @@
             margin: auto;
             padding: 20px;
         }
-        .comment_box *{
-            width: 500px;
-            margin: 10px auto;
-            /*border:  2px solid blue;*/
-        }
-        .comment_box a.reply-button{
-            background-color: blueviolet;
-
-
+        .comment_box{
+            width: 100%;
         }
     </style>
     <script>
@@ -186,7 +179,7 @@
             <a href="#" class="reply-button" data-comment-id="<%= comment.id %>">답글쓰기</a>
             <% if (comment.author_id == userId) { %> <!-- 작성자 본인의 댓글일 경우 -->
             <button class="edit-button" data-comment-id="<%= comment.id %>">수정</button> <!-- 'data-comment-id' 속성 추가 -->
-            <form action="/deleteComKYB/<%= comment.id %>" method="POST" style="display: inline;">
+            <form action="/deleteComment/<%= comment.id %>" method="POST" style="display: inline;">
                 <input type="hidden" name="post_id" value="<%= notice.id %>">
                 <button type="submit">삭제</button>
             </form>
@@ -207,8 +200,8 @@
                         <a href="#" class="reply-button" data-comment-id="<%= comment.id %>">답글쓰기</a>
                         <% if (childComment.author_id == userId) { %> <!-- 작성자 본인의 댓글일 경우 -->
                         <button class="edit-button" data-comment-id="<%= childComment.id %>">수정</button> <!-- 'data-comment-id' 속성 추가 -->
-                        <form action="/deleteComKYB/<%= childComment.id %>" method="POST" style="display: inline;">
-                            <input type="hidden" name="post_id" value="<%= notice.id %>">
+                        <form action="/deleteComment/<%= childComment.id %>" method="POST" style="display: inline;">
+                            <input type="hidden" name="post_id" value="<%= post.id %>">
                             <button type="submit">삭제</button>
                         </form>
                         <% } %>
@@ -276,7 +269,7 @@
                 const postId = '<%= notice.id %>'; // 게시물 ID 가져오기
                 const editForm = `
                     <div class="comment edit-form">
-                        <form action="/editComKYB/${commentId}" method="POST">
+                        <form action="/editComment/${commentId}" method="POST">
                             <textarea class="comment-input" name="content" rows="3" placeholder="댓글 수정 내용을 입력하세요" required>${commentContent}</textarea><br>
                             <input type="hidden" name="post_id" value="${postId}"> <!-- 게시물 ID hidden으로 추가 -->
                             <input type="submit" value="수정 완료" class="submit-button">

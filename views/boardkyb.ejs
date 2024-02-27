@@ -44,11 +44,36 @@
     </script>
 </head>
 <body>
-<<div class="container">
+<div class = "container1_1">
+    <nav class = "head_nav">
+        <div class = "nav-item1-left">
+            <a class="nav-link1" href = "/boardkyb">공지사항</a>
+        </div>
+        <div class="nav-item1-left">
+            <a class="nav-link" href="/boardkyb">홍보영상</a>
+        </div>
+        <div class = "nav-item1-center">
+            <a class = "nav-link1" href = "/video"><h1>Main</h1></a>
+        </div>
+        <div class = "nav-item1">
+            <div class = "login_box">
+                <% if (username) { %>
+                    <a href="#" class="button"><%- username %></a>
+                    <div class="sub-nav">
+                        <a class="nav-item" href="/logout">로그아웃</a>
+                    </div>
+                <% } else { %>
+                    <a href="/login" class="button">로그인</a>
+                <% } %>
+            </div>
+        </div>
+    </nav>
+</div>
+<div class="container">
     <nav>
         <a class="nav-item" href="/main_2"><h1>Trip</h1></a>
         <div class="nav-item">
-            <a class="nav-link" href="/sliedChart"><h2>차트</h2></a>
+            <a class="nav-link" href="/subway"><h2>2호선,4호선</h2></a>
             <div class="sub-nav">
                 <a class="nav-item" href="/total">이지우님차트</a>
                 <a class="nav-item" href="/chartkyb">강연배님차트</a>
@@ -67,22 +92,7 @@
             </div>
         </div>
         <div class="nav-item">
-            <a class="nav-link" href="/boardkyb"><h2>공지사항</h2></a>
-            <div class="sub-nav">
-                <a class="nav-item" href="public/Gunsan_Travel.html">금강권</a>
-            </div>
-        </div>
-        <div class="nav-item">
-            <div class = "login_box">
-                <% if (username) { %>
-                    <p><%= username %>님<a href="/logout" class="button"><h2>로그아웃</h2></a></p>
-                <% } else { %>
-                    <a href="/login" class="button"><h2>로그인</h2></a>
-                <% } %>
-            </div>
-            <div class="sub-nav">
-                <a class="nav-item" href="/video">홍보영상</a>
-            </div>
+            <a class="nav-link" href="public/Gunsan_Travel.html"><h2>???</h2></a>
         </div>
     </nav>
 </div>
@@ -99,12 +109,12 @@
         </thead>
         <tbody>
 
-        <% for (let i = 0; i < posts.length; i++) { %>
+        <% for (let i = 0; i < notice.length; i++) { %>
         <tr>
-            <td><%= posts[i][6]%></td>
-            <td><a href="/boarDetailkyb/<%= posts[i][0] %>" class="post-link"><%= posts[i][1] %> [<%= posts[i][6] %>]</a></td>
-            <td><%= posts[i][3] %></td>
-            <td><%= posts[i][4] %></td>
+            <td><%= notice[i][4]%></td>
+            <td><a href="/boarDetailkyb/<%= notice[i][0] %>" class="notice-link"><%= notice[i][1] %> [<%= notice[i][4] %>]</a></td>
+            <td><%= notice[i][2] %></td>
+            <td><%= notice[i][3] %></td>
         </tr>
         <% } %>
         </tbody>
@@ -141,7 +151,7 @@
 <!-- 글쓰기 버튼 -->
 <div class="button-container">
     <% if (username === 'system') { %>
-    <a href="/create" class="button">글쓰기</a>
+    <a href="/create_kyb" class="button">글쓰기</a>
     <% } %>
 </div>
 

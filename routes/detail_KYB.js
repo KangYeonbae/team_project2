@@ -12,7 +12,7 @@ router.get('/:id', async (req, res) => {
         return res.redirect('/login'); // 로그인되지 않은 경우 로그인 페이지로 리다이렉트
     }
 
-    const postId = req.params.id;
+    const noticeId = req.params.id;
     const userId = req.session.loggedInUserId;
     const userName = req.session.loggedInUserName;
     const userRealName = req.session.loggedInUserRealName;
@@ -20,32 +20,34 @@ router.get('/:id', async (req, res) => {
     let conn;
     try {
         conn = await oracledb.getConnection(dbConfig);
-
+        console.log('여기옴1'+noticeId)
         // 조회수 증가 처리
         await conn.execute(
-            `UPDATE posts SET views = views + 1 WHERE id = :id`,
-            [postId]
+            `UPDATE notice SET views = views + 1 WHERE id = :id`,
+            {'id':noticeId}
         );
-
+        console.log('여기옴2')
 
         // 게시글 정보 가져오기
-        const postResult = await conn.execute(
-            `SELECT p.id, p.title, u.username AS author, p.content, TO_CHAR(p.created_at, 'YYYY-MM-DD') AS created_at, p.views
-             FROM posts p
-                      JOIN users u ON p.author_id = u.id
-             WHERE p.id = :id`,
-            [postId],
+        const noticeResult = await conn.execute(
+            `SELECT n.id, n.title, u.username AS author, n.content, TO_CHAR(n.created_at, 'YYYY-MM-DD') AS created_at, n.views, n.class_post
+             FROM notice n
+                      JOIN users u ON n.author_id = u.id
+             WHERE n.id = :id`,
+            [noticeId],
             { fetchInfo: { CONTENT: { type: oracledb.STRING } } }
         );
+        console.log('noticeId ' + noticeId)
+        console.log('noticeResult '+ JSON.stringify(noticeResult))
 
         // 댓글 가져오기
         const commentResult = await conn.execute(
             `SELECT c.id, c.author_id, c.content, u.username AS author, TO_CHAR(c.created_at, 'YYYY-MM-DD HH:MM') AS created_at, c.parent_comment_id 
-            FROM comments c
+            FROM notice_comments c
             JOIN users u ON c.author_id = u.id
             WHERE c.post_id = :id
             ORDER BY c.id`,
-            [postId],
+            [noticeId],
             { fetchInfo: { CONTENT: { type: oracledb.STRING } } }
         );
 
@@ -75,23 +77,23 @@ router.get('/:id', async (req, res) => {
                 parentComment.children.push(comment);
             }
         });
-        const post = {
-            id: postResult.rows[0][0],
-            title: postResult.rows[0][1],
-            author: postResult.rows[0][2],
-            content: postResult.rows[0][3],
-            created_at: postResult.rows[0][4],
-            views: postResult.rows[0][5],
-            likes: postResult.rows[0][6],
-            class_post : postResult.rows[0][7]
+        console.table(noticeResult.rows)
+        const notice = {
+            id: noticeResult.rows[0][0],
+            title: noticeResult.rows[0][1],
+            username: noticeResult.rows[0][2],
+            content: noticeResult.rows[0][3],
+            created_at: noticeResult.rows[0][4],
+            views:noticeResult.rows[0][5],
+            class_post : noticeResult.rows[0][6],
         };
 
-        console.log(`post: ${post}, comments: ${comments}`);
-        console.log(`id: ${postResult.rows[0][0]}, content: ${postResult.rows[0][2]},
+        console.log(`notice: ${notice}, comments: ${comments}`);
+        console.log(`id: ${noticeResult.rows[0][0]}, content: ${noticeResult.rows[0][2]},
          login username: ${userName} login userRealName: ${userRealName}`);
 
         res.render('boarDetailkyb', {
-            post: post,
+            notice: notice,
             userId: userId,
             username: userName,
             userRealName: userRealName,
