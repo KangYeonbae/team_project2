@@ -5,11 +5,12 @@
     <title>Chart.js Example</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/SeoulNamsanM.woff">
     <link rel="stylesheet" href="../public/css/header_test.css">
-    <link rel="stylesheet" href="../public/css/main.css">
+    <link rel="stylesheet" href="../public/css/chartlee.css">
     <link rel="stylesheet" href="../public/css/chat.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://kit.fontawesome.com/a4dc7026e0.js" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
+    <script src="echarts.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
     <script>
         $(document).ready(function() {
             $(".btn3 button").on("click", function() {
@@ -33,7 +34,7 @@
             <a class="nav-link1" href = "/boardkyb">공지사항</a>
         </div>
         <div class="nav-item1-left">
-            <a class="nav-link" href="/video">홍보영상</a>
+            <a class="nav-link" href="/boardkyb">홍보영상</a>
         </div>
         <div class = "nav-item1-center">
             <a class = "nav-link1" href = "/video"><h1>Main</h1></a>
@@ -41,7 +42,7 @@
         <div class = "nav-item1">
             <div class = "login_box">
                 <% if (username) { %>
-                    <a href="#" class="button"><%- username %></a>
+                    <a href="#" class="button">username</a>
                     <div class="sub-nav">
                         <a class="nav-item" href="/logout">로그아웃</a>
                     </div>
@@ -54,13 +55,12 @@
 </div>
 <div class="container">
     <nav>
-        <a class="nav-item" href="/main"><h1>Trip</h1></a>
+        <a class="nav-item" href="/main_2"><h1>Trip</h1></a>
         <div class="nav-item">
             <a class="nav-link" href="/subway"><h2>2호선,4호선</h2></a>
             <div class="sub-nav">
                 <a class="nav-item" href="/total">이지우님차트</a>
                 <a class="nav-item" href="/chartkyb">강연배님차트</a>
-                <a class="nav-item" href="/testchart_kyb">관광객 추세</a>
             </div>
         </div>
         <div class="nav-item">
@@ -75,23 +75,116 @@
                 <a class="nav-item" href="public/ganTasty.html">맛집</a>
             </div>
         </div>
+        <div class="nav-item">
+            <a class="nav-link" href="public/Gunsan_Travel.html"><h2>???</h2></a>
+        </div>
     </nav>
 </div>
-<header id="header">
-    <video id="video-background" autoplay muted>
-        <source src="../public/video/seoul.mp4" type="video/mp4">
-        Your browser does not support the video tag.
-    </video>
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            var video = document.getElementById("video-background");
-            video.onended = function() {
-                window.location.href = "public/login_kyb.html";
-            };
-        });
-    </script>
-</header>
 <div class="container1">
+    <div class="chart_box">
+        <canvas id="myChart" width="700px" height="400px"></canvas>
+
+        <script>
+            var myChart = echarts.init(document.getElementById('myChart'));
+            var option = {
+                title:{
+                    text : '명동 점포수'
+                },
+                tooltip : {
+                    trigger:'axis',
+                    axisPointer:{
+                        type:'cross',
+                        label:{
+                            backgroundColor: '#281b56'
+                        }
+                    }
+                },
+                legend: {
+                    data: ['당월매출금액', '매장방문인원']
+                },
+                dataZoom:{
+                    show: false,
+                    start: 0,
+                    end:100
+                },
+                xAxis : [
+                    {
+                        type:'category',
+                        boundaryGap: tru,
+                        data : (function (){
+                            var now = newDate();
+                            var res = [];
+                            var len = 20;
+                            while(len--){
+                                res.unshift(now.toLocaleTimeString().replace(/^\D*/,''));
+                                now = new Date(now -2000);
+                            }
+                            return res;
+                        })()
+                    },
+                ],
+                yAxis: [{
+                    type: 'value',
+                    scale: true,
+                    name : '당월매출금액',
+                    max : 30,
+                    min : 0,
+                    boundaryGap: [0.2, 0.2],
+                    axisLale:{
+                        formatter: '{value}%'
+                    }
+                },
+                    {
+                        type: 'value',
+                        scale : true,
+                        name : '매장방문인원',
+                        max : 1200,
+                        min :0,
+                        boundaryGap: [0.2,0.2]
+                }
+                ],
+                series : [
+                    {
+                        name:'당월매출금액',
+                        type:'line',
+                        yAxisIndex:1,
+                        itemStyle:{
+                            color : '#EEAD00'
+                        },
+                        data: (function (){
+                            var res = [];
+                            var len = 20;
+                            while(len--){
+                                res.push(Math.round(Math.random() * 1000));
+                            }
+                            return res;
+                        })()
+                    }
+                ]
+            };
+
+            myChart.setOption(option);
+
+            setlnterval(function (){
+                var axisData = (new Date()).toLocaleTimeString().replace(/^\D*/, '');
+
+                var data0 = option.series[0].data;
+                var data1 = option.series[1].data;
+
+                data0 = shift();
+                data0.push(Math.round(Math.random() * 1000));
+                data1.shift();
+                data1.push((Math.random()*10+5).toFixed(1) - 0);
+
+                option.xAxis[0].data.shift();
+                option.xAxis[0].data.push(axisData);
+
+                myChart.setOption(option);
+            },2100);
+        </script>
+    </div>
+</div>
+<div class="container2">
     <div class="chat-bar collapsed">
         <div class="btn3">
             <button><i class="fa-sharp fa-solid fa-comments">chat us!</i></button>
@@ -127,4 +220,3 @@
 <script src="../public/js/Reply.js"></script>
 </body>
 </html>
-</DOCTYPE>

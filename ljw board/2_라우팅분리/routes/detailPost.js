@@ -79,7 +79,8 @@ router.get('/:id', async (req, res) => {
                 parentComment.children.push(comment);
             }
         });
-        // console.log(postResult.rows[0]);
+        console.log(postResult.rows[0]);
+
         const post = {
             id: requirement_postResult.rows[0][0],
             title: requirement_postResult.rows[0][1],

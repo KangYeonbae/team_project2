@@ -44,39 +44,39 @@
     </script>
 </head>
 <body>
-<div class = "container1_1">
-    <nav class = "head_nav">
-        <div class = "nav-item1-left">
-            <a class="nav-link1" href = "/boardkyb">공지사항</a>
+<nav class = "head_nav">
+    <div class = "nav-item1-left">
+        <a class="nav-link1" href = "/boardkyb">공지사항</a>
+    </div>
+    <div class="nav-item1-left">
+        <a class="nav-link" href="/video">홍보영상</a>
+    </div>
+    <div class = "nav-item1-center">
+        <a class = "nav-link1" href = "/video"><h1>Main</h1></a>
+    </div>
+    <div class = "nav-item1">
+        <div class = "login_box">
+            <% if (username) { %>
+                <a href="#" class="button"><%- username %></a>
+                <div class="sub-nav">
+                    <a class="nav-item" href="/logout">로그아웃</a>
+                </div>
+            <% } else { %>
+                <a href="/login" class="button">로그인</a>
+            <% } %>
         </div>
-        <div class="nav-item1-left">
-            <a class="nav-link" href="/boardkyb">홍보영상</a>
-        </div>
-        <div class = "nav-item1-center">
-            <a class = "nav-link1" href = "/video"><h1>Main</h1></a>
-        </div>
-        <div class = "nav-item1">
-            <div class = "login_box">
-                <% if (username) { %>
-                    <a href="#" class="button"><%- username %></a>
-                    <div class="sub-nav">
-                        <a class="nav-item" href="/logout">로그아웃</a>
-                    </div>
-                <% } else { %>
-                    <a href="/login" class="button">로그인</a>
-                <% } %>
-            </div>
-        </div>
-    </nav>
+    </div>
+</nav>
 </div>
 <div class="container">
     <nav>
-        <a class="nav-item" href="/main_2"><h1>Trip</h1></a>
+        <a class="nav-item" href="/main"><h1>Trip</h1></a>
         <div class="nav-item">
             <a class="nav-link" href="/subway"><h2>2호선,4호선</h2></a>
             <div class="sub-nav">
                 <a class="nav-item" href="/total">이지우님차트</a>
                 <a class="nav-item" href="/chartkyb">강연배님차트</a>
+                <a class="nav-item" href="/testchart_kyb">관광객 추세</a>
             </div>
         </div>
         <div class="nav-item">
@@ -90,9 +90,6 @@
             <div class="sub-nav">
                 <a class="nav-item" href="public/ganTasty.html">맛집</a>
             </div>
-        </div>
-        <div class="nav-item">
-            <a class="nav-link" href="public/Gunsan_Travel.html"><h2>???</h2></a>
         </div>
     </nav>
 </div>

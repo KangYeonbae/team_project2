@@ -1,42 +1,27 @@
+// routes/addComment.js
 const express = require('express');
 const oracledb = require('oracledb');
-const Chart = require('chart.js');
 const dbConfig = require('../dbConfig');
-const path = require('path');
 
 const router = express.Router();
+// GET 요청 처리
+// 분리를 한 경우 호출한 쪽의 경로가 prefix 로 처리 되기 때문에
+// 아래 별도로 router.get('/addComment' 하지 않아도 된다.
+router.get('/', async (req, res) => {
+    let conn;
 
-    router.get('/', async (req, res) => {
-        const loggedInUserId = req.session.loggedInUserId;
-        const loggedInUserName = req.session.loggedInUserName;
-        const loggedInUserRealName = req.session.loggedInUserRealName;
+    const loggedInUserId = req.session.loggedInUserId;
+    const loggedInUserName = req.session.loggedInUserName;
+    const loggedInUserRealName = req.session.loggedInUserRealName;
 
-        try {
-            // Oracle 데이터베이스에 연결
-            const connection = await oracledb.getConnection(dbConfig);
-
-            // SQL 쿼리 실행
-            const result = await connection.execute('SELECT 서비스업종코드명,당월매출금액 FROM gangnam');
-
-            const labels = result.rows.map(row => row[0]);
-            const data = result.rows.map(row => row[1])
-            // const values = result.rows.map(row => row[1]);
-
-            // EJS 템플릿 렌더링
-            res.render('subway', { labels: JSON.stringify(labels),
-                                                    data: JSON.stringify(data),
-                                                  userId: loggedInUserId,
-                                                username: loggedInUserName,
-                                                 userRealName: loggedInUserRealName});
-
-
-            // 연결 닫기
-            await connection.close();
-        } catch (err) {
-            console.error(err);
-            res.status(500).send('Error fetching data');
-        }
+    res.render('kybTest', {
+        userId: loggedInUserId,
+        username: loggedInUserName,
+        userRealName: loggedInUserRealName,
     });
 
+});
+
+// POST 요청 처리
 
 module.exports = router;

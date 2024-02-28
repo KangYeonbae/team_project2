@@ -48,12 +48,13 @@ app.get('/video', async (req, res) => {
     res.render('video',{'username':null});
 });
 
+
 // 라우팅 설정
 app.use('/login', require('./routes/login'));  // 로그인페이지 연결
 app.use('/logout', require('./routes/logout')); // 로그아웃페이지
-app.use('/chartKYB', require('./routes/chartKYB'));  // 차트페이지연결 연결
+app.use('/subway', require('./routes/subwaychart_kyb')); // 차트페이지
+app.use('/chartKYB', require('./routes/chartKYB'));  // 강연배 차트페이지 연결
 app.use('/total', require('./routes/totaltop12')); // 재우님 차트페이지연결
-app.use('/subway', require('./routes/testchart_kyb')); // 강연배 차트페이지
 app.use('/sliedChart', require('./routes/slideTest_chartKYB')); //슬라이드바 되어져있는 차트페이지
 app.use('/boardkyb', require('./routes/board_KYB'));// // 강연배 게시판메인페이지
 app.use('/boarDetailkyb', require('./routes/detail_KYB')); //강연베 게시판 세부내용페이지
@@ -64,6 +65,7 @@ app.use('/addComment', require('./routes/commentKYB')); //강연배 덧글
 app.use('/deleteComKYB', require('./routes/deleteComKYB')) //강연배 덧글 삭제
 app.use('/editComKYB', require('./routes/editComKYB')) //강연배 덧글 수정
 
+app.use('/testchart_kyb', require('./routes/testchart_kyb')) //강연배 덧글 수
 
 const server = app.listen(port, () => {
     console.log(`Server is running at http://localhost:${port}/main`);

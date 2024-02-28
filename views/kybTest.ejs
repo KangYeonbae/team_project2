@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="ko-kr">
+<head>
+    <meta charset="UTF-8">
+    <title>Chart.js Example</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/SeoulNamsanM.woff">
+    <link rel="stylesheet" href="../public/css/header_test.css">
+    <link rel="stylesheet" href="../public/css/chartlee.css">
+    <link rel="stylesheet" href="../public/css/chat.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://kit.fontawesome.com/a4dc7026e0.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
+    <script src="echarts.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $(".btn3 button").on("click", function() {
+                console.log("Button clicked!");
+                $(".content").toggleClass("expanded");
+            });
+
+            // content 외의 영역을 클릭하면 content 닫기
+            $(document).on("click", function(event) {
+                if (!$(event.target).closest(".btn3, .content").length) {
+                    $(".content").removeClass("expanded");
+                }
+            });
+        });
+    </script>
+    <style>
+        .container3{
+            margin: 130px auto;
+        }
+        .chart_box{
+            margin-left: 170px;
+            text-align: center;
+            float: left;
+        }
+    </style>
+</head>
+<body>
+<div class = "container1_1">
+    <nav class = "head_nav">
+        <div class = "nav-item1-left">
+            <a class="nav-link1" href = "/boardkyb">공지사항</a>
+        </div>
+        <div class="nav-item1-left">
+            <a class="nav-link" href="/video">홍보영상</a>
+        </div>
+        <div class = "nav-item1-center">
+            <a class = "nav-link1" href = "/video"><h1>Main</h1></a>
+        </div>
+        <div class = "nav-item1">
+            <div class = "login_box">
+                <% if (username) { %>
+                    <a href="#" class="button"><%- username %></a>
+                    <div class="sub-nav">
+                        <a class="nav-item" href="/logout">로그아웃</a>
+                    </div>
+                <% } else { %>
+                    <a href="/login" class="button">로그인</a>
+                <% } %>
+            </div>
+        </div>
+    </nav>
+</div>
+<div class="container">
+    <nav>
+        <a class="nav-item" href="/main"><h1>Trip</h1></a>
+        <div class="nav-item">
+            <a class="nav-link" href="/subway"><h2>2호선,4호선</h2></a>
+            <div class="sub-nav">
+                <a class="nav-item" href="/total">이지우님차트</a>
+                <a class="nav-item" href="/chartkyb">강연배님차트</a>
+                <a class="nav-item" href="/testchart_kyb">관광객 추세</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <a class="nav-link" href="public/main2.html"><h2>강남</h2></a>
+            <div class="sub-nav">
+                <a class="nav-item" href="public/ganTasty.html">맛집</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <a class="nav-link" href="public/main2.html"><h2>명동</h2></a>
+            <div class="sub-nav">
+                <a class="nav-item" href="public/ganTasty.html">맛집</a>
+            </div>
+        </div>
+    </nav>
+</div>
+<div class="container3">
+    <div class="chart_box">
+        <canvas id="myChart" width="700px" height="500px"></canvas>
+
+        <script>
+            var myChart = echarts.init(document.getElementById('myChart'));
+
+            //chart의 설정을 정합니다.
+            var option = {
+                title: {
+                    text: '강남 관광객',
+                },
+                tooltip: {
+                    trigger: 'axis',
+                    axisPointer: {
+                        type: 'cross',
+                        label: {
+                            backgroundColor: '#283b56'
+                        }
+                    }
+                },
+                legend: {
+                    data:['외국인비율', '관광객']
+                },
+                dataZoom: {
+                    show: false,
+                    start: 0,
+                    end: 100
+                },
+                xAxis: [
+                    {
+                        type: 'category',
+                        boundaryGap: true,
+                        data: (function (){
+                            var now = new Date();
+                            var res = [];
+                            var len = 20;
+                            while (len--) {
+                                res.unshift(now.toLocaleTimeString().replace(/^\D*/,''));
+                                now = new Date(now - 2000);
+                            }
+                            return res;
+                        })()
+                    },
+                ],
+                yAxis: [
+                    {
+                        type: 'value',
+                        scale: true,
+                        name: '외국인 비율',
+                        max: 30,
+                        min: 0,
+                        boundaryGap: [0.2, 0.2],
+                        axisLabel: {
+                            formatter: '{value} %'
+                        },
+                    },
+                    {
+                        type: 'value',
+                        scale: true,
+                        name: '관광객',
+                        max: 1200,
+                        min: 0,
+                        boundaryGap: [0.2, 0.2]
+                    }
+                ],
+                series: [
+                    {
+                        name: '외국인비율',
+                        type: 'line',
+                        lineStyle:{
+                            color:'#2A265C' //line차트 색상 변경
+                        },
+                        smooth: true, //부드러운 line 표현
+                        yAxisIndex: 0, //yAxis 1번째 사용
+                        data: (function (){
+                            var res = [];
+                            var len = 0;
+                            while (len < 20) {
+                                res.push((Math.random()*10 + 5).toFixed(1) - 0); //랜덤 데이터 생성
+                                len++;
+                            }
+                            return res;
+                        })()
+                    },
+                    {
+                        name: '관광객',
+                        type: 'bar',
+                        yAxisIndex: 1, //yAxis 2번째 사용
+                        itemStyle:{
+                            color:'#76ff03' //bar 색상 변경
+                        },
+                        data: (function (){
+                            var res = [];
+                            var len = 20;
+                            while (len--) {
+                                res.push(Math.round(Math.random() * 1000)); //랜덤 데이터 생성
+                            }
+                            return res;
+                        })()
+                    },
+                ]
+            };
+
+            // 위에서 설정한 속성을 차트에 반영합니다.
+            myChart.setOption(option);
+
+            //데이터를 생성하고 삭제합니다.
+            setInterval(function (){
+                //x축에 실시간 데이터 생성
+                var axisData = (new Date()).toLocaleTimeString().replace(/^\D*/, '');
+
+                var data0 = option.series[1].data; //순수익 데이터
+                var data1 = option.series[0].data; //총 수익 데이터
+
+                //데이터의 가장 왼쪽 값을 제거
+                data0.shift();
+                //데이터의 가장 오른쪽 값을 추가
+                data0.push(Math.round(Math.random() * 1000));
+                data1.shift();
+                data1.push((Math.random() * 10 + 5).toFixed(1) - 0);
+
+
+                //x축에 시간 데이터 추가
+                option.xAxis[0].data.shift();
+                option.xAxis[0].data.push(axisData);
+
+                //차트에 반영
+                myChart.setOption(option);
+            }, 2100);
+        </script>
+    </div>
+
+    <div class="chart_box">
+        <canvas id="myChart1" width="700px" height="500px"></canvas>
+
+        <script>
+            var myChart1 = echarts.init(document.getElementById('myChart1'));
+
+            //chart의 설정을 정합니다.
+            var option1 = {
+                title: {
+                    text: '명동 관광객',
+                },
+                tooltip: {
+                    trigger: 'axis',
+                    axisPointer: {
+                        type: 'cross',
+                        label: {
+                            backgroundColor: '#283b56'
+                        }
+                    }
+                },
+                legend: {
+                    data:['외국인비율', '관광객']
+                },
+                dataZoom: {
+                    show: false,
+                    start: 0,
+                    end: 100
+                },
+                xAxis: [
+                    {
+                        type: 'category',
+                        boundaryGap: true,
+                        data: (function (){
+                            var now = new Date();
+                            var res = [];
+                            var len = 20;
+                            while (len--) {
+                                res.unshift(now.toLocaleTimeString().replace(/^\D*/,''));
+                                now = new Date(now - 2000);
+                            }
+                            return res;
+                        })()
+                    },
+                ],
+                yAxis: [
+                    {
+                        type: 'value',
+                        scale: true,
+                        name: '외국인 비율',
+                        max: 30,
+                        min: 0,
+                        boundaryGap: [0.2, 0.2],
+                        axisLabel: {
+                            formatter: '{value} %'
+                        },
+                    },
+                    {
+                        type: 'value',
+                        scale: true,
+                        name: '관광객',
+                        max: 1200,
+                        min: 0,
+                        boundaryGap: [0.2, 0.2]
+                    }
+                ],
+                series: [
+                    {
+                        name: '외국인비율',
+                        type: 'line',
+                        lineStyle:{
+                            color:'#c8ffff' //line차트 색상 변경
+                        },
+                        smooth: true, //부드러운 line 표현
+                        yAxisIndex: 0, //yAxis 1번째 사용
+                        data: (function (){
+                            var res = [];
+                            var len = 0;
+                            while (len < 20) {
+                                res.push((Math.random()*10 + 5).toFixed(1) - 0); //랜덤 데이터 생성
+                                len++;
+                            }
+                            return res;
+                        })()
+                    },
+                    {
+                        name: '관광객',
+                        type: 'bar',
+                        yAxisIndex: 1, //yAxis 2번째 사용
+                        itemStyle:{
+                            color:'#2962ff' //bar 색상 변경
+                        },
+                        data: (function (){
+                            var res = [];
+                            var len = 20;
+                            while (len--) {
+                                res.push(Math.round(Math.random() * 1000)); //랜덤 데이터 생성
+                            }
+                            return res;
+                        })()
+                    },
+                ]
+            };
+
+            // 위에서 설정한 속성을 차트에 반영합니다.
+            myChart.setOption(option1);
+
+            //데이터를 생성하고 삭제합니다.
+            setInterval(function (){
+                //x축에 실시간 데이터 생성
+                var axisData1 = (new Date()).toLocaleTimeString().replace(/^\D*/, '');
+
+                var data2 = option1.series[1].data; //순수익 데이터
+                var data3 = option1.series[0].data; //총 수익 데이터
+
+                //데이터의 가장 왼쪽 값을 제거
+                data2.shift();
+                //데이터의 가장 오른쪽 값을 추가
+                data2.push(Math.round(Math.random() * 1000));
+                data3.shift();
+                data3.push((Math.random() * 10 + 5).toFixed(1) - 0);
+
+
+                //x축에 시간 데이터 추가
+                option1.xAxis[0].data.shift();
+                option1.xAxis[0].data.push(axisData1);
+
+                //차트에 반영
+                myChart1.setOption(option1);
+            }, 2100);
+        </script>
+    </div>
+</div>
+<div class="container2">
+    <div class="chat-bar collapsed">
+        <div class="btn3">
+            <button><i class="fa-sharp fa-solid fa-comments">chat us!</i></button>
+        </div>
+        <div class="content">
+            <div class="full-chat-block">
+                <div class="outer-container">
+                    <div class="chat-container">
+                        <div id="chatbox">
+                            <h5 id="chat-timestamp"></h5>
+                            <p id="botStarterMessage" class="botText"><span>Loading...</span></p>
+                        </div>
+                        <div class="chat-bar-input-block">
+                            <div id="userInput">
+                                <input id="textInput" class="input-box" type="text" name="msg" placeholder="엔터(Enter)키를 눌러 메세지를 보내세요!">
+                                <p></p>
+                            </div>
+                            <div class="chat-bar-icons">
+                                <i id="chat-icon" style="color: crimson;" class="fa fa-fw fa-heart" onclick="heartButton()"></i>
+                                <i id="chat-icon" style="color: #333;" class="fa fa-fw fa-send" onclick="sendButton()"></i>
+                            </div>
+                        </div>
+                        <div id="chat-bar-bottom">
+                            <p></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../public/js/chat.js"></script>
+<script src="../public/js/Reply.js"></script>
+</body>
+</html>
