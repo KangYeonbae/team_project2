@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Gangnam</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <canvas id="mixed-chart"></canvas>
+    <script>
+        // 데이터 준비
+        var lineData = {
+            labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+            datasets: [{
+                label: 'Line Dataset',
+                borderColor: 'rgb(255, 99, 132)',
+                data: [0, 10, 5, 2, 20, 30, 45],
+                type: 'line'
+            }]
+        };
+
+        var barData = {
+            labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+            datasets: [{
+                label: 'Bar Dataset',
+                backgroundColor: 'rgb(54, 162, 235)',
+                data: [10, 20, 30, 40, 50, 60, 70],
+                type: 'bar'
+            }]
+        };
+
+        // 차트 생성
+        var ctx = document.getElementById('mixed-chart').getContext('2d');
+        var mixedChart = new Chart(ctx, {
+            type: 'bar', // 기본 그래프 유형 설정
+            data: {
+                datasets: [lineData.datasets[0], barData.datasets[0]],
+                labels: lineData.labels
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+        });
+
+    </script>
+</body>
+</html>
