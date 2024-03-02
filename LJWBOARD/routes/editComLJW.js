@@ -1,4 +1,4 @@
-// routes/addComment.js
+// routes/addComLJW.js
 const express = require('express');
 const oracledb = require('oracledb');
 const dbConfig = require('../dbConfig');
@@ -16,7 +16,7 @@ router.post('/:commentId', async (req, res) => {
             { content, commentId }
         );
         // 삭제 후 상세 페이지로 리다이렉트
-        res.redirect(`/detailPost/${post_id}`);
+        res.redirect(`/detailPostLJW/${post_id}`);
     } catch (error) {
         // 댓글 수정 실패 시 에러 응답 반환
         console.error('댓글 수정 에러:', error);

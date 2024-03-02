@@ -102,7 +102,7 @@ router.get('/:id', async (req, res) => {
          login username: ${userName} login userRealName: ${userRealName}`);
 
         // console.log(`post: ${post}, comments: ${comments}, content: ${requirement_postResult.rows[0][2]}`);
-        res.render('detailPost', {
+        res.render('detailPostLJW', {
             post: post,
             userId: userId,
             username: userName,

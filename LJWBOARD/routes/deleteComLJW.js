@@ -1,4 +1,4 @@
-// routes/addComment.js
+// routes/addComLJW.js
 const express = require('express');
 const oracledb = require('oracledb');
 const dbConfig = require('../dbConfig');
@@ -6,7 +6,7 @@ const dbConfig = require('../dbConfig');
 const router = express.Router();
 // GET 요청 처리
 // 분리를 한 경우 호출한 쪽의 경로가 prefix 로 처리 되기 때문에
-// 아래 별도로 router.get('/addComment' 하지 않아도 된다.
+// 아래 별도로 router.get('/addComLJW' 하지 않아도 된다.
 router.post('/:id', async (req, res) => {
     if (!req.session.loggedIn) {
         return res.redirect('/login'); // 로그인되지 않은 경우 로그인 페이지로 리다이렉트
@@ -29,7 +29,7 @@ router.post('/:id', async (req, res) => {
         await conn.commit();
 
         // 삭제 후 상세 페이지로 리다이렉트
-        res.redirect(`/detailPost/${postId}`);
+        res.redirect(`/detailPostLJW/${postId}`);
     } catch (err) {
         console.error('댓글 삭제 중 오류 발생:', err);
         res.status(500).send('댓글 삭제 중 오류가 발생했습니다.');

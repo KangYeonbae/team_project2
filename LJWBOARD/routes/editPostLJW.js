@@ -31,7 +31,7 @@ router.get('/:id', async (req, res) => {
             content: result.rows[0][3]
         };
 
-        res.render('editPost', {
+        res.render('editPostLJW', {
             post: post,
             userId: userId,
             username: userName,
@@ -68,7 +68,7 @@ router.post('/:id', async (req, res) => {
         await conn.commit();
 
         // 수정 후 상세 페이지로 리다이렉트
-        res.redirect(`/detailPost/${postId}?user_id=${req.session.userId}&username=${req.session.username}&user_realname=${req.session.userRealName}`);
+        res.redirect(`/detailPostLJW/${postId}?user_id=${req.session.userId}&username=${req.session.username}&user_realname=${req.session.userRealName}`);
     } catch (err) {
         console.error('게시글 수정 중 오류 발생:', err);
         res.status(500).send('게시글 수정 중 오류가 발생했습니다.');

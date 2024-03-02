@@ -85,7 +85,7 @@ router.get('/', async (req, res) => {
         console.log(`result.rows[0].id: ${result.rows[0].id}`);
 
 
-        res.render('index', {
+        res.render('indexLJW', {
             userId: loggedInUserId,
             userName: loggedInUserName,
             userRealName: loggedInUserRealName,

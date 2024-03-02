@@ -32,7 +32,7 @@ app.use('/detailPost', require('./routes/detailPost2')); // 상세 페이지 렌
 app.use('/editPost', require('./routes/editPost2')); // 수정 페이지 렌더링
 app.use('/deletePost', require('./routes/deletePost2')); // 삭제 처리
 // app.use('/deleteComment', require('./routes/deleteComment2')); // 댓글 삭제 처리
-// app.use('/editComment', require('./routes/editComment2')); // 댓글 수정 엔드포인트 추가
+// app.use('/editComLJW', require('./routes/editComLJW2')); // 댓글 수정 엔드포인트 추가
 
 // 게시판 서버 시작
 app.listen(port, () => {

@@ -5,15 +5,12 @@ const path = require("path");
 const fs = require("fs");
 const multer = require('multer');
 const router = express.Router();
-
-
-
 const WEB_SERVER_HOME = 'C:\\JWLEE\\Util\\nginx-1.24.0\\html';
 const UPLOADS_FOLDER = path.join(WEB_SERVER_HOME,'uploads');
 const upload = multer({ dest: path.join(__dirname, 'temp'), encoding: 'utf8' });
 router.get('/', async (req, res) => {
     // 로그인 여부 확인 로직 작성
-    res.render('create', {
+    res.render('createLJW', {
         userId: req.session.userId,
         username: req.session.username,
         userRealName: req.session.userRealName
@@ -52,7 +49,7 @@ router.post('/',upload.array('files',5), async (req, res) => {
                 file_original_name: files.map(file => file.originalName).join(';'), // 파일의 원본 이름을 세미콜론으로 구분하여 저장
                 file_stored_name: files.map(file => file.storedName).join(';') // 파일의 변환된 이름을 세미콜론으로 구분하여 저장
             }
-            );
+        );
 
         // 변경 사항 커밋
         await conn.commit();
@@ -64,7 +61,7 @@ router.post('/',upload.array('files',5), async (req, res) => {
         }
 
         // 게시글 작성 후 게시판 메인 페이지로 리다이렉트
-        res.redirect('/boardMain');
+        res.redirect('/boardLJW');
     } catch (err) {
         console.error('글 작성 중 오류 발생:', err);
         res.status(500).send('글 작성 중 오류가 발생했습니다.');

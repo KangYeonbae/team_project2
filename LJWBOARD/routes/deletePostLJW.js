@@ -35,7 +35,7 @@ router.get('/:id', async (req, res) => {
 
         await conn.commit();
         // 삭제 후 게시판 메인 페이지로 리다이렉트
-        res.redirect(`/boardMain?id=${userId}&username=${userName}&name=${userRealName}`);
+        res.redirect(`/boardLJW?id=${userId}&username=${userName}&name=${userRealName}`);
     } catch (err) {
         console.error('게시글 삭제 중 오류 발생:', err);
         res.status(500).send('게시글 삭제 중 오류가 발생했습니다.');

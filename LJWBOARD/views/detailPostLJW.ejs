@@ -178,11 +178,11 @@
             <%= post.content %>
             <% if (post.file_original_name && post.file_original_name !== '') { %>
                 <ul style="list-style-type: none; padding-left: 0;">
-                    <!--  멀티 파일인 경우 구분자가 ; 이므로 ;를 기준으로 파일명만 배열로 수집                  -->
+<!--  멀티 파일인 경우 구분자가 ; 이므로 ;를 기준으로 파일명만 배열로 수집                  -->
                     <% const originalNames = post.file_original_name.split(';'); %>
                     <% const storedNames = post.file_stored_name.split(';'); %>
                     <% for (let i = 0; i < originalNames.length; i++) { %>
-                        <!-- 파일은 XXX.jpg 이런식의 패턴이므로 . 으로 split 한후에 pop 하면 결국 파일 확장자를 얻을 수 있다.  -->
+<!-- 파일은 XXX.jpg 이런식의 패턴이므로 . 으로 split 한후에 pop 하면 결국 파일 확장자를 얻을 수 있다.  -->
                         <% const extension = originalNames[i].split('.').pop(); %>  <!-- pop(): 배열의 가장 마지막값을 삽입해주는놈-->
                         <% if (['jpg', 'jpeg', 'png'].includes(extension)) { %>
                             <li style="text-align: center;">
@@ -240,19 +240,19 @@
                     <% } %>
                     &nbsp<%= comment.created_at %>
                 </p>
-                <!--  HTML
-                data- : HTML 사용자 정의 데이터 속성을 정의
-                이것은 아래 규칙이 적용.
-                > 'data-' prefix로 되어 나머지 텍스트를 사용하여 사용자 정의 데이터 값을 참조할 수 있다. data-comment-id => comment-id
-                > -으로 연결된 단어는 카멜규칙을 적용한다.  comment-id => commentId
-                이후 제이쿼리 data함수에서 commentID로 정의된 값을 참조할 수 있다.
-                -->
+<!--  HTML
+data- : HTML 사용자 정의 데이터 속성을 정의
+이것은 아래 규칙이 적용.
+> 'data-' prefix로 되어 나머지 텍스트를 사용하여 사용자 정의 데이터 값을 참조할 수 있다. data-comment-id => comment-id
+> -으로 연결된 단어는 카멜규칙을 적용한다.  comment-id => commentId
+이후 제이쿼리 data함수에서 commentID로 정의된 값을 참조할 수 있다.
+-->
                 <p class="comment-content" data-comment-id="<%= comment.id %>"><%= comment.content %></p> <!-- 여기서 '.comment-content'를 추가했습니다. -->
                 <div class="comment-buttons">
                     <a href="#" class="reply-button" data-comment-id="<%= comment.id %>">답글쓰기</a>
                     <% if (comment.author_id == userId) { %> <!-- 작성자 본인의 댓글일 경우 -->
                     <button class="edit-button" data-comment-id="<%= comment.id %>">수정</button> <!-- 'data-comment-id' 속성 추가 -->
-                    <form action="/deleteComment/<%= comment.id %>" method="POST" style="display: inline;">
+                    <form action="/deleteCommentLJW/<%= comment.id %>" method="POST" style="display: inline;">
                         <input type="hidden" name="post_id" value="<%= post.id %>">
                         <button type="submit">삭제</button>
                     </form>
@@ -273,7 +273,7 @@
                                 <a href="#" class="reply-button" data-comment-id="<%= comment.id %>">답글쓰기</a>
                                 <% if (childComment.author_id == userId) { %> <!-- 작성자 본인의 댓글일 경우 -->
                                 <button class="edit-button" data-comment-id="<%= childComment.id %>">수정</button> <!-- 'data-comment-id' 속성 추가 -->
-                                <form action="/deleteComment/<%= childComment.id %>" method="POST" style="display: inline;">
+                                <form action="/deleteCommentLJW/<%= childComment.id %>" method="POST" style="display: inline;">
                                     <input type="hidden" name="post_id" value="<%= post.id %>">
                                     <button type="submit">삭제</button>
                                 </form>
@@ -291,7 +291,7 @@
 </div>
 
 <div class="comment-form">
-    <form action="/addComment" method="POST">
+    <form action="/addComLJW" method="POST">
         <textarea class="comment-input" name="content" rows="5" placeholder="'<%= username%>'님 댓글을 남겨보세요" required></textarea><br>
         <input type="hidden" name="post_id" value="<%= post.id %>">
         <input type="hidden" name="author_id" value="<%= userId %>">
@@ -300,9 +300,9 @@
 </div>
 <!-- 이전 페이지로 돌아가기 버튼 -->
 <div class="center">
-    <a href="/boardMain" class="button">이전 페이지로 돌아가기</a>
-    <a href="/editPost/<%= post.id %>" class="button">수정</a>
-    <a href="/deletePost/<%= post.id %>" class="button">삭제</a>
+    <a href="/boardLJW" class="button">이전 페이지로 돌아가기</a>
+    <a href="/editPostLJW/<%= post.id %>" class="button">수정</a>
+    <a href="/deletePostLJW/<%= post.id %>" class="button">삭제</a>
 </div>
 
 <script src="/js/jquery.js"></script>
@@ -319,7 +319,7 @@
             if (replyForm.length === 0) {
                 const newReplyForm = `
                     <div class="comment reply-form">
-                        <form action="/addComment" method="POST">
+                        <form action="/addComLJW" method="POST">
                             <input type="hidden" name="post_id" value="<%= post.id %>">
                             <input type="hidden" name="author_id" value="<%= userId %>">
                             <input type="hidden" name="comment_id" value="${commentId}">
