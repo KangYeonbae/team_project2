@@ -3,11 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>게시판</title>
+    <title>강남 맛집 추천 게시판</title>
     <style>
         table {
             width: 100%;
             border-collapse: collapse;
+        }
+
+        h1 {
+         text-align: center;
         }
 
         th, td {
@@ -17,7 +21,7 @@
         }
 
         th {
-            background-color: #f2f2f2;
+            background-color: lawngreen;
             cursor: pointer; /* 정렬을 위해 커서 타입 변경 */
         }
 
@@ -60,7 +64,7 @@
     </style>
 </head>
 <body>
-<h1>게시판</h1>
+<h1>강남 맛집 추천 게시판</h1>
 <div style="position: absolute; top: 10px; right: 10px;">
     <% if (userRealName) { %>
         <p><%= userRealName %>님 환영합니다. &nbsp;&nbsp; <a href="/logout" class="button">로그아웃</a></p>
