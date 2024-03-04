@@ -67,7 +67,7 @@
 <h1>강남 맛집 추천 게시판</h1>
 <div style="position: absolute; top: 10px; right: 10px;">
     <% if (userRealName) { %>
-        <p><%= userRealName %>님 환영합니다. &nbsp;&nbsp; <a href="/logout" class="button">로그아웃</a></p>
+        <p><%= userRealName %>님 환영합니다. &nbsp;&nbsp; <a href="/HJ_logout" class="button">로그아웃</a></p>
     <% } else { %>
         <a href="/login" class="button">로그인</a>
     <% } %>
@@ -94,7 +94,7 @@
     <tbody>
     <% for (let i = 0; i < posts.length; i++) { %>
         <tr>
-            <td><a href="/detailPost/<%= posts[i][0] %>" class="post-link"><%= posts[i][1] %> [<%= posts[i][6] %>]</a></td>
+            <td><a href="/HJ_detailPost/<%= posts[i][0] %>" class="post-link"><%= posts[i][1] %> [<%= posts[i][6] %>]</a></td>
             <td><%= posts[i][2] %></td>
             <td><%= posts[i][3] %></td>
             <td><%= posts[i][4] %></td>
@@ -126,7 +126,7 @@
         sortByViews = !sortByViews;
         const sortParam = sortByViews ? 'views_desc' : ''; // 정렬 방식에 따른 쿼리 파라미터
         // location 객체를 사용하여 지정된 URL로 이동 및 화면 갱신
-        window.location.href = `/boardMain?sort=${sortParam}`; // 최초 조회수 클릭 시 /boardMain?sort=views_desc
+        window.location.href = `/HJ_boardMain?sort=${sortParam}`; // 최초 조회수 클릭 시 /boardMain?sort=views_desc
     }
 </script>
 
@@ -134,26 +134,26 @@
 <!-- 글쓰기 버튼 -->
 <div class="button-container">
     <% if (userRealName) { %>
-        <a href="/create" class="button">글쓰기</a>
+        <a href="/HJ_create" class="button">글쓰기</a>
     <% } %>
 </div>
 
 <!-- 페이징 -->
 <div class="paging-container">
     <% if (currentPage > 1) { %>
-        <a href="/boardMain/?page=<%= currentPage - 1 %>">이전</a>
+        <a href="/HJ_boardMain/?page=<%= currentPage - 1 %>">이전</a>
     <% } %>
 
     <% for (let i = startPage; i <= endPage; i++) { %>
         <% if (i === currentPage) { %>
             <span class="current-page"><%= i %></span>
         <% } else { %>
-            <a href="/boardMain/?page=<%= i %>"><%= i %></a>
+            <a href="/HJ_boardMain/?page=<%= i %>"><%= i %></a>
         <% } %>
     <% } %>
 
     <% if ((totalPages - currentPage + 1) > maxPageNumber) { %>
-        <a href="/boardMain/?page=<%= currentPage + 1 %>">다음</a>
+        <a href="/HJ_boardMain/?page=<%= currentPage + 1 %>">다음</a>
     <% } %>
 </div>
 
@@ -161,7 +161,7 @@
 <!-- 검색 조건 및 입력 창 -->
 <div id="searchContainer">
 <!-- 기존의 /boardMain이 get방식으로 처리되고 있어 편의상 GET 방식으로 호출   -->
-    <form action="/boardMain" method="GET">
+    <form action="/HJ_boardMain" method="GET">
         <label for="searchType">검색 조건:</label>
         <select id="searchType" name="searchType">
             <option value="title" selected>제목</option>

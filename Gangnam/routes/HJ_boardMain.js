@@ -1,7 +1,7 @@
-// routes/addComment.js
+// routes/HJ_addComment.js
 const express = require('express');
 const oracledb = require('oracledb');
-const dbConfig = require('../dbconfig');
+const dbConfig = require('../HJ_dbconfig');
 
 const router = express.Router();
 // 게시판 메인 페이지 렌더링
@@ -77,7 +77,7 @@ router.get('/', async(req, res) => {
         const startPage = (totalPages - currentPage) < MAX_PAGE_LIMIT ? totalPages - MAX_PAGE_LIMIT + 1 : currentPage;
         const endPage = Math.min(startPage + MAX_PAGE_LIMIT - 1, totalPages);
 
-        res.render('index', {
+        res.render('HJ_index', {
             userId: loggedInUserId,
             userName: loggedInUserName,
             userRealName: loggedInUserRealName,

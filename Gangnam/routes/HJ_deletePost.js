@@ -1,7 +1,7 @@
 // 삭제 처리
 const express = require('express');
 const oracledb = require('oracledb');
-const dbConfig = require('../dbconfig');
+const dbConfig = require('../HJ_dbconfig');
 
 const router = express.Router();
 
@@ -27,7 +27,7 @@ router.get('/:id', async (req, res) => {
 
 
     if (resultDeletdComments !== null && resultDeletdPosts !== null) {
-        res.redirect(`/boardMain?id=${userId}&username=${userName}&name=${userRealName}`);
+        res.redirect(`/HJ_boardMain?id=${userId}&username=${userName}&name=${userRealName}`);
     } else {
         res.send("하.. 에러났나보다..")
     }

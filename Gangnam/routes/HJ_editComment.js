@@ -1,7 +1,7 @@
 // 댓글 수정 엔드포인트 추가
 const express = require('express');
 const oracledb = require('oracledb');
-const dbConfig = require('../dbConfig');
+const dbConfig = require('../HJ_dbconfig');
 
 const router = express.Router();
 
@@ -22,7 +22,7 @@ router.post('/:commentId', async (req, res) => {
             { content, commentId }
         );
         // 삭제 후 상세 페이지로 리다이렉트
-        res.redirect(`/detailPost/${post_id}`);
+        res.redirect(`/HJ_detailPost/${post_id}`);
     } catch (error) {
         // 댓글 수정 실패 시 에러 응답 반환
         console.error('댓글 수정 에러:', error);

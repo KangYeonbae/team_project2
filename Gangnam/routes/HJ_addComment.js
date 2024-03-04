@@ -1,8 +1,8 @@
 // 댓글 페이지 렌더링
-// routes/addComment.js
+// routes/HJ_addComment.js
 const express = require('express');
 const oracledb = require('oracledb');
-const dbConfig = require('../dbconfig');
+const dbConfig = require('../HJ_dbconfig');
 
 const router = express.Router();
 
@@ -11,7 +11,7 @@ router.get('/', (req, res) => {
     const userId = req.session.loggedInUserId;
     const username = req.session.loggedInUserName;
     const userRealName = req.session.loggedInUserRealName;
-    res.render('addComment',{postId: postId, userId:userId, userName:username, userRealName:userRealName});
+    res.render('HJ_addComment',{postId: postId, userId:userId, userName:username, userRealName:userRealName});
 });
 // console.log(post_id);
 // POST 요청 처리
@@ -44,7 +44,7 @@ router.post('/', async (req, res) => {
         // console.log(comment_id);
         // await conn.commit();
 
-        res.redirect(`/detailPost/${post_id}`);
+        res.redirect(`/HJ_detailPost/${post_id}`);
     } catch (err) {
         console.error(err);
         res.status(500).send('Internal Server Error');

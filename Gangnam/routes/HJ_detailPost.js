@@ -1,7 +1,7 @@
-// routes/addComment.js
+// routes/HJ_addComment.js
 const express = require('express');
 const oracledb = require('oracledb');
-const dbConfig = require('../dbconfig');
+const dbConfig = require('../HJ_dbconfig');
 
 const router = express.Router();
 
@@ -94,7 +94,7 @@ router.get('/:id', async (req, res) => {
             file_stored_name: postResult.rows[0][8]
         };
         console.log(`debug /:id post.id: ${post.id}`);
-        res.render('detailPost', {
+        res.render('HJ_detailPost', {
             post: post,
             userId: userId,
             username: userName,

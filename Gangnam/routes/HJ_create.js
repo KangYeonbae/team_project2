@@ -1,7 +1,7 @@
 // 글 작성 페이지 렌더링
 const express = require('express');
 const oracledb = require('oracledb');
-const dbConfig = require('../dbconfig');
+const dbConfig = require('../HJ_dbconfig');
 const multer = require('multer');
 const fs = require('fs');
 const path = require('path');
@@ -10,7 +10,7 @@ const router = express.Router();
 
 router.get('/', (req, res) => {
     // 로그인 여부 확인 로직 작성
-    res.render('create', {
+    res.render('HJ_create', {
         userId: req.session.userId,
         username: req.session.username,
         userRealName: req.session.userRealName
@@ -75,14 +75,14 @@ router.post('/', upload.array('files', 5), async (req, res) => {
             // 일반적인 절차이다.
             // 추가적으로 보안조치를 취할 경우 아래  fs.renameSync 메소드를 통해 최종 이동하기 전에 필요로직을 구현한다.
             const tempFilePath = file.path;
-            const targetFilePath = path.join(UPLOADS_FOLDER, file.filename);
+            const targetFilePath = path.join(UPLOADS, file.filename);
 
             // 임시폴더의 파일을 타겟 경로로 이동
             fs.renameSync(tempFilePath, targetFilePath);
         }
 
         // 게시글 작성 후 게시판 메인 페이지로 리다이렉트
-        res.redirect('/boardMain');
+        res.redirect('/HJ_boardMain');
     } catch (err) {
         console.error('글 작성 중 오류 발생:', err);
         res.status(500).send('글 작성 중 오류가 발생했습니다.');

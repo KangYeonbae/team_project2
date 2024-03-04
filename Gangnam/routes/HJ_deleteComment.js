@@ -1,7 +1,7 @@
 // 댓글 삭제 처리
 const express = require('express');
 const oracledb = require('oracledb');
-const dbConfig = require('../dbConfig');
+const dbConfig = require('../HJ_dbconfig');
 
 const router = express.Router();
 
@@ -28,7 +28,7 @@ router.post('/:id', async (req, res) => {
         await conn.commit();
 
         // 삭제 후 상세 페이지로 리다이렉트
-        res.redirect(`/detailPost/${postId}`);
+        res.redirect(`/HJ_detailPost/${postId}`);
     } catch (err) {
         console.error('댓글 삭제 중 오류 발생:', err);
         res.status(500).send('댓글 삭제 중 오류가 발생했습니다.');

@@ -1,7 +1,7 @@
 // 로그아웃 처리
 const express = require('express');
 const oracledb = require('oracledb');
-const dbConfig = require('../dbconfig');
+const dbConfig = require('../HJ_dbconfig');
 
 const router = express.Router();
 
