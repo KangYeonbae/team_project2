@@ -1,15 +1,20 @@
 // routes/addComment.js
 const express = require('express');
 const oracledb = require('oracledb');
+const bodyParser = require('body-parser');
 const dbConfig = require('../dbConfig');
+const session = require('express-session');
+const multer = require('multer');
+const fs = require('fs');
+const path = require('path');
 
 const router = express.Router();
 
 router.get('/', async (req, res) => {
     const postId = req.query.post_id; // postId 가져오기
-    const userId = req.query.loggedInUserId;
-    const username = req.query.loggedInUserName;
-    const userRealName = req.query.loggedInUserRealName;
+    const userId = req.session.loggedInUserId;
+    const username = req.session.loggedInUserName;
+    const userRealName = req.session.loggedInUserRealName;
     res.render('md_addComment',{postId:postId, userId:userId, username:username, userRealName:userRealName});
 });
 
@@ -22,7 +27,7 @@ router.post('/', async (req, res) => {
 
     const post_id = req.body.post_id;
     const author_id = req.session.loggedInUserId;
-    const comment_id = req.body.comment_id; // req.body에서 comment_id를 가져옴
+    const comment_id = req.body.comment_id;
     const { content } = req.body;
 
     let conn;
@@ -31,8 +36,8 @@ router.post('/', async (req, res) => {
 
         // 댓글 추가
         await conn.execute(
-            `insert into comments (id, post_id, author_id, content, parent_comment_id) 
-             values (comment_id_seq.nextval, :post_id, :author_id, :content, :parent_id)`, // parend_id를 parent_id로 수정
+            `insert into comments (id, post_id, author_id, content, parent_comment_id)
+             values (comment_id_seq.nextval, :post_id, :author_id, :content, :parent_id)`, // parent_comment_id를 parent_id로 수정
             [post_id, author_id, content, comment_id]
         );
 
