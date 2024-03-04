@@ -5,229 +5,399 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>글 상세 페이지</title>
     <style>
-        table {
-            width: 80%;
-            margin: 20px auto;
-            border-collapse: collapse;
+
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background-color: #f7f7f7;
+            color: #333;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
         }
 
-        th, td {
-            border: 1px solid #ddd;
-            padding: 10px;
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
         }
 
-        th {
-            background-color: #f2f2f2;
-            width: 200px;
-            text-align: center;
+        .card {
+            background: #ffffff;
+            margin-bottom: 20px;
+            border: none;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
         }
 
-        .title {
+        .card-header, .card-body, .card-footer {
+            padding: 20px;
+        }
+
+        .card-header {
+            background-color: #4CAF50;
+            color: white;
             font-size: 24px;
             font-weight: bold;
-            text-align: center;
         }
 
-        .author {
-            font-size: 18px;
-            text-align: center;
+        .title, .author, .content, .comment-header {
+            margin: 10px 0;
         }
 
         .content {
             font-size: 16px;
-            padding: 20px;
+            color: #555;
         }
 
-        .comment-section {
-            width: 80%;
-            margin: 20px auto;
-            border: 1px solid #ccc; /* 테두리 추가 */
-            padding: 10px;
-            border-radius: 5px;
-        }
-
-        .comment {
-            margin-bottom: 20px; /* 댓글 사이에 간격 추가 */
+        .comment-section, .comment-form, .comment {
+            background-color: #f9f9f9;
+            border: 1px solid #e1e1e1;
+            border-radius: 4px;
+            padding: 15px;
+            margin-top: 20px;
         }
 
         .comment:not(:last-child) {
-            border-bottom: 1px solid #ccc; /* 댓글 사이에 구분선 추가 */
-            padding-bottom: 10px;
+            margin-bottom: 15px;
         }
 
-        .comment:last-child {
-            margin-bottom: 0;
-        }
-
-        .comment-header {
-            font-size: 20px;
-            font-weight: bold;
-            margin-bottom: 10px;
+        .comment-content {
+            background-color: #fff;
+            padding: 10px;
+            border-radius: 4px;
         }
 
         .comment-buttons {
-            margin-top: 5px;
+            text-align: right;
+            padding-top: 10px;
         }
 
-        .comment-buttons button {
-            margin-right: 5px;
+        .comment-buttons button, .submit-button, .reply-button, .button {
             background-color: #4CAF50;
             color: white;
             border: none;
-            padding: 5px 10px;
-            border-radius: 5px;
+            padding: 8px 16px;
+            margin: 5px;
+            border-radius: 4px;
             cursor: pointer;
+            transition: background-color 0.3s ease;
         }
 
-        .comment-buttons button:hover {
+        .comment-buttons button:hover, .submit-button:hover, .reply-button:hover, .button:hover {
             background-color: #45a049;
         }
 
-        /*가운데 정렬 스타일 추가 */
+        .button {
+            display: block;
+            text-align: center;
+            width: 100%;
+        }
+
         .center {
             text-align: center;
         }
 
-        /* 버튼 스타일 정의 */
-        .button {
-            display: inline-block;
-            background-color: #4CAF50;
-            color: white;
-            padding: 10px 20px;
-            text-align: center;
-            text-decoration: none;
-            font-size: 16px;
-            margin: 4px 2px;
-            cursor: pointer;
-            border-radius: 10px;
-        }
-
-        /* 버튼 호버 효과 */
-        .button:hover {
-            background-color: #45a049;
-        }
-
-        /* 답글 달기 버튼 스타일 */
-        .reply-button {
-            background-color: #008CBA;
-            border: none;
-            color: white;
-            padding: 5px 10px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 12px;
-            margin-left: 10px;
-            border-radius: 5px;
-        }
-
-        /* 답글 달기 버튼 호버 효과 */
-        .reply-button:hover {
-            background-color: #004455;
-        }
-
-        /* 댓글 입력 폼 스타일 */
-        .comment-form {
-            width: 80%;
-            margin: 20px auto;
-        }
-
         .comment-input {
-            width: 100%;
-            padding: 10px;
+            width: calc(100% - 30px);
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
             margin-bottom: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            resize: none;
+            resize: vertical;
         }
 
-        .submit-button {
-            background-color: #4CAF50;
-            color: white;
-            padding: 10px 20px;
-            text-align: center;
-            text-decoration: none;
-            font-size: 16px;
-            border: none;
-            border-radius: 5px;
+        .like-button-image {
+            width: 24px;
+            height: 24px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .like-button-image:hover {
+            transform: scale(1.1);
+        }
+
+        #like-button {
+            display: flex;
+            align-items: center;
             cursor: pointer;
         }
 
-        /* 답글 폼 스타일 */
-        .reply-form {
-            margin-left: 50px;
+        #like-button img {
+            margin-right: 10px;
         }
+
+        /* 반응형 디자인 */
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+
+            .comment-input, .comment-buttons button, .submit-button, .reply-button, .button {
+                padding: 8px 12px;
+            }
+
+            .comment-buttons button, .reply-button, .button {
+                font-size: 14px;
+            }
+        }
+        .navigation-buttons {
+            display: flex;
+            justify-content: center;
+            padding: 20px 0;
+        }
+
+        .navigation-buttons .button {
+            margin: 0 10px; /* 좌우 간격을 10px로 조정 */
+            padding: 10px 20px; /* 내부 패딩을 늘려 클릭 영역을 넓힘 */
+            font-size: 16px; /* 폰트 크기를 조정 */
+            text-decoration: none; /* 텍스트 밑줄 제거 */
+            background-color: #4CAF50; /* 버튼 배경색 */
+            color: white; /* 버튼 텍스트 색상 */
+            border-radius: 5px; /* 모서리 둥글게 */
+            transition: background-color 0.3s; /* 호버 효과를 위한 전환 */
+        }
+
+        .navigation-buttons .button:hover {
+            background-color: #367c39; /* 버튼 호버시 색상 변경 */
+        }
+
+
+        /* 반응형 디자인에서도 조정 */
+        @media (max-width: 768px) {
+            .navigation-buttons .button {
+                padding: 8px 12px;
+                font-size: 14px;
+            }
+        }
+
     </style>
+
+<!--    /*table {*/-->
+<!--        /*    width: 80%;*/-->
+<!--        /*    margin: 20px auto;*/-->
+<!--        /*    border-collapse: collapse;*/-->
+<!--        /*}*/-->
+
+<!--        /*th, td {*/-->
+<!--        /*    border: 1px solid #ddd;*/-->
+<!--        /*    padding: 10px;*/-->
+<!--        /*}*/-->
+
+<!--        /*th {*/-->
+<!--        /*    background-color: #f2f2f2;*/-->
+<!--        /*    width: 200px;*/-->
+<!--        /*    text-align: center;*/-->
+<!--        /*}*/-->
+
+<!--        /*.title {*/-->
+<!--        /*    font-size: 24px;*/-->
+<!--        /*    font-weight: bold;*/-->
+<!--        /*    text-align: center;*/-->
+<!--        /*}*/-->
+
+<!--        /*.author {*/-->
+<!--        /*    font-size: 18px;*/-->
+<!--        /*    text-align: center;*/-->
+<!--        /*}*/-->
+
+<!--        /*.content {*/-->
+<!--        /*    font-size: 16px;*/-->
+<!--        /*    padding: 20px;*/-->
+<!--        /*}*/-->
+
+<!--        /*.comment-section {*/-->
+<!--        /*    width: 80%;*/-->
+<!--        /*    margin: 20px auto;*/-->
+<!--        /*    border: 1px solid #ccc; !* 테두리 추가 *!*/-->
+<!--        /*    padding: 10px;*/-->
+<!--        /*    border-radius: 5px;*/-->
+<!--        /*}*/-->
+
+<!--        /*.comment {*/-->
+<!--        /*    margin-bottom: 20px; !* 댓글 사이에 간격 추가 *!*/-->
+<!--        /*}*/-->
+
+<!--        /*.comment:not(:last-child) {*/-->
+<!--        /*    border-bottom: 1px solid #ccc; !* 댓글 사이에 구분선 추가 *!*/-->
+<!--        /*    padding-bottom: 10px;*/-->
+<!--        /*}*/-->
+
+<!--        /*.comment:last-child {*/-->
+<!--        /*    margin-bottom: 0;*/-->
+<!--        /*}*/-->
+
+<!--        /*.comment-header {*/-->
+<!--        /*    font-size: 20px;*/-->
+<!--        /*    font-weight: bold;*/-->
+<!--        /*    margin-bottom: 10px;*/-->
+<!--        /*}*/-->
+
+<!--        /*.comment-buttons {*/-->
+<!--        /*    margin-top: 5px;*/-->
+<!--        /*}*/-->
+
+<!--        /*.comment-buttons button {*/-->
+<!--        /*    margin-right: 5px;*/-->
+<!--        /*    background-color: #4CAF50;*/-->
+<!--        /*    color: white;*/-->
+<!--        /*    border: none;*/-->
+<!--        /*    padding: 5px 10px;*/-->
+<!--        /*    border-radius: 5px;*/-->
+<!--        /*    cursor: pointer;*/-->
+<!--        /*}*/-->
+
+<!--        /*.comment-buttons button:hover {*/-->
+<!--        /*    background-color: #45a049;*/-->
+<!--        /*}*/-->
+
+<!--        /*!*가운데 정렬 스타일 추가 *!*/-->
+<!--        /*.center {*/-->
+<!--        /*    text-align: center;*/-->
+<!--        /*}*/-->
+
+<!--        /*!* 버튼 스타일 정의 *!*/-->
+<!--        /*.button {*/-->
+<!--        /*    display: inline-block;*/-->
+<!--        /*    background-color: #4CAF50;*/-->
+<!--        /*    color: white;*/-->
+<!--        /*    padding: 10px 20px;*/-->
+<!--        /*    text-align: center;*/-->
+<!--        /*    text-decoration: none;*/-->
+<!--        /*    font-size: 16px;*/-->
+<!--        /*    margin: 4px 2px;*/-->
+<!--        /*    cursor: pointer;*/-->
+<!--        /*    border-radius: 10px;*/-->
+<!--        /*}*/-->
+
+<!--        /*!* 버튼 호버 효과 *!*/-->
+<!--        /*.button:hover {*/-->
+<!--        /*    background-color: #45a049;*/-->
+<!--        /*}*/-->
+
+<!--        /*!* 답글 달기 버튼 스타일 *!*/-->
+<!--        /*.reply-button {*/-->
+<!--        /*    background-color: #008CBA;*/-->
+<!--        /*    border: none;*/-->
+<!--        /*    color: white;*/-->
+<!--        /*    padding: 5px 10px;*/-->
+<!--        /*    text-align: center;*/-->
+<!--        /*    text-decoration: none;*/-->
+<!--        /*    display: inline-block;*/-->
+<!--        /*    font-size: 12px;*/-->
+<!--        /*    margin-left: 10px;*/-->
+<!--        /*    border-radius: 5px;*/-->
+<!--        /*}*/-->
+
+<!--        /*!* 답글 달기 버튼 호버 효과 *!*/-->
+<!--        /*.reply-button:hover {*/-->
+<!--        /*    background-color: #004455;*/-->
+<!--        /*}*/-->
+
+<!--        /*!* 댓글 입력 폼 스타일 *!*/-->
+<!--        /*.comment-form {*/-->
+<!--        /*    width: 80%;*/-->
+<!--        /*    margin: 20px auto;*/-->
+<!--        /*}*/-->
+
+<!--        /*.comment-input {*/-->
+<!--        /*    width: 100%;*/-->
+<!--        /*    padding: 10px;*/-->
+<!--        /*    margin-bottom: 10px;*/-->
+<!--        /*    border: 1px solid #ccc;*/-->
+<!--        /*    border-radius: 5px;*/-->
+<!--        /*    resize: none;*/-->
+<!--        /*}*/-->
+
+<!--        /*.submit-button {*/-->
+<!--        /*    background-color: #4CAF50;*/-->
+<!--        /*    color: white;*/-->
+<!--        /*    padding: 10px 20px;*/-->
+<!--        /*    text-align: center;*/-->
+<!--        /*    text-decoration: none;*/-->
+<!--        /*    font-size: 16px;*/-->
+<!--        /*    border: none;*/-->
+<!--        /*    border-radius: 5px;*/-->
+<!--        /*    cursor: pointer;*/-->
+<!--        /*}*/-->
+
+<!--        /*!* 답글 폼 스타일 *!*/-->
+<!--        /*.reply-form {*/-->
+<!--        /*    margin-left: 50px;*/-->
+<!--        /*}*/-->
+
+<!--        /*#like-button img {*/-->
+<!--        /*    width: 100px;*/-->
+<!--        /*    height: 100px;*/-->
+<!--        /*}*/-->
+
 </head>
 <body>
 <div>
     <p><%= userRealName %>님 </p>
 </div>
-<table>
-    <tr>
-        <th>제목</th>
-        <td class="title"><%= post.title %></td>
-    </tr>
-    <tr>
-        <th>작성자</th>
-        <td class="author"><%= post.author %></td>
-    </tr>
-    <tr>
-        <th>게시글 내용</th>
-        <td class="content" style="word-wrap: break-word;">
-            <%= post.content %>
-            <% if (post.file_original_name && post.file_original_name !== '') { %>
-                <ul style="list-style-type: none; padding-left: 0;">
-<!--  멀티 파일인 경우 구분자가 ; 이므로 ;를 기준으로 파일명만 배열로 수집                  -->
-                    <% const originalNames = post.file_original_name.split(';'); %>
-                    <% const storedNames = post.file_stored_name.split(';'); %>
-                    <% for (let i = 0; i < originalNames.length; i++) { %>
-<!-- 파일은 XXX.jpg 이런식의 패턴이므로 . 으로 split 한후에 pop 하면 결국 파일 확장자를 얻을 수 있다.  -->
-                        <% const extension = originalNames[i].split('.').pop(); %>  <!-- pop(): 배열의 가장 마지막값을 삽입해주는놈-->
-                        <% if (['jpg', 'jpeg', 'png'].includes(extension)) { %>
-                            <li style="text-align: center;">
-                                <img src="/uploads/<%= storedNames[i] %>" alt="<%= originalNames[i] %>" style="max-width: 100%; height: auto;">
-                            </li>
+<div class="container">
+    <!-- 게시글 섹션 -->
+    <div class="card">
+        <div class="card-header">
+            <h2 class="title"><%= post.title %></h2>
+        </div>
+        <div class="card-body">
+            <div class="post-author"><strong>작성자:</strong> <%= post.author %></div>
+            <div class="post-content">
+                <%= post.content %>
+                <% if (post.file_original_name && post.file_original_name !== '') { %>
+                    <div class="uploaded-images">
+                        <% const originalNames = post.file_original_name.split(';'); %>
+                        <% const storedNames = post.file_stored_name.split(';'); %>
+                        <% for (let i = 0; i < originalNames.length; i++) { %>
+                            <% const extension = originalNames[i].split('.').pop(); %>
+                            <% if (['jpg', 'jpeg', 'png'].includes(extension)) { %>
+                                <img src="/uploads/<%= storedNames[i] %>" alt="<%= originalNames[i] %>" class="uploaded-image">
+                            <% } %>
                         <% } %>
-                    <% } %>
-                </ul>
-            <% } %>
-        </td>
-    </tr>
-    <tr>
-        <th>생성일</th>
-        <td><%= post.created_at %></td>
-    </tr>
-    <tr>
-        <th>조회수</th>
-        <td><%= post.views %></td>
-    </tr>
-    <tr>
-        <th>좋아요 수</th>
-        <td><%= post.likes %></td>
-    </tr>
-</table>
-<div class="attachment-section center">
-    <div class="attachment-header">첨부 파일</div>
-    <% if (post.file_original_name && post.file_original_name !== '') { %>
-        <ul style="list-style-type: none; padding-left: 0;">
-            <% const originalNames = post.file_original_name.split(';'); %>
-            <% const storedNames = post.file_stored_name.split(';'); %>
-            <% for (let i = 0; i < originalNames.length; i++) { %>
-                <li style="text-align: center;">
-                    <!-- 다운로드 링크에 download 속성 추가하여 원본 파일 이름으로 다운로드 -->
-                    <a href="/uploads/<%= storedNames[i] %>" download="<%= originalNames[i] %>">
-                        <%= originalNames[i] %>
-                    </a>
-                </li>
-            <% } %>
-        </ul>
-    <% } else { %>
-        <p>첨부된 파일이 없습니다.</p>
-    <% } %>
+                    </div>
+                <% } %>
+            </div>
+            <div class="post-details">
+                <div class="post-date"><strong>생성일:</strong> <%= post.created_at %></div>
+                <div class="post-views"><strong>조회수:</strong> <%= post.views %></div>
+            </div>
+        </div>
+        <div class="card-footer">
+            <div id="like-button" class="likes-section">
+                <img src="/images/likes.jpg" alt="좋아요" class="like-button-image">
+                <span class="likes-count"><%= post.likes %></span>
+            </div>
+        </div>
+    </div>
 </div>
 
-
+<!-- 첨부 파일 섹션 -->
+<div class="card attachment-section center">
+    <div class="card-header attachment-header">
+        첨부 파일
+    </div>
+    <% if (post.file_original_name && post.file_original_name !== '') { %>
+        <div class="card-body">
+            <div class="uploaded-files">
+                <% const originalNames = post.file_original_name.split(';'); %>
+                <% const storedNames = post.file_stored_name.split(';'); %>
+                <% for (let i = 0; i < originalNames.length; i++) { %>
+                    <!-- 다운로드 링크에 download 속성 추가하여 원본 파일 이름으로 다운로드 -->
+                    <a href="/uploads/<%= storedNames[i] %>" download="<%= originalNames[i] %>" class="uploaded-file-link">
+                        <%= originalNames[i] %>
+                    </a>
+                <% } %>
+            </div>
+        </div>
+    <% } else { %>
+        <div class="card-body">
+            <p>첨부된 파일이 없습니다.</p>
+        </div>
+    <% } %>
+</div>
 <!-- 댓글 섹션 -->
 <div class="comment-section">
     <div class="comment-header">댓글</div>
@@ -240,13 +410,13 @@
                     <% } %>
                     &nbsp<%= comment.created_at %>
                 </p>
-<!--  HTML
-data- : HTML 사용자 정의 데이터 속성을 정의
-이것은 아래 규칙이 적용.
-> 'data-' prefix로 되어 나머지 텍스트를 사용하여 사용자 정의 데이터 값을 참조할 수 있다. data-comment-id => comment-id
-> -으로 연결된 단어는 카멜규칙을 적용한다.  comment-id => commentId
-이후 제이쿼리 data함수에서 commentID로 정의된 값을 참조할 수 있다.
--->
+                <!--  HTML
+                data- : HTML 사용자 정의 데이터 속성을 정의
+                이것은 아래 규칙이 적용.
+                > 'data-' prefix로 되어 나머지 텍스트를 사용하여 사용자 정의 데이터 값을 참조할 수 있다. data-comment-id => comment-id
+                > -으로 연결된 단어는 카멜규칙을 적용한다.  comment-id => commentId
+                이후 제이쿼리 data함수에서 commentID로 정의된 값을 참조할 수 있다.
+                -->
                 <p class="comment-content" data-comment-id="<%= comment.id %>"><%= comment.content %></p> <!-- 여기서 '.comment-content'를 추가했습니다. -->
                 <div class="comment-buttons">
                     <a href="#" class="reply-button" data-comment-id="<%= comment.id %>">답글쓰기</a>
@@ -298,8 +468,10 @@ data- : HTML 사용자 정의 데이터 속성을 정의
         <input type="submit" value="등록" class="submit-button">
     </form>
 </div>
+
+
 <!-- 이전 페이지로 돌아가기 버튼 -->
-<div class="center">
+<div class="center navigation-buttons">
     <a href="/boardLJW" class="button">이전 페이지로 돌아가기</a>
     <a href="/editPostLJW/<%= post.id %>" class="button">수정</a>
     <a href="/deletePostLJW/<%= post.id %>" class="button">삭제</a>
@@ -352,6 +524,33 @@ data- : HTML 사용자 정의 데이터 속성을 정의
                 commentArea.append(editForm);
             }
         });
+        let postId = '<%= post.id %>';
+        document.getElementById('like-button').addEventListener('click', function() {
+            fetch('/detailLikesLJW/' + postId + '/likes', { method: 'POST' }) // 경로 수정
+                .then(function(response) {
+                    if (response.ok) {
+                        // 좋아요 수를 화면에 업데이트하는 로직 추가 필요
+                        return response.text();
+                    } else {
+                        throw new Error('좋아요 실패');
+                    }
+                })
+                .then(function(text) {
+                    alert(text);
+                    // 여기에서 좋아요 수를 업데이트하는 코드를 추가할 수 있습니다.
+                    // 예: document.getElementById('likes-count').innerText = "새로운 좋아요 수";
+                })
+                .catch(function(error) {
+                    alert(error.message);
+                });
+        });
+
+
+
+
+
+
+
     });
 </script>
 

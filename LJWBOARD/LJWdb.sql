@@ -64,4 +64,12 @@ CREATE TABLE requirement_comments (
                           FOREIGN KEY (author_id) REFERENCES team_users(id),
                           FOREIGN KEY (parent_comment_id) REFERENCES requirement_comments(id)
 );
+CREATE TABLE post_likes (
+                            user_id INT NOT NULL,
+                            post_id INT NOT NULL,
+                            PRIMARY KEY (user_id, post_id),
+                            FOREIGN KEY (user_id) REFERENCES team_users(id),
+                            FOREIGN KEY (post_id) REFERENCES requirement_posts(id)
+);
+
 commit;

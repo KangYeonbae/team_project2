@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>게시판</title>
+    <title>자유게시판</title>
     <style>
 
-        <style>
+
             /* 기본 바디 스타일 */
         body {
             font-family: 'Noto Sans', sans-serif;
@@ -213,7 +213,7 @@
 <!--    </nav>-->
 <!--</div>-->
 
-<h1>게시판</h1>
+<h1>자유게시판</h1>
 <div style="position: absolute; top: 10px; right: 10px;">
     <% if (userRealName) { %>
         <p><%= userRealName %>님 환영합니다. &nbsp;&nbsp; <a href="/logout" class="button">로그아웃</a></p>
@@ -238,7 +238,8 @@
       -->
 
         <th onclick="toggleSort()" onmouseover="this.style.textDecoration = 'underline';" onmouseout="this.style.textDecoration = 'none';">조회수 ▼</th>
-        <th onclick="toggleSort()" onmouseover="this.style.textDecoration = 'underline';" onmouseout="this.style.textDecoration = 'none';">좋아요 ▼</th>
+        <th onclick="toggleSort()" onmouseover="this.style.textDecoration = 'underline';" onmouseout="this.style.textDecoration = 'none';">좋아요 </th>
+
 
     </tr>
     </thead>

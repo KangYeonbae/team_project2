@@ -19,7 +19,15 @@ router.get('/:id', async (req, res) => {
     try {
         conn = await oracledb.getConnection(dbConfig);
 
-        // 게시글 삭제
+       // 좋아요 삭제
+        await conn.execute(
+        `DELETE FROM post_likes WHERE post_id = :postId`,
+            [postId]
+        );
+        // 변경 사항 커밋
+        await conn.commit();
+
+        // 댓글 삭제
         await conn.execute(
             `DELETE FROM requirement_comments WHERE post_id = :postId OR parent_comment_id IN (SELECT id FROM requirement_comments WHERE post_id = :postId)`,
             [postId, postId]
@@ -28,6 +36,7 @@ router.get('/:id', async (req, res) => {
         // 변경 사항 커밋
         await conn.commit();
 
+         //게시글 삭제
         await conn.execute(
             `DELETE FROM requirement_posts WHERE id = :id`,
             [postId]

@@ -34,6 +34,8 @@ app.use(session({
 }));
 
 //
+
+app.use('/detailLikesLJW', require('./routes/detailLikesLJW'));  // 좋아요 추가
 app.use('/editComLJW', require('./routes/editComLJW'));  // 댓글 수정
 app.use('/addComLJW', require('./routes/addComLJW'));  // 댓글 추가를 불러옵니다.
 app.use('/boardLJW', require('./routes/boardLJW'));   // 게시판 화면
