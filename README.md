@@ -17,6 +17,12 @@
 
 <hr>
 
+## 2월 14일 
+공공데이터포털(www.data.go.kr) 에서 서울시 승하차유동인구로 데이터를 뽑아 여행에 추천할만한 12개역을 뽑았습니다. 
+![Excel](https://img.shields.io/badge/-Excel-217346?style=flat&logo=microsoftexcel&logoColor=white)로 파일을 정리하고
+![Chart.js Badge](https://img.shields.io/badge/Chart.js-FF6384?style=flat&logo=Chart.js&logoColor=white)
+를 이용해 하차 Top12개역 차트를 구현했습니다.
+
 ## 2월 15일
 
 디테일한 화면 구성이 결정되었습니다.
@@ -237,6 +243,9 @@ app.use('/', require('./routes/post.js') );
 이지우님과 강연배가 성공하여 연결하였습니다.
 ```
 
+## 2월 22일 
+이지우 - 서비스 홈페이지에 대해 사용자의 자유게시판을 만들기 시작했습니다
+
 ## 2월 23일
 
 강연배 - 게시판 시작.
@@ -252,3 +261,13 @@ app.use('/', require('./routes/post.js') );
 system (관리자) 로 로그인할 경우에만 글작성이 가능합니다.
 덧글은 누구나 작성 가능합니다.
 이제 남은것은 챗봇 업그레이드와, css 입니다.
+
+### 3월 4일
+
+이지우 - 자유게시판 구현완료
+좋아요 기능을 추가 구현했으며 1명당 한번씩만 누를수있고 한번 누르면 최소할 수 없습니다.
+
+
+### 3월 5일 
+
+이지우 - 회원가입 기능 완료
