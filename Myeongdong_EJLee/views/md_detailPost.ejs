@@ -123,7 +123,7 @@
         }
         /* 수정 및 삭제 달기 버튼 */
         .comment-buttons button {
-            margin-right: 5px;
+            margin-right: auto;
             background-color: #1e90ff;
             color: #fff;
             padding: 7.5px;
@@ -284,7 +284,7 @@
     <!-- 수정 버튼 -->
     <a href="/md_editPost/<%= md_posts.id %>?user_id=<%= userId %>&username=<%= userName %>&user_realname=<%= userRealName %>" class="button">수정</a>
     <!-- 삭제 버튼 -->
-    <a href="/md_deletePost/<%= md_posts.id %>?user_id=<% userId %>&username=<%= userName %>&user_realname=<%= userRealName %>" class="button">삭제</a>
+    <a href="/md_deletePost/<%= md_posts.id %>?user_id=<%= userId %>&username=<%= userName %>&user_realname=<%= userRealName %>" class="button">삭제</a>
 </div>
 <script src="/js/jquery.js"></script>
 <script>
@@ -320,12 +320,12 @@
             if (existingForm.length === 0) {
                 const commentContent = commentArea.find(`.comment-content[data-comment-id="${commentId}"]`).text().trim();
                 // 수정후 상세 페이지 리다이렉시시 필요한 게시글 id를 지정
-                const postId = '<%= md_posts.id %>'; // 게시물 ID 가져오기
+                const post_id = '<%= md_posts.id %>'; // 게시물 ID 가져오기
                 const editForm =
                     `<div class="comment edit-form">
                         <form action="/md_editComment/${commentId}" method="post">
                             <textarea class="inp_textarea" name="content" placeholder="댓글 수정 내용을 입력하세요" required>${commentContent}</textarea>
-                            <input type="hidden" name="post_id" value="${postId}">
+                            <input type="hidden" name="post_id" value="${post_id}">
                             <input type="submit" value="수정 완료" class="comment-buttons">
                         </form>
                     </div>`;
