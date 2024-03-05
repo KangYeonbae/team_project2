@@ -8,9 +8,17 @@ function getBotResponse(input){
     } else if (input === "지하철 명소"){
         console.log("지하철명소")
         return "대표적으로 2호선에 강남역, 4호선에 명동역이 있습니다."
-    } else if (input ==="강남역"){
+    } else if (input ==="강남역") {
         console.log("강남역")
         return "강남역 추천명소 1.봉은사 2.가로수길 "
+    } else if(input === "봉은사") {
+        console.log("봉은사")
+        return "봉은사 페이지를 안내해드릴께요^^<br>" +
+            "<a href = 'https://www.tripadvisor.co.kr/Attraction_Review-g294197-d592486-Reviews-Bongeunsa_Temple-Seoul.html' style='color: royalblue'>봉은사 홈페이지 바로가기 <i class=\"fa-solid fa-arrow-pointer\"></i></a>"
+    }else if(input === "명동성당") {
+            console.log("명동성당")
+            return "명동성당 페이지를 안내해드릴께요^^<br>" +
+                "<a href = 'https://www.tripadvisor.co.kr/Attraction_Review-g294197-d609340-Reviews-Myeong_dong_Cathedral-Seoul.html' style='color: royalblue'>명동성당 홈페이지 바로가기 <i class=\"fa-solid fa-arrow-pointer\"></i></a>"
     } else if(input === "명동역") {
         console.log("명동역")
         return "명동역 추천명소 1.명동성당 2.남산케이블카"

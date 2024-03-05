@@ -96,7 +96,8 @@ router.get('/:id', async (req, res) => {
             userId: userId,
             userName: userName,
             userRealName: userRealName,
-            comments: comments
+            comments: comments,
+            username : userName
         });
     } catch (err) {
         console.error(err);

@@ -98,6 +98,11 @@
         <div class = "nav-item1-center">
             <a class = "nav-link1" href = "/main"><h1><img src = "../public/images/logo1.png"></h1></a>
         </div>
+        <div class="nav-item1-left">
+            <% if (username == null) {%>
+                <a class="nav-link" href="/signup">회원가입</a>
+            <%}%>
+        </div>
         <div class = "nav-item1">
             <div class = "login_box">
                 <% if (username) { %>
@@ -176,6 +181,7 @@
             <a class="nav-link" href="/Myeong-dong"><h2>명동</h2></a>
             <div class="sub-nav">
                 <a class="nav-item" href="/md_mainBoard">게시판</a>
+                <a class="nav-item" href="/totalKYB">명동 남녀매출</a>
             </div>
         </div>
         <div class="nav-item">

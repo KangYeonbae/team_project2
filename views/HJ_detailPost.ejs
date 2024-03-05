@@ -4,7 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>글 상세 페이지</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/SeoulNamsanM.woff">
+    <link rel="stylesheet" href="../public/css/header_test2.css">
+    <link rel="stylesheet" href="../public/css/main.css">
+    <link rel="stylesheet" href="../public/css/chat.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://kit.fontawesome.com/a4dc7026e0.js" crossorigin="anonymous"></script>
     <style>
+        .container3{
+            margin: 150px auto;
+        }
         table {
             width: 80%;
             margin: 20px auto;
@@ -171,6 +180,11 @@
         <div class = "nav-item1-center">
             <a class = "nav-link1" href = "/main"><h1><img src = "../public/images/logo1.png"></h1></a>
         </div>
+        <div class="nav-item1-left">
+            <% if (username == null) {%>
+                <a class="nav-link" href="/signup">회원가입</a>
+            <%}%>
+        </div>
         <div class = "nav-item1">
             <div class = "login_box">
                 <% if (username) { %>
@@ -249,6 +263,7 @@
             <a class="nav-link" href="/Myeong-dong"><h2>명동</h2></a>
             <div class="sub-nav">
                 <a class="nav-item" href="/md_mainBoard">게시판</a>
+                <a class="nav-item" href="/totalKYB">명동 남녀매출</a>
             </div>
         </div>
         <div class="nav-item">
@@ -259,6 +274,7 @@
         </div>
     </nav>
 </div>
+<div class = "container3">
 <table>
     <tr>
         <th>제목</th>
@@ -453,6 +469,6 @@ data- : HTML 사용자 정의 데이터 속성을 정의
         });
     });
 </script>
-
+</div>
 </body>
 </html>

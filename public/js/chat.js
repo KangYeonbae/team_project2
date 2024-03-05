@@ -30,7 +30,7 @@ function getTime(){
 }
 
 function  firstBotMessage(){
-    let firstMessage = "안녕하세요, 여행이야기입니다. 저희 여행이야기는 여행관련 자료안내사이트입니다. 어디로 떠나가볼까요? 1. 서울 2. 강릉 3. 군산 4. 부산"
+    let firstMessage = "안녕하세요, 여행이야기입니다. 저희 여행이야기는 여행관련 자료안내사이트입니다. 어디로 떠나가볼까요?"
     document.getElementById("botStarterMessage").innerHTML="<p class='botTest'><span>" + firstMessage + '</span></p>';
 
     let time = getTime();

@@ -24,7 +24,7 @@ router.get('/:id', async (req, res) => {
         const result = await conn.execute(
             `select * from md_posts where id = :id`,
             [postId],
-            { fetchInfo: { content: { type: oracledb.STRING }}}
+            { fetchInfo: { CONTENT: { type: oracledb.STRING }}}
         );
 
         const md_posts = {
@@ -39,7 +39,8 @@ router.get('/:id', async (req, res) => {
             post: postId,
             userId: userId,
             userName: userName,
-            userRealName: userRealName
+            userRealName: userRealName,
+            username : userName
         });
     } catch (err) {
         console.error(err);

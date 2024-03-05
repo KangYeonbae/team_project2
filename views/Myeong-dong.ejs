@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko-kr">
+<html lang="ko-kr" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
     <title>Chart.js Example</title>
@@ -220,6 +220,11 @@
         <div class = "nav-item1-center">
             <a class = "nav-link1" href = "/main"><h1><img src = "../public/images/logo1.png"></h1></a>
         </div>
+        <div class="nav-item1-left">
+            <% if (username == null) {%>
+                <a class="nav-link" href="/signup">회원가입</a>
+            <%}%>
+        </div>
         <div class = "nav-item1">
             <div class = "login_box">
                 <% if (username) { %>
@@ -298,6 +303,7 @@
             <a class="nav-link" href="/Myeong-dong"><h2>명동</h2></a>
             <div class="sub-nav">
                 <a class="nav-item" href="/md_mainBoard">게시판</a>
+                <a class="nav-item" href="/totalKYB">명동 남녀매출</a>
             </div>
         </div>
         <div class="nav-item">
@@ -333,7 +339,7 @@
                                 <div class="container5">
                                     <div class="chart_box" id="m_img_box">
                                             <div class = "m_img">
-                                                <img src="../public/images/myeongdong.JPG">
+                                                <img src="../public/images/myeongdong.JPG" alt="">
                                                 <div class = "m_text_box">
                                                 <q>서울 최대 번화가 중 한 곳인 명동이 있다. 평일 낮 시간에는 그래도 비교적 한산한 편이지만,<br>
                                                     저녁 및 밤이나 주말, 연휴, 공휴일 땐 그야말로 사람들이 폭발한다.<br>
@@ -356,7 +362,6 @@
             </form>
         </div>
     </div>
-
     <ul class="panel_wrap">
         <li class="panel_item" style="display: block;">
             <div class="panel_inner" role="tabpanel" aria-controls="ones">
@@ -532,13 +537,13 @@
                             </a>
                         </div>
                         <div id="zone4" class="swiper-slide" data-areaCode="2">
-                            <a href="javascript:;" class="incheon" onclick="areaClickEvent(this);">
+                            <a href="javascript:" class="incheon" onclick="areaClickEvent(this);">
                                 <div class="imgbox"><img src="../public/images/m4.jpg" alt=""></div>
                                     <button><span>명동성당</span></button>
                             </a>
                         </div>
                         <div id="zone6" class="swiper-slide" data-areaCode="3">
-                            <a href="javascript:;" class="daejeon" onclick="areaClickEvent(this);">
+                            <a href="javascript:" class="daejeon" onclick="areaClickEvent(this);">
                                 <div class="imgbox"><img src="../public/images/m5.jpg" alt=""></div>
                                 <button><span>남산벚꽃</span></button>
                             </a>
@@ -550,25 +555,25 @@
                             </a>
                         </div>
                         <div id="zone9" class="swiper-slide" data-areaCode="31">
-                            <a href="javascript:;" class="gyeonggi" onclick="areaClickEvent(this);">
+                            <a href="javascript:" class="gyeonggi" onclick="areaClickEvent(this);">
                                 <div class="imgbox"><img src="../public/images/m6.jpg" alt=""></div>
                                 <button><span>숭례문</span></button>
                             </a>
                         </div>
                         <div id="zone2" class="swiper-slide" data-areaCode="6">
-                            <a href="javascript:;" class="busan" onclick="areaClickEvent(this);">
+                            <a href="javascript:" class="busan" onclick="areaClickEvent(this);">
                                 <div class="imgbox"><img src="../public/images/m7.jpg" alt=""></div>
                                 <button><span>남대문수입상가</span></button>
                             </a>
                         </div>
                         <div id="zone7" class="swiper-slide" data-areaCode="7">
-                            <a href="javascript:;" class="ulsan" onclick="areaClickEvent(this);">
+                            <a href="javascript:" class="ulsan" onclick="areaClickEvent(this);">
                                 <div class="imgbox"><img src="../public/images/m3.jpg" alt=""></div>
                                 <button><span>명동거리</span></button>
                             </a>
                         </div>
                         <div id="zone5" class="swiper-slide" data-areaCode="5">
-                            <a href="javascript:;" class="gwangju" onclick="areaClickEvent(this);">
+                            <a href="javascript:" class="gwangju" onclick="areaClickEvent(this);">
                                 <div class="imgbox"><img src="../public/images/m8.jpg" alt=""></div>
                                 <button><span>만화거리</span></button>
                             </a>
@@ -599,8 +604,6 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
 </div>
 <script>
     function initMap() {
@@ -640,7 +643,7 @@
                     </ul>
                     <div id="mQuration">
                         <div class="q1"><div class = "tourimg"><img src = "../public/images/m1.jpg"></div> 롯데백화점 </div>
-                        <div class="q2"><div class = "tourimg"><img src = "../public/images/m2.jpg" href="https://www.shinsegae.com/store/main.do?storeCd=SC00001"></div> 신세계백화점 </div>
+                        <div class="q2"><div class = "tourimg"><a href="https://www.shinsegae.com/store/main.do?storeCd=SC00001"><img src = "../public/images/m2.jpg"></a></div> 신세계백화점 </div>
                         <div class="q2"><div class = "tourimg"><img src = "../public/images/m4.jpg"></div> 명동성당 </div>
                     </div>
                 </div>
@@ -649,84 +652,14 @@
                     <ul>
                     </ul>
                     <div id="mQuration1">
-                        <div class="q1"><div class = "tourimg"><img src = "../public/images/m1_1.jpg" href="http://www.mdkj.co.kr/"></div> 명동교자 </div>
+                        <div class="q1"><div class = "tourimg"><a href= "http://www.mdkj.co.kr/"><img src = "../public/images/m1_1.jpg"></a></div> 명동교자 </div>
                         <div class="q2"><div class = "tourimg"><img src = "../public/images/m2_1.jpg"></div> 명동돈까스 </div>
                         <div class="q2"><div class = "tourimg"><img src = "../public/images/m3_1.jpg"></div> 하동관 </div>
                 </div>
             </div>
         </div>
     </div>
-
-<!--    <div class="kockoc_banner">-->
-<!--        <div class="swiper-container">-->
-<!--            <ul class="swiper-wrapper">-->
-<!--                <li class="swiper-slide cont1">-->
-<!--                    <strong>핫플콕콕</strong>-->
-<!--                    <p>요즘 인기있는 여행지는 다 모였네!<br>-->
-<!--                        지역별 핫플을 알려드려요!-->
-<!--                    </p>-->
-<!--                    <a href="/main/cr_main.do?type=place">바로가기</a>-->
-<!--                </li>-->
-<!--                <li class="swiper-slide cont2">-->
-<!--                    <strong>AI콕콕 플래너</strong>-->
-<!--                    <p>어떤 지역을 여행하고 싶으신가요?<br>-->
-<!--                        맞춤형 여행 코스 대기 중!-->
-<!--                    </p>-->
-<!--                    <a href="/main/cr_main.do?type=abc">바로가기</a>-->
-<!--                </li>-->
-<!--                <li class="swiper-slide cont3">-->
-<!--                    <strong>AI콕콕</strong>-->
-<!--                    <p>나의 여행 성향을 분석한 <br>-->
-<!--                        나만의 맞춤형 여행지 추천!-->
-<!--                    </p>-->
-<!--                    <a href="/main/cr_main.do?type=ai">바로가기</a>-->
-<!--                </li>-->
-<!--            </ul>-->
-<!--        </div>-->
-<!--    </div>-->
-
-<!--    <div class="festival_calendar">-->
-<!--        <h3><strong></strong>축제&middot;행사 어디까지 가봤니?</h3>-->
-<!--        <div class="calendar">-->
-<!--            <button class="prev" type="button" onclick="_monthUtil.fnPreDay();">이전</button>-->
-<!--            <button class="next" type="button" onclick="_monthUtil.fnNextDay();">다음</button>-->
-<!--            <ul id="dayList">-->
-<!--            </ul>-->
-<!--            <div class="wrap">-->
-<!--                <div id="datePickerPC"></div>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--        <div class="mo_calendar">-->
-<!--            <div class="control">-->
-<!--                <button type="button" class="prev">이전</button>-->
-<!--                <span id="dateTxt"></span>-->
-<!--                <button type="button" class="next">다음</button>-->
-<!--            </div>-->
-<!--            <div id="datePickerM"></div>-->
-<!--        </div>-->
-<!--        <div id="festivalCon" class="poster">-->
-<!--            <div class="swiper-container">-->
-<!--                <div class="swiper-wrapper">-->
-<!--                </div>-->
-<!--                <div class="swiper-button-prev">이전</div>-->
-<!--                <div class="swiper-button-next">다음</div>-->
-<!--                <div class="page_box">-->
-<!--                    <div class="swiper-pagination"></div>-->
-<!--                    <div class="num"><strong class="current"></strong>/<span class="total"></span></div>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--            <div class="no_list" style="display:none">-->
-<!--                <strong>앗! 아쉽지만 찾으신 날짜에 <br class="mo">진행중인 축제&middot;행사가 없어요.</strong>-->
-<!--                <p>다른 축제&middot;행사를 살펴보는건 어떨까요?</p>-->
-<!--                <a href="/other/festivalCalendar.do"><strong>축제·행사달력</strong> 바로가기</a>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--        <div class="btn_shortcut"><a href="/other/festivalCalendar.do"><strong>축제&middot;행사달력</strong> 바로가기</a></div>-->
-<!--        <a href="/list/all_list.do?searchTag=%EC%B6%95%EC%A0%9C%7C%EA%B3%B5%EC%97%B0/%ED%96%89%EC%82%AC" class="more" title="측제,행사 페이지로 이동">더보기</a>-->
-<!--    </div>-->
-
 </div>
-            </div>
 <div class="container1">
     <div class="chat-bar collapsed">
         <div class="btn3">

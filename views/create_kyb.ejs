@@ -198,10 +198,15 @@
             <a class="nav-link1" href = "/boardkyb">공지사항</a>
         </div>
         <div class="nav-item1-left">
-            <a class="nav-link" href="/video">혼잡도</a>
+            <a class="nav-link" href="/boardLJW">요청게시판</a>
         </div>
         <div class = "nav-item1-center">
-            <a class = "nav-link1" href = "/video"><h1>Main</h1></a>
+            <a class = "nav-link1" href = "/main"><h1><img src = "../public/images/logo1.png"></h1></a>
+        </div>
+        <div class="nav-item1-left">
+            <% if (username == null) {%>
+                <a class="nav-link" href="/signup">회원가입</a>
+            <%}%>
         </div>
         <div class = "nav-item1">
             <div class = "login_box">
@@ -280,6 +285,7 @@
             <a class="nav-link" href="public/main2.html"><h2>명동</h2></a>
             <div class="sub-nav">
                 <a class="nav-item" href="public/ganTasty.html">맛집</a>
+                <a class="nav-item" href="/totalKYB">명동 남녀매출</a>
             </div>
         </div>
         <div class="nav-item">

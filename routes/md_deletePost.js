@@ -12,9 +12,10 @@ router.get('/:id', async (req, res) => {
     }
 
     const postId = req.params.id;
-    const userId = req.params.user_id;
-    const userName = req.query.username;
-    const userRealName = req.query.user_realname;
+    const userId = req.params.userId;
+    const username = req.query.userName;
+    const userName = req.query.userName;
+    const userRealName = req.query.userRealName;
 
     let conn;
     try {
@@ -22,14 +23,14 @@ router.get('/:id', async (req, res) => {
 
         // 게시글에 달린 댓글과 답글 삭제
         await conn.execute(
-            `delete from comments where post_id = :postId or parent_comment_id in (select id from comments where post_id = :postId)`,
+            `DELETE FROM md_comments where post_id = :postId OR parent_comment_id IN (SELECT id FROM md_comments WHERE post_id = :postId)`,
             [postId, postId]
         );
         // 변경 사항 커밋
         await conn.commit();
         // 게시글 삭제
         await conn.execute(
-            `delete from posts where id = :id`,
+            `DELETE FROM md_posts WHERE id = :id`,
             [postId]
         );
 

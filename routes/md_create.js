@@ -46,7 +46,7 @@ router.post('/', upload.array('files', 5), async (req, res) => {
         conn = await oracledb.getConnection(dbConfig);
 
         const result = await conn.execute(
-            `select post_id_seq.nextval from dual`
+            `select md_post_id_seq.nextval from dual`
         );
 
         const postId = result.rows[0][0];

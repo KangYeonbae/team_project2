@@ -5,11 +5,12 @@
     <title>Chart.js Example</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/SeoulNamsanM.woff">
     <link rel="stylesheet" href="../public/css/header_test.css">
-    <link rel="stylesheet" href="../public/css/chartlee.css">
+    <link rel="stylesheet" href="../public/css/chartlee2.css">
     <link rel="stylesheet" href="../public/css/chat.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://kit.fontawesome.com/a4dc7026e0.js" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
         $(document).ready(function() {
             $(".btn3 button").on("click", function() {
@@ -25,6 +26,33 @@
             });
         });
     </script>
+    <style>
+        .container3{
+            margin: 50px auto;
+            text-align: center;
+        }
+        .imgtag{
+            display: inline-block;
+        }
+        .container3 img{
+            width:400px;
+            height: 200px;
+            border: 1px solid black;
+            margin: 10px auto;
+            display: inline-block;
+        }
+        .chart_box{
+            margin: 150px auto;
+            width: 1500px;
+            height: 800px;
+            text-align: center;
+        }
+        .chart_box #myChart{
+            margin: 0 auto;
+            width: 100%;
+            height: 100%;
+        }
+    </style>
 </head>
 <body>
 <div class = "container1_1">
@@ -33,10 +61,15 @@
             <a class="nav-link1" href = "/boardkyb">공지사항</a>
         </div>
         <div class="nav-item1-left">
-            <a class="nav-link" href="/testchart_kyb">요청게시판</a>
+            <a class="nav-link" href="/boardLJW">요청게시판</a>
         </div>
         <div class = "nav-item1-center">
             <a class = "nav-link1" href = "/main"><h1><img src = "../public/images/logo1.png"></h1></a>
+        </div>
+        <div class="nav-item1-left">
+            <% if (username == null) {%>
+                <a class="nav-link" href="/signup">회원가입</a>
+            <%}%>
         </div>
         <div class = "nav-item1">
             <div class = "login_box">
@@ -54,12 +87,14 @@
 </div>
 <div class="container">
     <nav>
-        <a class="nav-item" href="/total"><h1>Top12</h1></a>
-        <div class="nav-item">
-            <a class="nav-link" href="/video"><h2>잠실</h2></a>
+        <div class = "nav-item">
+            <a class="nav-link" href="/total"><h1>Top12</h1></a>
             <div class="sub-nav">
                 <a class="nav-item" href="/subway">관광객 추세</a>
             </div>
+        </div>
+        <div class="nav-item">
+            <a class="nav-link" href="/video"><h2>잠실</h2></a>
         </div>
         <div class="nav-item">
             <a class="nav-link" href="public/main2.html"><h2>홍대입구</h2></a>
@@ -71,7 +106,7 @@
             <a class="nav-link" href="/gangnam"><h2>강남</h2></a>
             <div class="sub-nav">
                 <a class="nav-item" href="/chartkyb">강남 점포수</a>
-                <a class="nav-item" href="/hj_boardMain">게시판</a>
+                <a class="nav-item" href="/HJ_boardMain">게시판</a>
             </div>
         </div>
         <div class="nav-item">
@@ -125,65 +160,67 @@
         </div>
     </nav>
 </div>
-<div class="container1">
-    <div class="chart_box">
-        <canvas id="myChart" width="700px" height="400px"></canvas>
+<div class = "chart_box">
+    <h1>명동상권별, 남녀매출</h1>
+<h2>현재 데이터는 <span id="chartName"></span> 입니다.</h2>
 
-        <script>
-            var ctx = document.getElementById('myChart').getContext('2d');
-            var myChart = new Chart(ctx, {
-                type: 'bar',
-                data: {
-                    labels: <%- labels %>,
-                    datasets: [{
-                        label: 'Chart Data',
-                        data: <%- data %>,
-                        backgroundColor: 'rgba(255, 99, 132, 0.2)',
-                        borderColor: 'rgba(255, 99, 132, 1)',
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                    scales: {
-                        x: {
-                            type: 'category',
-                            offset: true,
-                            grid: {
-                                offset: true
-                            }
-                        },
-                        y: {
-                            beginAtZero: true
-                        }
-                    },
-                    plugins: {
-                        legend: {
-                            display: true,
-                            position: 'top'
-                        }
-                    },
-                    animation: {
-                        onComplete: function () {
-                            var chart = this.chart;
-                            var xAxis = chart.scales.x;
-                            chart.options.animation.onComplete = null;
-                            xAxis.options.ticks.autoSkip = true;
-                            xAxis.max = 4; // 한 화면에 보여줄 데이터 개수 - 1 (0부터 시작하므로)
-                            chart.update();
-                            setInterval(function () {
-                                xAxis.options.ticks.autoSkip = false;
-                                xAxis.min++;
-                                xAxis.max++;
-                                chart.update();
-                            }, 3000);
-                        }
-                    }
+<canvas id="myChart"></canvas>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    // 전역 범위에서 currentMonthIndex 변수를 선언하고 초기화
+    let currentChartIndex = 0;
+    const chartData = <%- chartData %>;
+    const chartName = chartData.map(data => data.label);
+    const element_chartName = document.getElementById('chartName');
+    const ctx = document.getElementById('myChart').getContext('2d');
+
+    // 초기 차트 생성
+    const myChart = new Chart(ctx, {
+        type: 'pie',
+        data: {
+            labels: ['남성 매출', '여성 매출'],
+            datasets: [{
+                label: chartName[currentChartIndex],
+                data: [chartData[currentChartIndex].maleSales, chartData[currentChartIndex].femaleSales],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
                 }
-            });
-        </script>
-    </div>
+            }
+        }
+    });
+
+    // 차트 업데이트 함수
+    function updateChart() {
+        currentChartIndex = (currentChartIndex + 1) % chartData.length; // 다음 차트 인덱스 계산
+        element_chartName.textContent = chartName[currentChartIndex]; // 차트 이름 업데이트
+
+        // 차트 데이터 업데이트
+        myChart.data.datasets[0].label = chartName[currentChartIndex];
+        myChart.data.datasets[0].data = [chartData[currentChartIndex].maleSales, chartData[currentChartIndex].femaleSales];
+        myChart.update();
+    }
+
+    // 주기적으로 차트 업데이트
+    setInterval(updateChart, 3000); // 3초마다 업데이트
+</script>
 </div>
-<div class="container2">
+
+
+<div class="container1">
     <div class="chat-bar collapsed">
         <div class="btn3">
             <button><i class="fa-sharp fa-solid fa-comments">chat us!</i></button>

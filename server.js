@@ -97,6 +97,10 @@ app.use('/addComment', require('./routes/commentKYB')); //강연배 덧글
 app.use('/deleteComKYB', require('./routes/deleteComKYB')) //강연배 덧글 삭제
 app.use('/editComKYB', require('./routes/editComKYB')) //강연배 덧글 수정
 app.use('/testchart_kyb', require('./routes/testchart_kyb')) //강연배 덧글 수
+app.use('/signup', require('./routes/signup'))//이재우님 회원가입
+
+
+app.use('/totalKYB', require('./routes/totalKYB'))
 
 
 app.use('/detailLikesLJW', require('./routes/detailLikesLJW'));  // 좋아요 추가
