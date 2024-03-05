@@ -11,20 +11,126 @@
     <script src="https://kit.fontawesome.com/a4dc7026e0.js" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
     <style>
+        /* 전체 body에 대한 스타일링 */
+        body {
+            font-family: 'SeoulNamsanM', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f7f7f7; /* 배경색 지정 */
+        }
+
+        /* 전체 container1에 대한 스타일링 */
         .container1 {
-            margin-top: 80px;
+            margin: 150px auto;
             width: 80%;
+            background-color: #fff; /* 배경색 지정 */
+            padding: 20px; /* 안쪽 여백 지정 */
+            border-radius: 10px; /* 모서리를 둥글게 만듦 */
+            box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2); /* 그림자 효과 */
         }
-        .container1 table{
-            border: 1px solid black;
-            width: 100%;
+
+        .container1 h1{
+            margin: 30px;
         }
-        .container1 th{
-             box-shadow: 5px 5px 5px 5px grey ;
+        /* 테이블에 대한 스타일링 */
+        table {
+            margin: 20px auto;
+            width: 95%;
+            border-collapse: collapse; /* 테이블 경계를 합침 */
         }
-        .button-container a{
+
+        th, td {
+            padding: 10px; /* 셀 안쪽 여백 지정 */
+            height: 50px;
+            text-align: left; /* 텍스트를 왼쪽으로 정렬 */
+            border-bottom: 1px solid #ddd; /* 아래쪽 테두리를 지정 */
+        }
+
+        /* 첫 번째 th에 대한 스타일링 */
+        th:first-child {
+            border-top-left-radius: 10px; /* 왼쪽 위 모서리를 둥글게 만듦 */
+        }
+
+        /* 마지막 th에 대한 스타일링 */
+        th:last-child {
+            border-top-right-radius: 10px; /* 오른쪽 위 모서리를 둥글게 만듦 */
+        }
+
+        /* 버튼 컨테이너에 대한 스타일링 */
+        .button-container {
+            margin-top: 20px;
+            text-align: right; /* 버튼을 오른쪽으로 정렬 */
+        }
+        #searchContainer {
+            margin-left: 30px;
             font-size: larger;
-            float: right;
+        }
+        #searchContainer input, #searchContainer #searchType{
+            height: 30px;
+        }
+        #searchContainer button{
+            height: 30px;
+            width: 50px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 10px;
+        }
+
+        #searchContainer button:hover{
+            height: 30px;
+            width: 50px;
+            background-color: white;
+            color: #007bff;
+            border: 2px solid #007bff;
+            border-radius: 10px;
+        }
+
+
+
+        /* 버튼에 대한 스타일링 */
+        .button-container a.button {
+            background-color: #007bff; /* 배경색 지정 */
+            color: #fff; /* 텍스트 색상 지정 */
+            padding: 10px 20px; /* 안쪽 여백 지정 */
+            border-radius: 5px; /* 모서리를 둥글게 만듦 */
+            text-decoration: none; /* 밑줄 제거 */
+            transition: background-color 0.3s; /* 배경색 변화를 부드럽게 만듦 */
+        }
+
+        .button-container a.button:hover {
+            background-color: #0056b3; /* 마우스를 올렸을 때 배경색 변경 */
+        }
+
+        /* 페이징 컨테이너에 대한 스타일링 */
+        .paging-container {
+            margin-top: 20px;
+            text-align: center; /* 텍스트를 가운데로 정렬 */
+        }
+
+        /* 페이징 링크에 대한 스타일링 */
+        .paging-container a {
+            margin: 0 5px; /* 링크 간격 지정 */
+            padding: 5px 10px; /* 안쪽 여백 지정 */
+            color: #007bff; /* 링크 색상 지정 */
+            text-decoration: none; /* 밑줄 제거 */
+            border: 1px solid #007bff; /* 테두리 지정 */
+            border-radius: 5px; /* 모서리를 둥글게 만듦 */
+        }
+
+        .paging-container a:hover {
+            background-color: #007bff; /* 마우스를 올렸을 때 배경색 변경 */
+            color: #fff; /* 텍스트 색상 변경 */
+        }
+
+        /* 현재 페이지 링크에 대한 스타일링 */
+        .paging-container .current-page {
+            margin: 0 5px; /* 링크 간격 지정 */
+            padding: 5px 10px; /* 안쪽 여백 지정 */
+            background-color: #007bff; /* 배경색 지정 */
+            color: #fff; /* 텍스트 색상 지정 */
+            border: 1px solid #007bff; /* 테두리 지정 */
+            border-radius: 5px; /* 모서리를 둥글게 만듦 */
         }
     </style>
     <script>
@@ -44,49 +150,97 @@
     </script>
 </head>
 <body>
-<nav class = "head_nav">
-    <div class = "nav-item1-left">
-        <a class="nav-link1" href = "/boardkyb">공지사항</a>
-    </div>
-    <div class="nav-item1-left">
-        <a class="nav-link" href="/video">홍보영상</a>
-    </div>
-    <div class = "nav-item1-center">
-        <a class = "nav-link1" href = "/video"><h1>Main</h1></a>
-    </div>
-    <div class = "nav-item1">
-        <div class = "login_box">
-            <% if (username) { %>
-                <a href="#" class="button"><%- username %></a>
-                <div class="sub-nav">
-                    <a class="nav-item" href="/logout">로그아웃</a>
-                </div>
-            <% } else { %>
-                <a href="/login" class="button">로그인</a>
-            <% } %>
+<div class = "container1_1">
+    <nav class = "head_nav">
+        <div class = "nav-item1-left">
+            <a class="nav-link1" href = "/boardkyb">공지사항</a>
         </div>
-    </div>
-</nav>
+        <div class="nav-item1-left">
+            <a class="nav-link" href="/testchart_kyb">요청게시판</a>
+        </div>
+        <div class = "nav-item1-center">
+            <a class = "nav-link1" href = "/main"><h1><img src = "../public/images/logo1.png"></h1></a>
+        </div>
+        <div class = "nav-item1">
+            <div class = "login_box">
+                <% if (username) { %>
+                    <a href="#" class="button"><%- username %></a>
+                    <div class="sub-nav">
+                        <a class="nav-item" href="/logout">로그아웃</a>
+                    </div>
+                <% } else { %>
+                    <a href="/login" class="button">로그인</a>
+                <% } %>
+            </div>
+        </div>
+    </nav>
 </div>
 <div class="container">
     <nav>
-        <a class="nav-item" href="/main"><h1>Trip</h1></a>
+        <a class="nav-item" href="/total"><h1>Top12</h1></a>
         <div class="nav-item">
-            <a class="nav-link" href="/subway"><h2>2호선,4호선</h2></a>
+            <a class="nav-link" href="/video"><h2>잠실</h2></a>
             <div class="sub-nav">
-                <a class="nav-item" href="/total">이지우님차트</a>
-                <a class="nav-item" href="/chartkyb">강연배님차트</a>
-                <a class="nav-item" href="/testchart_kyb">관광객 추세</a>
+                <a class="nav-item" href="/subway">관광객 추세</a>
             </div>
         </div>
         <div class="nav-item">
-            <a class="nav-link" href="public/main2.html"><h2>강남</h2></a>
+            <a class="nav-link" href="public/main2.html"><h2>홍대입구</h2></a>
             <div class="sub-nav">
                 <a class="nav-item" href="public/ganTasty.html">맛집</a>
             </div>
         </div>
         <div class="nav-item">
-            <a class="nav-link" href="public/main2.html"><h2>명동</h2></a>
+            <a class="nav-link" href="/gangnam"><h2>강남</h2></a>
+            <div class="sub-nav">
+                <a class="nav-item" href="/chartkyb">강남 점포수</a>
+                <a class="nav-item" href="/hj_boardMain">게시판</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <a class="nav-link" href="public/main2.html"><h2>구로디지털</h2></a>
+            <div class="sub-nav">
+                <a class="nav-item" href="public/ganTasty.html">맛집</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <a class="nav-link" href="public/main2.html"><h2>삼성</h2></a>
+            <div class="sub-nav">
+                <a class="nav-item" href="public/ganTasty.html">맛집</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <a class="nav-link" href="public/main2.html"><h2>신림</h2></a>
+            <div class="sub-nav">
+                <a class="nav-item" href="public/ganTasty.html">역삼</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <a class="nav-link" href="public/main2.html"><h2>서울역</h2></a>
+            <div class="sub-nav">
+                <a class="nav-item" href="public/ganTasty.html">맛집</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <a class="nav-link" href="public/main2.html"><h2>신도림</h2></a>
+            <div class="sub-nav">
+                <a class="nav-item" href="public/ganTasty.html">맛집</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <a class="nav-link" href="public/main2.html"><h2>고속터미널</h2></a>
+            <div class="sub-nav">
+                <a class="nav-item" href="public/ganTasty.html">맛집</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <a class="nav-link" href="/Myeong-dong"><h2>명동</h2></a>
+            <div class="sub-nav">
+                <a class="nav-item" href="/md_mainBoard">게시판</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <a class="nav-link" href="public/main2.html"><h2>선릉</h2></a>
             <div class="sub-nav">
                 <a class="nav-item" href="public/ganTasty.html">맛집</a>
             </div>

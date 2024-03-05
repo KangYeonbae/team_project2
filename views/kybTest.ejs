@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko-kr">
+<html lang="ko-kr" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
     <title>Chart.js Example</title>
@@ -28,12 +28,59 @@
     </script>
     <style>
         .container3{
+            border-top: 2px solid lightgray;
+            margin: 0;
+        }
+        .container4{
+            width: 800px;
+            height: 550px;
             margin: 130px auto;
+            border: 2px solid lightgray;
+            overflow: hidden;
+        }
+
+        .container4 li{
+            margin: auto;
+        }
+        .container4 .menu_wrap{
+            display: table;
+            table-layout: fixed;
+            width: 100%;
+            border-collapse: collapse;
         }
         .chart_box{
-            margin-left: 170px;
             text-align: center;
-            float: left;
+        }
+        .container4 .menu_item{
+            position: relative;
+            display: table-cell;
+            vertical-align: top;
+        }
+        .container4 from{
+            display: block;
+        }
+        .menu_id.on{
+            border: 2px solid lightgray;
+            border-bottom: none;
+            z-index: 5;
+        }
+        .menu_ones, .menu_qr{
+            border: 2px solid lightgray;
+            z-index: 5;
+        }
+        .menu_id, .menu_ones, .menu_qr{
+            display: block;
+            position: relative;
+            padding-top: 17px;
+            height: 61px;
+            border-bottom: 0;
+            text-align: center;
+            box-sizing: border-box;
+        }
+
+        .container4 li:hover{
+            color: white;
+            text-shadow: -1px 0px black, 0px 1px black, 1px 0px black, 0px -1px black
         }
     </style>
 </head>
@@ -44,10 +91,10 @@
             <a class="nav-link1" href = "/boardkyb">공지사항</a>
         </div>
         <div class="nav-item1-left">
-            <a class="nav-link" href="/video">홍보영상</a>
+            <a class="nav-link" href="/boardLJW">요청게시판</a>
         </div>
         <div class = "nav-item1-center">
-            <a class = "nav-link1" href = "/video"><h1>Main</h1></a>
+            <a class = "nav-link1" href = "/main"><h1><img src = "../public/images/logo1.png"></h1></a>
         </div>
         <div class = "nav-item1">
             <div class = "login_box">
@@ -65,294 +112,411 @@
 </div>
 <div class="container">
     <nav>
-        <a class="nav-item" href="/main"><h1>Trip</h1></a>
-        <div class="nav-item">
-            <a class="nav-link" href="/subway"><h2>2호선,4호선</h2></a>
+        <div class = "nav-item">
+            <a class="nav-link" href="/total"><h1>Top12</h1></a>
             <div class="sub-nav">
-                <a class="nav-item" href="/total">이지우님차트</a>
-                <a class="nav-item" href="/chartkyb">강연배님차트</a>
-                <a class="nav-item" href="/testchart_kyb">관광객 추세</a>
+                <a class="nav-item" href="/subway">관광객 추세</a>
             </div>
         </div>
         <div class="nav-item">
-            <a class="nav-link" href="public/main2.html"><h2>강남</h2></a>
+            <a class="nav-link" href="/video"><h2>잠실</h2></a>
+        </div>
+        <div class="nav-item">
+            <a class="nav-link" href="public/main2.html"><h2>홍대입구</h2></a>
             <div class="sub-nav">
                 <a class="nav-item" href="public/ganTasty.html">맛집</a>
             </div>
         </div>
         <div class="nav-item">
-            <a class="nav-link" href="public/main2.html"><h2>명동</h2></a>
+            <a class="nav-link" href="/gangnam"><h2>강남</h2></a>
+            <div class="sub-nav">
+                <a class="nav-item" href="/chartkyb">강남 점포수</a>
+                <a class="nav-item" href="/HJ_boardMain">게시판</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <a class="nav-link" href="public/main2.html"><h2>구로디지털</h2></a>
+            <div class="sub-nav">
+                <a class="nav-item" href="public/ganTasty.html">맛집</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <a class="nav-link" href="public/main2.html"><h2>삼성</h2></a>
+            <div class="sub-nav">
+                <a class="nav-item" href="public/ganTasty.html">맛집</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <a class="nav-link" href="public/main2.html"><h2>신림</h2></a>
+            <div class="sub-nav">
+                <a class="nav-item" href="public/ganTasty.html">역삼</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <a class="nav-link" href="public/main2.html"><h2>서울역</h2></a>
+            <div class="sub-nav">
+                <a class="nav-item" href="public/ganTasty.html">맛집</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <a class="nav-link" href="public/main2.html"><h2>신도림</h2></a>
+            <div class="sub-nav">
+                <a class="nav-item" href="public/ganTasty.html">맛집</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <a class="nav-link" href="public/main2.html"><h2>고속터미널</h2></a>
+            <div class="sub-nav">
+                <a class="nav-item" href="public/ganTasty.html">맛집</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <a class="nav-link" href="/Myeong-dong"><h2>명동</h2></a>
+            <div class="sub-nav">
+                <a class="nav-item" href="/md_mainBoard">게시판</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <a class="nav-link" href="public/main2.html"><h2>선릉</h2></a>
             <div class="sub-nav">
                 <a class="nav-item" href="public/ganTasty.html">맛집</a>
             </div>
         </div>
     </nav>
 </div>
-<div class="container3">
-    <div class="chart_box">
-        <canvas id="myChart" width="700px" height="500px"></canvas>
+<div class = "container4">
+    <!-- content -->
+    <div class="chart_content">
+        <div class="login_wrap">
+            <ul class="menu_wrap" role="tablist">
+                <li class="menu_item" role="presentation">
+                    <a href="#none" id="loinid" class="menu_id on" role="tab" aria-selected="true">
+                        <span class="menu_text"><span class="text">강남 관광객</span></span>
+                    </a>
+                </li>
+                <li class="menu_item" role="presentation">
+                    <a href="#none" id="ones" class="menu_ones" role="tab" aria-selected="false">
+                        <span class="menu_text"><span class="text">명동 관광객</span></span>
+                    </a>
+                </li>
+                <li class="menu_item" role="presentation">
+                    <a href="#none" id="qrcode" class="menu_qr" role="tab" aria-selected="false">
+                        <span class="menu_text"><span class="text">QR코드</span></span>
+                    </a>
+                </li>
+            </ul>
+            <form id="frmNIDLogin" name="frmNIDLogin" target="_top" AUTOCOMPLETE="off"
+                  action="https://nid.naver.com/nidlogin.login" method="POST">
+                <ul class="panel_wrap">
+                    <li class="panel_item" style="display: block;">
+                        <div class="panel_inner" role="tabpanel" aria-controls="loinid">
+                            <div class="id_pw_wrap">
+                                <div class="container3">
+                                    <div class="chart_box">
+                                        <canvas id="myChart" width="800px" height="500px"></canvas>
 
-        <script>
-            var myChart = echarts.init(document.getElementById('myChart'));
+                                        <script>
+                                            var myChart = echarts.init(document.getElementById('myChart'));
 
-            //chart의 설정을 정합니다.
-            var option = {
-                title: {
-                    text: '강남 관광객',
-                },
-                tooltip: {
-                    trigger: 'axis',
-                    axisPointer: {
-                        type: 'cross',
-                        label: {
-                            backgroundColor: '#283b56'
-                        }
-                    }
-                },
-                legend: {
-                    data:['외국인비율', '관광객']
-                },
-                dataZoom: {
-                    show: false,
-                    start: 0,
-                    end: 100
-                },
-                xAxis: [
-                    {
-                        type: 'category',
-                        boundaryGap: true,
-                        data: (function (){
-                            var now = new Date();
-                            var res = [];
-                            var len = 20;
-                            while (len--) {
-                                res.unshift(now.toLocaleTimeString().replace(/^\D*/,''));
-                                now = new Date(now - 2000);
-                            }
-                            return res;
-                        })()
-                    },
-                ],
-                yAxis: [
-                    {
-                        type: 'value',
-                        scale: true,
-                        name: '외국인 비율',
-                        max: 30,
-                        min: 0,
-                        boundaryGap: [0.2, 0.2],
-                        axisLabel: {
-                            formatter: '{value} %'
-                        },
-                    },
-                    {
-                        type: 'value',
-                        scale: true,
-                        name: '관광객',
-                        max: 1200,
-                        min: 0,
-                        boundaryGap: [0.2, 0.2]
-                    }
-                ],
-                series: [
-                    {
-                        name: '외국인비율',
-                        type: 'line',
-                        lineStyle:{
-                            color:'#2A265C' //line차트 색상 변경
-                        },
-                        smooth: true, //부드러운 line 표현
-                        yAxisIndex: 0, //yAxis 1번째 사용
-                        data: (function (){
-                            var res = [];
-                            var len = 0;
-                            while (len < 20) {
-                                res.push((Math.random()*10 + 5).toFixed(1) - 0); //랜덤 데이터 생성
-                                len++;
-                            }
-                            return res;
-                        })()
-                    },
-                    {
-                        name: '관광객',
-                        type: 'bar',
-                        yAxisIndex: 1, //yAxis 2번째 사용
-                        itemStyle:{
-                            color:'#76ff03' //bar 색상 변경
-                        },
-                        data: (function (){
-                            var res = [];
-                            var len = 20;
-                            while (len--) {
-                                res.push(Math.round(Math.random() * 1000)); //랜덤 데이터 생성
-                            }
-                            return res;
-                        })()
-                    },
-                ]
-            };
+                                            //chart의 설정을 정합니다.
+                                            var option = {
+                                                title: {
+                                                    text: '강남 관광객',
+                                                },
+                                                tooltip: {
+                                                    trigger: 'axis',
+                                                    axisPointer: {
+                                                        type: 'cross',
+                                                        label: {
+                                                            backgroundColor: '#283b56'
+                                                        }
+                                                    }
+                                                },
+                                                legend: {
+                                                    data:['외국인비율', '관광객']
+                                                },
+                                                dataZoom: {
+                                                    show: false,
+                                                    start: 0,
+                                                    end: 100
+                                                },
+                                                xAxis: [
+                                                    {
+                                                        type: 'category',
+                                                        boundaryGap: true,
+                                                        data: (function (){
+                                                            var now = new Date();
+                                                            var res = [];
+                                                            var len = 20;
+                                                            while (len--) {
+                                                                res.unshift(now.toLocaleTimeString().replace(/^\D*/,''));
+                                                                now = new Date(now - 2000);
+                                                            }
+                                                            return res;
+                                                        })()
+                                                    },
+                                                ],
+                                                yAxis: [
+                                                    {
+                                                        type: 'value',
+                                                        scale: true,
+                                                        name: '외국인 비율',
+                                                        max: 30,
+                                                        min: 0,
+                                                        boundaryGap: [0.2, 0.2],
+                                                        axisLabel: {
+                                                            formatter: '{value} %'
+                                                        },
+                                                    },
+                                                    {
+                                                        type: 'value',
+                                                        scale: true,
+                                                        name: '관광객',
+                                                        max: 1200,
+                                                        min: 0,
+                                                        boundaryGap: [0.2, 0.2]
+                                                    }
+                                                ],
+                                                series: [
+                                                    {
+                                                        name: '외국인비율',
+                                                        type: 'line',
+                                                        lineStyle:{
+                                                            color:'#2A265C' //line차트 색상 변경
+                                                        },
+                                                        smooth: true, //부드러운 line 표현
+                                                        yAxisIndex: 0, //yAxis 1번째 사용
+                                                        data: (function (){
+                                                            var res = [];
+                                                            var len = 0;
+                                                            while (len < 20) {
+                                                                res.push((Math.random()*10 + 5).toFixed(1) - 0); //랜덤 데이터 생성
+                                                                len++;
+                                                            }
+                                                            return res;
+                                                        })()
+                                                    },
+                                                    {
+                                                        name: '관광객',
+                                                        type: 'bar',
+                                                        yAxisIndex: 1, //yAxis 2번째 사용
+                                                        itemStyle:{
+                                                            color:'#76ff03' //bar 색상 변경
+                                                        },
+                                                        data: (function (){
+                                                            var res = [];
+                                                            var len = 20;
+                                                            while (len--) {
+                                                                res.push(Math.round(Math.random() * 1000)); //랜덤 데이터 생성
+                                                            }
+                                                            return res;
+                                                        })()
+                                                    },
+                                                ]
+                                            };
 
-            // 위에서 설정한 속성을 차트에 반영합니다.
-            myChart.setOption(option);
+                                            // 위에서 설정한 속성을 차트에 반영합니다.
+                                            myChart.setOption(option);
 
-            //데이터를 생성하고 삭제합니다.
-            setInterval(function (){
-                //x축에 실시간 데이터 생성
-                var axisData = (new Date()).toLocaleTimeString().replace(/^\D*/, '');
+                                            //데이터를 생성하고 삭제합니다.
+                                            setInterval(function (){
+                                                //x축에 실시간 데이터 생성
+                                                var axisData = (new Date()).toLocaleTimeString().replace(/^\D*/, '');
 
-                var data0 = option.series[1].data; //순수익 데이터
-                var data1 = option.series[0].data; //총 수익 데이터
+                                                var data0 = option.series[1].data; //순수익 데이터
+                                                var data1 = option.series[0].data; //총 수익 데이터
 
-                //데이터의 가장 왼쪽 값을 제거
-                data0.shift();
-                //데이터의 가장 오른쪽 값을 추가
-                data0.push(Math.round(Math.random() * 1000));
-                data1.shift();
-                data1.push((Math.random() * 10 + 5).toFixed(1) - 0);
+                                                //데이터의 가장 왼쪽 값을 제거
+                                                data0.shift();
+                                                //데이터의 가장 오른쪽 값을 추가
+                                                data0.push(Math.round(Math.random() * 1000));
+                                                data1.shift();
+                                                data1.push((Math.random() * 10 + 5).toFixed(1) - 0);
 
 
-                //x축에 시간 데이터 추가
-                option.xAxis[0].data.shift();
-                option.xAxis[0].data.push(axisData);
+                                                //x축에 시간 데이터 추가
+                                                option.xAxis[0].data.shift();
+                                                option.xAxis[0].data.push(axisData);
 
-                //차트에 반영
-                myChart.setOption(option);
-            }, 2100);
-        </script>
+                                                //차트에 반영
+                                                myChart.setOption(option);
+                                            }, 2100);
+                                        </script>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </form>
+        </div>
     </div>
 
-    <div class="chart_box">
-        <canvas id="myChart1" width="700px" height="500px"></canvas>
+    <ul class="panel_wrap">
+        <li class="panel_item" style="display: block;">
+            <div class="panel_inner" role="tabpanel" aria-controls="ones">
+                <div class="ones_text">
+                    <div class="input_row" id="id_line">
+                        <div class="icon_cell" id="id_cell">
+                            <div class="container3">
+                                <div class="chart_box">
+                                    <canvas id="myChart1" width="800px" height="500px"></canvas>
 
-        <script>
-            var myChart1 = echarts.init(document.getElementById('myChart1'));
+                                    <script>
+                                        var myChart1 = echarts.init(document.getElementById('myChart1'));
 
-            //chart의 설정을 정합니다.
-            var option1 = {
-                title: {
-                    text: '명동 관광객',
-                },
-                tooltip: {
-                    trigger: 'axis',
-                    axisPointer: {
-                        type: 'cross',
-                        label: {
-                            backgroundColor: '#283b56'
-                        }
-                    }
-                },
-                legend: {
-                    data:['외국인비율', '관광객']
-                },
-                dataZoom: {
-                    show: false,
-                    start: 0,
-                    end: 100
-                },
-                xAxis: [
-                    {
-                        type: 'category',
-                        boundaryGap: true,
-                        data: (function (){
-                            var now = new Date();
-                            var res = [];
-                            var len = 20;
-                            while (len--) {
-                                res.unshift(now.toLocaleTimeString().replace(/^\D*/,''));
-                                now = new Date(now - 2000);
-                            }
-                            return res;
-                        })()
-                    },
-                ],
-                yAxis: [
-                    {
-                        type: 'value',
-                        scale: true,
-                        name: '외국인 비율',
-                        max: 30,
-                        min: 0,
-                        boundaryGap: [0.2, 0.2],
-                        axisLabel: {
-                            formatter: '{value} %'
-                        },
-                    },
-                    {
-                        type: 'value',
-                        scale: true,
-                        name: '관광객',
-                        max: 1200,
-                        min: 0,
-                        boundaryGap: [0.2, 0.2]
-                    }
-                ],
-                series: [
-                    {
-                        name: '외국인비율',
-                        type: 'line',
-                        lineStyle:{
-                            color:'#c8ffff' //line차트 색상 변경
-                        },
-                        smooth: true, //부드러운 line 표현
-                        yAxisIndex: 0, //yAxis 1번째 사용
-                        data: (function (){
-                            var res = [];
-                            var len = 0;
-                            while (len < 20) {
-                                res.push((Math.random()*10 + 5).toFixed(1) - 0); //랜덤 데이터 생성
-                                len++;
-                            }
-                            return res;
-                        })()
-                    },
-                    {
-                        name: '관광객',
-                        type: 'bar',
-                        yAxisIndex: 1, //yAxis 2번째 사용
-                        itemStyle:{
-                            color:'#2962ff' //bar 색상 변경
-                        },
-                        data: (function (){
-                            var res = [];
-                            var len = 20;
-                            while (len--) {
-                                res.push(Math.round(Math.random() * 1000)); //랜덤 데이터 생성
-                            }
-                            return res;
-                        })()
-                    },
-                ]
-            };
+                                        //chart의 설정을 정합니다.
+                                        var option1 = {
+                                            title: {
+                                                text: '명동 관광객',
+                                            },
+                                            tooltip: {
+                                                trigger: 'axis',
+                                                axisPointer: {
+                                                    type: 'cross',
+                                                    label: {
+                                                        backgroundColor: '#283b56'
+                                                    }
+                                                }
+                                            },
+                                            legend: {
+                                                data:['외국인비율', '관광객']
+                                            },
+                                            dataZoom: {
+                                                show: false,
+                                                start: 0,
+                                                end: 100
+                                            },
+                                            xAxis: [
+                                                {
+                                                    type: 'category',
+                                                    boundaryGap: true,
+                                                    data: (function (){
+                                                        var now = new Date();
+                                                        var res = [];
+                                                        var len = 20;
+                                                        while (len--) {
+                                                            res.unshift(now.toLocaleTimeString().replace(/^\D*/,''));
+                                                            now = new Date(now - 2000);
+                                                        }
+                                                        return res;
+                                                    })()
+                                                },
+                                            ],
+                                            yAxis: [
+                                                {
+                                                    type: 'value',
+                                                    scale: true,
+                                                    name: '외국인 비율',
+                                                    max: 30,
+                                                    min: 0,
+                                                    boundaryGap: [0.2, 0.2],
+                                                    axisLabel: {
+                                                        formatter: '{value} %'
+                                                    },
+                                                },
+                                                {
+                                                    type: 'value',
+                                                    scale: true,
+                                                    name: '관광객',
+                                                    max: 1200,
+                                                    min: 0,
+                                                    boundaryGap: [0.2, 0.2]
+                                                }
+                                            ],
+                                            series: [
+                                                {
+                                                    name: '외국인비율',
+                                                    type: 'line',
+                                                    lineStyle:{
+                                                        color:'#c8ffff' //line차트 색상 변경
+                                                    },
+                                                    smooth: true, //부드러운 line 표현
+                                                    yAxisIndex: 0, //yAxis 1번째 사용
+                                                    data: (function (){
+                                                        var res = [];
+                                                        var len = 0;
+                                                        while (len < 20) {
+                                                            res.push((Math.random()*10 + 5).toFixed(1) - 0); //랜덤 데이터 생성
+                                                            len++;
+                                                        }
+                                                        return res;
+                                                    })()
+                                                },
+                                                {
+                                                    name: '관광객',
+                                                    type: 'bar',
+                                                    yAxisIndex: 1, //yAxis 2번째 사용
+                                                    itemStyle:{
+                                                        color:'#2962ff' //bar 색상 변경
+                                                    },
+                                                    data: (function (){
+                                                        var res = [];
+                                                        var len = 20;
+                                                        while (len--) {
+                                                            res.push(Math.round(Math.random() * 1000)); //랜덤 데이터 생성
+                                                        }
+                                                        return res;
+                                                    })()
+                                                },
+                                            ]
+                                        };
 
-            // 위에서 설정한 속성을 차트에 반영합니다.
-            myChart.setOption(option1);
+                                        // 위에서 설정한 속성을 차트에 반영합니다.
+                                        myChart.setOption(option1);
 
-            //데이터를 생성하고 삭제합니다.
-            setInterval(function (){
-                //x축에 실시간 데이터 생성
-                var axisData1 = (new Date()).toLocaleTimeString().replace(/^\D*/, '');
+                                        //데이터를 생성하고 삭제합니다.
+                                        setInterval(function (){
+                                            //x축에 실시간 데이터 생성
+                                            var axisData1 = (new Date()).toLocaleTimeString().replace(/^\D*/, '');
 
-                var data2 = option1.series[1].data; //순수익 데이터
-                var data3 = option1.series[0].data; //총 수익 데이터
+                                            var data2 = option1.series[1].data; //순수익 데이터
+                                            var data3 = option1.series[0].data; //총 수익 데이터
 
-                //데이터의 가장 왼쪽 값을 제거
-                data2.shift();
-                //데이터의 가장 오른쪽 값을 추가
-                data2.push(Math.round(Math.random() * 1000));
-                data3.shift();
-                data3.push((Math.random() * 10 + 5).toFixed(1) - 0);
+                                            //데이터의 가장 왼쪽 값을 제거
+                                            data2.shift();
+                                            //데이터의 가장 오른쪽 값을 추가
+                                            data2.push(Math.round(Math.random() * 1000));
+                                            data3.shift();
+                                            data3.push((Math.random() * 10 + 5).toFixed(1) - 0);
 
 
-                //x축에 시간 데이터 추가
-                option1.xAxis[0].data.shift();
-                option1.xAxis[0].data.push(axisData1);
+                                            //x축에 시간 데이터 추가
+                                            option1.xAxis[0].data.shift();
+                                            option1.xAxis[0].data.push(axisData1);
 
-                //차트에 반영
-                myChart1.setOption(option1);
-            }, 2100);
-        </script>
-    </div>
+                                            //차트에 반영
+                                            myChart1.setOption(option1);
+                                        }, 2100);
+                                    </script>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </li>
+    </ul>
 </div>
+<script>
+    // 강남 관광객 메뉴를 클릭했을 때 실행될 함수
+    document.getElementById('loinid').addEventListener('click', function() {
+        // 강남 관광객 차트를 보입니다.
+        document.getElementById('myChart').style.display = 'block';
+        // 명동 관광객 차트를 숨깁니다.
+        document.getElementById('myChart1').style.display = 'none';
+    });
+
+    // 명동 관광객 메뉴를 클릭했을 때 실행될 함수
+    document.getElementById('ones').addEventListener('click', function() {
+        // 명동 관광객 차트를 보입니다.
+        document.getElementById('myChart1').style.display = 'block';
+        // 강남 관광객 차트를 숨깁니다.
+        document.getElementById('myChart').style.display = 'none';
+    });
+</script>
+
+
 <div class="container2">
     <div class="chat-bar collapsed">
         <div class="btn3">

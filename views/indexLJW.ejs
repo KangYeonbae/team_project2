@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="ko-kr">
+<head>
+    <meta charset="UTF-8">
+    <title>자유게시판</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/SeoulNamsanM.woff">
+    <link rel="stylesheet" href="../public/css/header_test_LEE.css">
+    <link rel="stylesheet" href="../public/css/main.css">
+    <link rel="stylesheet" href="../public/css/chat.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://kit.fontawesome.com/a4dc7026e0.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $(".btn3 button").on("click", function() {
+                console.log("Button clicked!");
+                $(".content").toggleClass("expanded");
+            });
+
+            // content 외의 영역을 클릭하면 content 닫기
+            $(document).on("click", function(event) {
+                if (!$(event.target).closest(".btn3, .content").length) {
+                    $(".content").removeClass("expanded");
+                }
+            });
+        });
+    </script>
+    <style>
+            /* 기본 바디 스타일 */
+        .container3{
+            margin: 150px auto;
+            width: 80%;
+        }
+
+        /* 헤더 스타일 */
+        .container3 h1 {
+            color: #333;
+        }
+
+        /* 테이블 스타일 */
+        table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        th, td {
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+
+        th {
+            background-color: #ff6666;
+            color: #ffffff;
+            cursor: pointer;
+        }
+
+        /* 링크 스타일 */
+        .post-link {
+            color: #333;
+            text-decoration: none;
+        }
+
+        .post-link:hover {
+            color: #ff6666;
+            text-decoration: underline;
+        }
+
+        /* 버튼 및 페이지네이션 컨테이너 */
+        .button-container, .paging-container {
+            margin-top: 20px;
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .paging-container {
+            justify-content: center;
+        }
+
+        /* 페이지네이션 링크 */
+        .paging-container a {
+            margin: 0 5px;
+            text-decoration: none;
+            color: #ff6666;
+        }
+
+        .paging-container a:hover {
+            text-decoration: underline;
+        }
+
+        /* 로그인 및 로그아웃 버튼 스타일 */
+        .button {
+            padding: 10px 20px;
+            background-color: #ff6666;
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        .button:hover {
+            background-color: #dd5555;
+        }
+
+        /* 검색 컨테이너 */
+        #searchContainer {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        #searchContainer select,
+        #searchContainer input[type="text"],
+        #searchContainer button {
+            padding: 10px;
+            margin: 10px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+
+        #searchContainer button {
+            background-color: #ff6666;
+            color: white;
+            cursor: pointer;
+        }
+
+        #searchContainer button:hover {
+            background-color: #dd5555;
+        }
+
+    </style>
+</head>
+<body>
+<div class = "container1_1">
+    <nav class = "head_nav">
+        <div class = "nav-item1-left">
+            <a class="nav-link1" href = "/boardkyb">공지사항</a>
+        </div>
+        <div class="nav-item1-left">
+            <a class="nav-link" href="/boardLJW">요청게시판</a>
+        </div>
+        <div class = "nav-item1-center">
+            <a class = "nav-link1" href = "/main"><h1><img src = "../public/images/logo1.png"></h1></a>
+        </div>
+        <div class = "nav-item1">
+            <div class = "login_box">
+                <% if (username) { %>
+                    <a href="#" class="button"><%- username %></a>
+                    <div class="sub-nav">
+                        <a class="nav-item" href="/logout">로그아웃</a>
+                    </div>
+                <% } else { %>
+                    <a href="/login" class="button">로그인</a>
+                <% } %>
+            </div>
+        </div>
+    </nav>
+</div>
+<div class="container">
+    <nav>
+        <div class = "nav-item">
+            <a class="nav-link" href="/total"><h1>Top12</h1></a>
+            <div class="sub-nav">
+                <a class="nav-item" href="/subway">관광객 추세</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <a class="nav-link" href="/video"><h2>잠실</h2></a>
+        </div>
+        <div class="nav-item">
+            <a class="nav-link" href="public/main2.html"><h2>홍대입구</h2></a>
+            <div class="sub-nav">
+                <a class="nav-item" href="public/ganTasty.html">맛집</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <a class="nav-link" href="/gangnam"><h2>강남</h2></a>
+            <div class="sub-nav">
+                <a class="nav-item" href="/chartkyb">강남 점포수</a>
+                <a class="nav-item" href="/HJ_boardMain">게시판</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <a class="nav-link" href="public/main2.html"><h2>구로디지털</h2></a>
+            <div class="sub-nav">
+                <a class="nav-item" href="public/ganTasty.html">맛집</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <a class="nav-link" href="public/main2.html"><h2>삼성</h2></a>
+            <div class="sub-nav">
+                <a class="nav-item" href="public/ganTasty.html">맛집</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <a class="nav-link" href="public/main2.html"><h2>신림</h2></a>
+            <div class="sub-nav">
+                <a class="nav-item" href="public/ganTasty.html">역삼</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <a class="nav-link" href="public/main2.html"><h2>서울역</h2></a>
+            <div class="sub-nav">
+                <a class="nav-item" href="public/ganTasty.html">맛집</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <a class="nav-link" href="public/main2.html"><h2>신도림</h2></a>
+            <div class="sub-nav">
+                <a class="nav-item" href="public/ganTasty.html">맛집</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <a class="nav-link" href="public/main2.html"><h2>고속터미널</h2></a>
+            <div class="sub-nav">
+                <a class="nav-item" href="public/ganTasty.html">맛집</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <a class="nav-link" href="/Myeong-dong"><h2>명동</h2></a>
+            <div class="sub-nav">
+                <a class="nav-item" href="/md_mainBoard">게시판</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <a class="nav-link" href="public/main2.html"><h2>선릉</h2></a>
+            <div class="sub-nav">
+                <a class="nav-item" href="public/ganTasty.html">맛집</a>
+            </div>
+        </div>
+    </nav>
+</div>
+
+<div class = "container3">
+<h1>자유게시판</h1>
+<!--<div style="position: absolute; top: 10px; right: 10px;">-->
+<!--    <% if (userRealName) { %>-->
+<!--        <p><%= userRealName %>님 환영합니다. &nbsp;&nbsp; <a href="/logout" class="button">로그아웃</a></p>-->
+<!--    <% } else { %>-->
+<!--        <a href="/login" class="button">로그인</a>-->
+<!--    <% } %>-->
+<!--</div>-->
+<!-- 게시글 목록 표시 -->
+<table>
+    <thead>
+    <tr>
+        <th>제목</th>
+        <th>작성자</th>
+        <th>작성일</th>
+<!--
+* onmouseover="this.style.textDecoration = 'underline'":
+ - 사용자가 마우스를 해당 열 제목 위에 올렸을 때 호출되는 이벤트.
+ - 이벤트가 발생하면 해당 열 제목의 텍스트에 밑줄이 생기도록 스타일 변경.
+ * onmouseout="this.style.textDecoration = 'none'
+  - 사용자가 마우수를 해당 열 제목에서 벗어나 있는 상태에 호출 되는 이벤트
+  - 해당 상태에는 밑줄을 제거하도록 스타일 변경
+      -->
+
+        <th onclick="toggleSort()" onmouseover="this.style.textDecoration = 'underline';" onmouseout="this.style.textDecoration = 'none';">조회수 ▼</th>
+        <th onclick="toggleSort()" onmouseover="this.style.textDecoration = 'underline';" onmouseout="this.style.textDecoration = 'none';">좋아요 </th>
+
+
+    </tr>
+    </thead>
+    <tbody>
+    <% for (let i = 0; i < posts.length; i++) { %>
+        <tr>
+            <td><a href="/detailPostLJW/<%= posts[i][0] %>" class="post-link"><%= posts[i][1] %> [<%= posts[i][6] %>]</a></td>
+            <td><%= posts[i][2] %></td>
+            <td><%= posts[i][3] %></td>
+            <td><%= posts[i][4] %></td>
+            <td><%= posts[i][5] %></td>
+        </tr>
+    <% } %>
+    </tbody>
+</table>
+
+<script>
+    // 단순히 한 번만 초기화되도록 변수.
+    // 한 번 설정된 값은 그 후에 페이지가 재로드되어도 바뀌지 않는다.
+    let sortByViews = false;
+
+    // 페이지 로드 또는 재로드 될 때마다 초기화를 위한 함수
+    window.onload = function() {
+        // 현재 페이지의 URL에서 쿼리 문자열을 반환
+        const queryParams = new URLSearchParams(window.location.search);
+
+        // 'sort' 쿼리 파라메터 값을 확인
+        const sortParam = queryParams.get('sort');
+
+        if (sortParam === 'views_desc') {
+            sortByViews = true;
+        }
+    };
+
+    function toggleSort() {
+        // sortByViews라는 플래그 변수(상태를 저장하는 변수)를 지정하여 정렬상태를 토글(반전) 시킴
+        sortByViews = !sortByViews;
+        const sortParam = sortByViews ? 'views_desc' : ''; // 정렬 방식에 따른 쿼리 파라미터
+        // location 객체를 사용하여 지정된 URL로 이동 및 화면 갱신
+        window.location.href = `/boardLJW?sort=${sortParam}`; // 최초 조회수 클릭 시 /boardLJW?sort=views_desc
+    }
+</script>
+
+
+<!-- 글쓰기 버튼 -->
+<div class="button-container">
+    <% if (userRealName) { %>
+        <a href="/createLJW" class="button">글쓰기</a>
+    <% } %>
+</div>
+
+<!-- 페이징 -->
+<div class="paging-container">
+    <% if (currentPage > 1) { %>
+        <a href="/boardLJW/?page=<%= currentPage - 1 %>">이전</a>
+    <% } %>
+
+    <% for (let i = startPage; i <= endPage; i++) { %>
+        <% if (i === currentPage) { %>
+            <span class="current-page"><%= i %></span>
+        <% } else { %>
+            <a href="/boardLJW/?page=<%= i %>"><%= i %></a>
+        <% } %>
+    <% } %>
+
+    <% if ((totalPages - currentPage + 1) > maxPageNumber) { %>
+        <a href="/boardLJW/?page=<%= currentPage + 1 %>">다음</a>
+    <% } %>
+</div>
+
+<!-- 검색 조건 -->
+<!-- 검색 조건 및 입력 창 -->
+<div id="searchContainer">
+<!-- 기존의 /boardLJW이 get방식으로 처리되고 있어 편의상 GET 방식으로 호출   -->
+    <form action="/boardLJW" method="GET">
+        <label for="searchType">검색 조건:</label>
+        <select id="searchType" name="searchType">
+            <option value="title" selected>제목</option>
+            <option value="content">게시글 내용</option>
+            <option value="author">글 작성자</option>
+        </select>
+        <input type="text" id="searchInput" name="searchInput">
+        <button type="submit">검색</button>
+    </form>
+</div>
+</div>
+</body>
+</html>

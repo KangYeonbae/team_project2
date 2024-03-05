@@ -11,18 +11,168 @@
     <script src="https://kit.fontawesome.com/a4dc7026e0.js" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
     <style>
-        .container5{
+        .container5 {
             margin: 130px auto;
             text-align: center;
         }
-        .container5 *{
-            margin: 10px;
-        }
-        .create_box{
+
+        .container5 .create_box {
             width: 50%;
             border: 2px solid black;
             margin: auto;
             text-align: center;
+            padding: 20px;
+            border-radius: 10px;
+            background-color: #f8f9fa;
+        }
+
+        .container5 .create_box label {
+            margin-bottom: 5px;
+            display: block;
+            font-weight: bold;
+        }
+
+        .container5 .create_box input[type="text"],
+        .container5 .create_box textarea {
+            width: 100%;
+            margin-bottom: 10px;
+            padding: 8px;
+            border: 1px solid #ced4da;
+            border-radius: 5px;
+            box-sizing: border-box;
+            resize: vertical;
+        }
+
+        .container5 .create_box select {
+            width: 100%;
+            margin-bottom: 10px;
+            padding: 8px;
+            border: 1px solid #ced4da;
+            border-radius: 5px;
+            box-sizing: border-box;
+            resize: vertical;
+            background-color: #fff;
+        }
+
+        .container5 .create_box input[type="file"] {
+            margin-bottom: 10px;
+        }
+
+        .container5 .create_box input[type="submit"] {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: #fff;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .container5 .create_box input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+        .container5 a {
+            display: inline-block;
+            margin-top: 10px;
+            text-decoration: none;
+            color: #007bff;
+        }
+
+        .container5 a:hover {
+            color: #0056b3;
+        }
+
+        .chat-bar {
+            position: fixed;
+            bottom: 0;
+            right: 20px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 10px 10px 0 0;
+            overflow: hidden;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            transition: height 0.3s;
+        }
+
+        .chat-bar.collapsed {
+            height: 40px;
+        }
+
+        .chat-bar.expanded {
+            height: 300px;
+        }
+
+        .content {
+            padding: 10px;
+            overflow-y: auto;
+            max-height: 250px;
+        }
+
+        .chat-bar-input-block {
+            display: flex;
+            align-items: center;
+            padding: 5px;
+        }
+
+        .input-box {
+            flex-grow: 1;
+            margin-right: 10px;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .chat-bar-icons {
+            display: flex;
+            align-items: center;
+        }
+
+        #chat-icon {
+            margin-right: 5px;
+            cursor: pointer;
+        }
+
+        #chat-bar-bottom {
+            padding-top: 5px;
+            border-top: 1px solid #ccc;
+        }
+
+        .botText {
+            background-color: #f2f2f2;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 5px;
+            font-size: 14px;
+            line-height: 1.4;
+        }
+
+        .userText {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 5px;
+            font-size: 14px;
+            line-height: 1.4;
+            text-align: right;
+        }
+
+        #chat-timestamp {
+            font-size: 12px;
+            color: #666;
+            margin-bottom: 5px;
+        }
+
+        .outer-container {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .chat-container {
+            flex-grow: 1;
+            overflow-y: auto;
         }
     </style>
     <script>
@@ -48,7 +198,7 @@
             <a class="nav-link1" href = "/boardkyb">공지사항</a>
         </div>
         <div class="nav-item1-left">
-            <a class="nav-link" href="/video">홍보영상</a>
+            <a class="nav-link" href="/video">혼잡도</a>
         </div>
         <div class = "nav-item1-center">
             <a class = "nav-link1" href = "/video"><h1>Main</h1></a>
@@ -69,13 +219,19 @@
 </div>
 <div class="container">
     <nav>
-        <a class="nav-item" href="/main"><h1>Trip</h1></a>
+        <a class="nav-item" href="/subway"><h1>Top12</h1></a>
         <div class="nav-item">
-            <a class="nav-link" href="/subway"><h2>2호선,4호선</h2></a>
+            <a class="nav-link" href="/subway"><h2>잠실</h2></a>
             <div class="sub-nav">
                 <a class="nav-item" href="/total">이지우님차트</a>
                 <a class="nav-item" href="/chartkyb">강연배님차트</a>
                 <a class="nav-item" href="/testchart_kyb">관광객 추세</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <a class="nav-link" href="public/main2.html"><h2>홍대입구</h2></a>
+            <div class="sub-nav">
+                <a class="nav-item" href="public/ganTasty.html">맛집</a>
             </div>
         </div>
         <div class="nav-item">
@@ -85,7 +241,49 @@
             </div>
         </div>
         <div class="nav-item">
+            <a class="nav-link" href="public/main2.html"><h2>구로디지털</h2></a>
+            <div class="sub-nav">
+                <a class="nav-item" href="public/ganTasty.html">맛집</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <a class="nav-link" href="public/main2.html"><h2>삼성</h2></a>
+            <div class="sub-nav">
+                <a class="nav-item" href="public/ganTasty.html">맛집</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <a class="nav-link" href="public/main2.html"><h2>신림</h2></a>
+            <div class="sub-nav">
+                <a class="nav-item" href="public/ganTasty.html">역삼</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <a class="nav-link" href="public/main2.html"><h2>서울역</h2></a>
+            <div class="sub-nav">
+                <a class="nav-item" href="public/ganTasty.html">맛집</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <a class="nav-link" href="public/main2.html"><h2>신도림</h2></a>
+            <div class="sub-nav">
+                <a class="nav-item" href="public/ganTasty.html">맛집</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <a class="nav-link" href="public/main2.html"><h2>고속터미널</h2></a>
+            <div class="sub-nav">
+                <a class="nav-item" href="public/ganTasty.html">맛집</a>
+            </div>
+        </div>
+        <div class="nav-item">
             <a class="nav-link" href="public/main2.html"><h2>명동</h2></a>
+            <div class="sub-nav">
+                <a class="nav-item" href="public/ganTasty.html">맛집</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <a class="nav-link" href="public/main2.html"><h2>선릉</h2></a>
             <div class="sub-nav">
                 <a class="nav-item" href="public/ganTasty.html">맛집</a>
             </div>

@@ -11,19 +11,21 @@ router.get('/:id', async (req, res) => {
 
     const postId = req.params.id;
 
+
     let conn;
     try {
         conn = await oracledb.getConnection(dbConfig);
 
         const result = await conn.execute(
             `SELECT * FROM notice WHERE id = :id`,
-            [postId]
+            [postId],
+            { fetchInfo: { CONTENT: { type: oracledb.STRING } } }
         );
 
         const notice = {
             id: result.rows[0][0],
-            title: result.rows[0][2],
-            content: result.rows[0][3]
+            title: result.rows[0][3],
+            content: result.rows[0][4]
         };
 
         res.render('editKYB', {
@@ -57,7 +59,7 @@ router.post('/:id', async (req, res) => {
         // 게시글 수정
         await conn.execute(
             `UPDATE notice SET title = :title, content = :content WHERE id = :id`,
-            [title, content, postId]
+            [title, content.replace(/\n/g, '<br>'), postId]
         );
 
         // 변경 사항 커밋

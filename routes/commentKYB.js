@@ -34,9 +34,8 @@ router.post('/', async (req, res) => {
         // 댓글 추가
         await conn.execute(
             `INSERT INTO notice_comments (id, post_id, author_id, content, parent_comment_id) 
-             VALUES (comment_id_seq.nextval, :post_id, :author_id, :content, :parent_id)`, // parend_id를 parent_id로 수정
-            [post_id, author_id, content, comment_id]
-        );
+             VALUES (notice_comments_id_seq.nextval, :post_id, :author_id, :content, :parent_id)`, // parend_id를 parent_id로 수정
+            [post_id, author_id, content, comment_id]        );
 
         await conn.commit();
 

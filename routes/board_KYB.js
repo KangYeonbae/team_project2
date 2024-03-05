@@ -52,7 +52,7 @@ router.get('/', async (req, res) => {
         // if () 다음블록이 수행되지 않는 조건 : false, falsy*0, null, non)
         const sql_query = `SELECT
                                id, title, to_char(created_at,'YYYY-MM-DD'), views, class_post,
-                               (SELECT COUNT(*) FROM comments c WHERE c.post_id = p.id) AS comments_count
+                               (SELECT COUNT(*) FROM notice_comments c WHERE c.post_id = p.id) AS comments_count
                            FROM (
                                     SELECT
                                         n.id, n.title, n.created_at, n.views, n.class_post,

@@ -28,6 +28,7 @@ router.get('/', async (req, res) => {
             result.rows.map(row => [row[0], row.slice(1)]),
         );
 
+        console.log(row => [row[0], row.slice(1)]);
 
     res.render('totallee', {
         chartData: JSON.stringify(chartData),

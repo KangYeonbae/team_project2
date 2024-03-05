@@ -10,31 +10,122 @@
     <script src="https://kit.fontawesome.com/a4dc7026e0.js" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
     <style>
-        .container1{
+        .container1 {
             border: 2px solid black;
-            margin-top: 130px;
+            margin: 130px auto 0;
+            padding: 20px;
+            border-radius: 10px;
+            background-color: #f8f9fa;
+            width: 80%;
         }
-        .container1 .text_box{
+
+        .container1 .text_box {
             text-align: center;
+        }
+
+        .container1 table{
+            margin: 20px auto;
+            border-collapse: collapse;
+
             width: 100%;
         }
-        .container1 table{
+        .container1 table *{
+            margin: 20px;
+        }
+
+        .container1 th{
+            width: 300px;
             text-align: center;
-            margin: 20px auto;
         }
-        .container1 th, .container1 th {
-            margin: auto;
-            padding: 20px;
+        .container1 th, .container1 td {
+            padding: 10px;
+            margin: 50px auto;
+            height: 50px;
+            /*border-radius: 10px; !* 모서리를 둥글게 만듦 *!*/
+            /*box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);*/
         }
-        .comment_box *{
-            width: 500px;
-            margin: 10px auto;
-            /*border:  2px solid blue;*/
+        .container1 td{
+            width: auto;
+            margin-top: 50px;
+            height: 50px;
+            text-align: left;
         }
-        .comment_box a.reply-button{
-            background-color: blueviolet;
 
+        .comment_box {
+            margin-top: 20px;
+            border: 1px solid lightgray;
+        }
+        .comment_section {
+            margin-bottom: 20px;
+        }
 
+        .comment {
+            margin-bottom: 20px;
+            border: 1px solid #007bff;
+            padding: 10px;
+            border-radius: 5px;
+            background-color: #fff;
+        }
+
+        .comment p {
+            margin: 5px 0;
+        }
+
+        .comment-content {
+            margin-bottom: 10px;
+        }
+
+        .comment-buttons {
+            margin-top: 10px;
+        }
+
+        .comment-buttons a, .comment-buttons button {
+            margin-right: 10px;
+            padding: 5px 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: #fff;
+            text-decoration: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .comment-buttons a:hover, .comment-buttons button:hover {
+            background-color: #0056b3;
+        }
+
+        .comment-form {
+            margin-top: 20px;
+        }
+
+        .comment-input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ced4da;
+            border-radius: 5px;
+            box-sizing: border-box;
+            resize: vertical;
+        }
+
+        .submit-button {
+            padding: 10px 20px;
+            border: 1px solid #007bff;;
+            border-radius: 5px;
+            background-color: #fff;
+            color: #007bff;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin: 20px;
+        }
+
+        .submit-button:hover {
+            background-color: #007bff;
+            color: white;
+        }
+
+        .center {
+            text-align: center;
         }
     </style>
     <script>
@@ -60,10 +151,10 @@
             <a class="nav-link1" href = "/boardkyb">공지사항</a>
         </div>
         <div class="nav-item1-left">
-            <a class="nav-link" href="/video">홍보영상</a>
+            <a class="nav-link" href="/boardLJW">요청게시판</a>
         </div>
         <div class = "nav-item1-center">
-            <a class = "nav-link1" href = "/video"><h1>Main</h1></a>
+            <a class = "nav-link1" href = "/main"><h1><img src = "../public/images/logo1.png"></h1></a>
         </div>
         <div class = "nav-item1">
             <div class = "login_box">
@@ -81,23 +172,72 @@
 </div>
 <div class="container">
     <nav>
-        <a class="nav-item" href="/main"><h1>Trip</h1></a>
-        <div class="nav-item">
-            <a class="nav-link" href="/subway"><h2>2호선,4호선</h2></a>
+        <div class = "nav-item">
+            <a class="nav-link" href="/total"><h1>Top12</h1></a>
             <div class="sub-nav">
-                <a class="nav-item" href="/total">이지우님차트</a>
-                <a class="nav-item" href="/chartkyb">강연배님차트</a>
-                <a class="nav-item" href="/testchart_kyb">관광객 추세</a>
+                <a class="nav-item" href="/subway">관광객 추세</a>
             </div>
         </div>
         <div class="nav-item">
-            <a class="nav-link" href="public/main2.html"><h2>강남</h2></a>
+            <a class="nav-link" href="/video"><h2>잠실</h2></a>
+        </div>
+        <div class="nav-item">
+            <a class="nav-link" href="public/main2.html"><h2>홍대입구</h2></a>
             <div class="sub-nav">
                 <a class="nav-item" href="public/ganTasty.html">맛집</a>
             </div>
         </div>
         <div class="nav-item">
-            <a class="nav-link" href="public/main2.html"><h2>명동</h2></a>
+            <a class="nav-link" href="/gangnam"><h2>강남</h2></a>
+            <div class="sub-nav">
+                <a class="nav-item" href="/chartkyb">강남 점포수</a>
+                <a class="nav-item" href="/HJ_boardMain">게시판</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <a class="nav-link" href="public/main2.html"><h2>구로디지털</h2></a>
+            <div class="sub-nav">
+                <a class="nav-item" href="public/ganTasty.html">맛집</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <a class="nav-link" href="public/main2.html"><h2>삼성</h2></a>
+            <div class="sub-nav">
+                <a class="nav-item" href="public/ganTasty.html">맛집</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <a class="nav-link" href="public/main2.html"><h2>신림</h2></a>
+            <div class="sub-nav">
+                <a class="nav-item" href="public/ganTasty.html">역삼</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <a class="nav-link" href="public/main2.html"><h2>서울역</h2></a>
+            <div class="sub-nav">
+                <a class="nav-item" href="public/ganTasty.html">맛집</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <a class="nav-link" href="public/main2.html"><h2>신도림</h2></a>
+            <div class="sub-nav">
+                <a class="nav-item" href="public/ganTasty.html">맛집</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <a class="nav-link" href="public/main2.html"><h2>고속터미널</h2></a>
+            <div class="sub-nav">
+                <a class="nav-item" href="public/ganTasty.html">맛집</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <a class="nav-link" href="/Myeong-dong"><h2>명동</h2></a>
+            <div class="sub-nav">
+                <a class="nav-item" href="/md_mainBoard">게시판</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <a class="nav-link" href="public/main2.html"><h2>선릉</h2></a>
             <div class="sub-nav">
                 <a class="nav-item" href="public/ganTasty.html">맛집</a>
             </div>
@@ -113,12 +253,12 @@
         </tr>
         <tr>
             <th>제목</th>
-            <td class = "title"><%- notice.title %></td>
+            <td class = "title" style="font-weight: bold;"><h2><%- notice.title %></h2></td>
         </tr>
         <tr>
             <th>게시글내용</th>
-            <td class="content" style="word-wrap: break-word;">
-                <%= notice.content %>
+            <td class="content" style="word-wrap: break-word; text-align: left;">
+                <%- notice.content %>
                 <% if (notice.file_original_name && notice.file_original_name !== '') { %>
                     <ul style="list-style-type: none; padding-left: 0;">
                         <!--  멀티 파일인 경우 구분자가 ; 이므로 ;를 기준으로 파일명만 배열로 수집                  -->
@@ -144,9 +284,11 @@
         <th>조회수</th>
             <td><%- notice.views %></td>
         </tr>
-    </table>
-        <div class="attachment-section center">
-            <div class="attachment-header">첨부 파일</div>
+        <tr>
+            <th>첨부파일</th>
+            <td>
+          <div class="attachment-section center">
+          <div class="attachment-header"></div>
             <% if (notice.file_original_name && notice.file_original_name !== '') { %>
                 <ul style="list-style-type: none; padding-left: 0;">
                     <% const originalNames = notice.file_original_name.split(';'); %>
@@ -164,12 +306,15 @@
                 <p>첨부된 파일이 없습니다.</p>
             <% } %>
         </div>
-
-
+        </td>
+        </tr>
+<tr>
+<th><div class = "commnet_header">댓글</div></th>
 <!--댓글섹션-->
-        <div class = "comment_box">
+<td>
+<div class = "comment_box">
 <div class = "comment_section">
-    <div class = "commnet_header">댓글</div>
+
     <% if (comments && comments.length > 0) { %>
         <% comments.forEach(comment => { %>
     <div class="comment">
@@ -177,7 +322,7 @@
             <% if (comment.author_id == userId) { %>
                 (본인)
             <% } %>
-            &nbsp<%- comment.created_at %>
+            <%- comment.created_at %>
         </p>
         <p class="comment-content" data-comment-id="<%= comment.id %>"><%= comment.content %></p> <!-- 여기서 '.comment-content'를 추가했습니다. -->
         <div class="comment-buttons">
@@ -198,7 +343,7 @@
                         <% if (childComment.author_id == userId) { %>
                             (본인)
                         <% } %>
-                        &nbsp<%= childComment.created_at %>
+                        <%= childComment.created_at %>
                     </p>
                     <p class="comment-content" data-comment-id="<%= childComment.id %>"><%= childComment.content %></p> <!-- 여기서 '.comment-content'를 추가했습니다. -->
                     <div class="comment-buttons">
@@ -226,9 +371,13 @@
         <textarea class="comment-input" name="content" rows="5" placeholder="'<%= username%>'님 댓글을 남겨보세요" required></textarea><br>
         <input type="hidden" name="post_id" value="<%= notice.id %>">
         <input type="hidden" name="author_id" value="<%= userId %>">
-        <input type="submit" value="등록" class="submit-button">
+        <input type="submit" value="댓글작성" class="submit-button">
     </form>
 </div>
+</div>
+</td>
+ </tr>
+</table>
 <!-- 이전 페이지로 돌아가기 버튼 -->
 <div class="center">
     <a href="/boardkyb" class="button">이전 페이지로 돌아가기</a>
@@ -255,7 +404,7 @@
                             <input type="hidden" name="author_id" value="<%= userId %>">
                             <input type="hidden" name="comment_id" value="${commentId}">
                             <textarea class="comment-input" name="content" rows="3" placeholder="'<%= username%>'님 답글을 남겨보세요" required></textarea><br>
-                            <input type="submit" value="등록" class="submit-button">
+                            <input type="submit" value="답글작성" class="submit-button">
                         </form>
                     </div>`;
                 $(this).closest('.comment').append(newReplyForm);

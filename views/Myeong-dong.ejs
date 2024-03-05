@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="ko-kr">
+<head>
+    <meta charset="UTF-8">
+    <title>Chart.js Example</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/SeoulNamsanM.woff">
+    <link rel="stylesheet" href="../public/css/header_test_1.css">
+    <link rel="stylesheet" href="../public/css/main.css">
+    <link rel="stylesheet" href="../public/css/chat.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://kit.fontawesome.com/a4dc7026e0.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
+    <script src="echarts.min.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+
+    <!-- Leaflet JavaScript -->
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script>
+        $(document).ready(function() {
+            $(".btn3 button").on("click", function() {
+                console.log("Button clicked!");
+                $(".content").toggleClass("expanded");
+            });
+
+            // content 외의 영역을 클릭하면 content 닫기
+            $(document).on("click", function(event) {
+                if (!$(event.target).closest(".btn3, .content").length) {
+                    $(".content").removeClass("expanded");
+                }
+            });
+        });
+    </script>
+    <style>
+
+     .container3{
+         margin: 130px auto;
+     }
+
+     .area_btn .swiper-slide { display: inline-block; }
+     .swiper-slide {
+         padding: 0.5em;
+         text-align: center;
+         margin: 0 auto;
+     }
+     .swiper-slide button {
+         margin: 20px 0;
+         padding: 5px;
+     }
+     .imgbox {
+         border-radius: 50%;
+         background: #ffffff;
+         overflow: hidden;
+     }
+    .swiper-slide img {
+        width: 100px;
+        height: 100px;
+    }
+    .cont{
+        border: 2px solid deepskyblue;
+        text-align: center;
+        width: 80%;
+        margin: 0 auto;
+        padding: 20px;
+    }
+    .q1, .q2{
+        display: inline-block;
+    }
+     .tourimg  img{
+         width: 200px;
+         height: 200px;
+         margin: 30px 40px;
+         border-radius: 10px;
+     }
+     .cont.pc{
+         margin-top: 30px;
+         margin-bottom: 10px;
+         padding: 20px;
+     }
+     .map1 {
+        margin: 10px auto;
+     }
+
+     .container4{
+         width: 800px;
+         height: 550px;
+         margin: 130px auto;
+         border: 2px solid lightgray;
+         overflow: hidden;
+     }
+
+     .container4 li{
+         margin: auto;
+     }
+     .container4 .menu_wrap{
+         display: table;
+         table-layout: fixed;
+         width: 100%;
+         border-collapse: collapse;
+     }
+     .chart_box{
+         text-align: center;
+     }
+     .container4 .menu_item{
+         position: relative;
+         display: table-cell;
+         vertical-align: top;
+     }
+     .container4 from{
+         display: block;
+     }
+     .menu_id.on{
+         border: 2px solid lightgray;
+         border-bottom: none;
+         z-index: 5;
+     }
+     .menu_ones, .menu_qr{
+         border: 2px solid lightgray;
+         z-index: 5;
+     }
+     .menu_id, .menu_ones, .menu_qr{
+         display: block;
+         position: relative;
+         padding-top: 17px;
+         height: 61px;
+         border-bottom: 0;
+         text-align: center;
+         box-sizing: border-box;
+     }
+
+     .container4 li:hover{
+         color: white;
+         text-shadow: -1px 0px black, 0px 1px black, 1px 0px black, 0px -1px black
+     }
+     .container5{
+         border-top: 2px solid lightgray;
+         margin: 0;
+     }
+     .m_img img{
+         width: 900px;
+         height: 250px;
+         margin-left: -40px;
+     }
+     .m_text_box{
+         width: 800px;
+         height: 180px;
+         text-align: center;
+         padding: 20px;
+         line-height: 30px;
+     }
+     .background1{
+         background: linear-gradient(to bottom, #00B0F0, #ffff 30%, #ffff );
+         padding: 30px;
+         height: 50rem;
+     }
+     .hashtag{
+         width: 800px;
+         height: 70px;
+     }
+     .hashtag button{
+         padding: 10px;
+         background: none;
+         border: none;
+     }
+     .map_container{
+         text-align: center;
+         margin: 0 auto;
+         width: 800px;
+         height: 500px;
+     }
+     .map_container button{
+         padding: 10px;
+         margin-bottom: 10px;
+         float: left;
+     }
+
+     .button_box1{
+         width: 960px;
+         margin: 0 auto;
+     }
+     .button_box1 button{
+         margin-top: 20px;
+         padding: 10px;
+         border : 2px solid deepskyblue;
+         border-radius: 10px;
+     }
+     .wide{
+         width: 1200px;
+         margin: 0 auto;
+     }
+     .area_hotplace{
+         width: 1200px;
+
+     }
+     .wide .inr{
+         width: 1200px;
+         text-align: center;
+         margin: 20px auto;
+     }
+     .swiper-wrapper, .zone_cont{
+         text-align: center;
+         margin: 0 auto;
+     }
+     .zone_cont{
+         text-align: center;
+         margin: 20px auto;
+     }
+
+
+    </style>
+</head>
+<body>
+<div class = "container1_1">
+    <nav class = "head_nav">
+        <div class = "nav-item1-left">
+            <a class="nav-link1" href = "/boardkyb">공지사항</a>
+        </div>
+        <div class="nav-item1-left">
+            <a class="nav-link" href="/boardLJW">요청게시판</a>
+        </div>
+        <div class = "nav-item1-center">
+            <a class = "nav-link1" href = "/main"><h1><img src = "../public/images/logo1.png"></h1></a>
+        </div>
+        <div class = "nav-item1">
+            <div class = "login_box">
+                <% if (username) { %>
+                    <a href="#" class="button"><%- username %></a>
+                    <div class="sub-nav">
+                        <a class="nav-item" href="/logout">로그아웃</a>
+                    </div>
+                <% } else { %>
+                    <a href="/login" class="button">로그인</a>
+                <% } %>
+            </div>
+        </div>
+    </nav>
+</div>
+<div class="container">
+    <nav>
+        <div class = "nav-item">
+            <a class="nav-link" href="/total"><h1>Top12</h1></a>
+            <div class="sub-nav">
+                <a class="nav-item" href="/subway">관광객 추세</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <a class="nav-link" href="/video"><h2>잠실</h2></a>
+        </div>
+        <div class="nav-item">
+            <a class="nav-link" href="public/main2.html"><h2>홍대입구</h2></a>
+            <div class="sub-nav">
+                <a class="nav-item" href="public/ganTasty.html">맛집</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <a class="nav-link" href="/gangnam"><h2>강남</h2></a>
+            <div class="sub-nav">
+                <a class="nav-item" href="/chartkyb">강남 점포수</a>
+                <a class="nav-item" href="/HJ_boardMain">게시판</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <a class="nav-link" href="public/main2.html"><h2>구로디지털</h2></a>
+            <div class="sub-nav">
+                <a class="nav-item" href="public/ganTasty.html">맛집</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <a class="nav-link" href="public/main2.html"><h2>삼성</h2></a>
+            <div class="sub-nav">
+                <a class="nav-item" href="public/ganTasty.html">맛집</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <a class="nav-link" href="public/main2.html"><h2>신림</h2></a>
+            <div class="sub-nav">
+                <a class="nav-item" href="public/ganTasty.html">역삼</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <a class="nav-link" href="public/main2.html"><h2>서울역</h2></a>
+            <div class="sub-nav">
+                <a class="nav-item" href="public/ganTasty.html">맛집</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <a class="nav-link" href="public/main2.html"><h2>신도림</h2></a>
+            <div class="sub-nav">
+                <a class="nav-item" href="public/ganTasty.html">맛집</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <a class="nav-link" href="public/main2.html"><h2>고속터미널</h2></a>
+            <div class="sub-nav">
+                <a class="nav-item" href="public/ganTasty.html">맛집</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <a class="nav-link" href="/Myeong-dong"><h2>명동</h2></a>
+            <div class="sub-nav">
+                <a class="nav-item" href="/md_mainBoard">게시판</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <a class="nav-link" href="public/main2.html"><h2>선릉</h2></a>
+            <div class="sub-nav">
+                <a class="nav-item" href="public/ganTasty.html">맛집</a>
+            </div>
+        </div>
+    </nav>
+</div>
+<div class = "background1">
+<div class = "container4">
+    <div class="chart_content">
+        <div class="login_wrap">
+            <ul class="menu_wrap" role="tablist">
+                <li class="menu_item" role="presentation">
+                    <a href="#none" id="loinid" class="menu_id on" role="tab" aria-selected="true">
+                        <span class="menu_text"><span class="text">명동역</span></span>
+                    </a>
+                </li>
+                <li class="menu_item" role="presentation">
+                    <a href="#none" id="ones" class="menu_ones" role="tab" aria-selected="false">
+                        <span class="menu_text"><span class="text">실시간 관광객</span></span>
+                    </a>
+                </li>
+            </ul>
+            <form id="frmNIDLogin" name="frmNIDLogin" target="_top" AUTOCOMPLETE="off"
+                  action="https://nid.naver.com/nidlogin.login" method="POST">
+                <ul class="panel_wrap">
+                    <li class="panel_item" style="display: block;">
+                        <div class="panel_inner" role="tabpanel" aria-controls="loinid">
+                            <div class="id_pw_wrap">
+                                <div class="container5">
+                                    <div class="chart_box" id="m_img_box">
+                                            <div class = "m_img">
+                                                <img src="../public/images/myeongdong.JPG">
+                                                <div class = "m_text_box">
+                                                <q>서울 최대 번화가 중 한 곳인 명동이 있다. 평일 낮 시간에는 그래도 비교적 한산한 편이지만,<br>
+                                                    저녁 및 밤이나 주말, 연휴, 공휴일 땐 그야말로 사람들이 폭발한다.<br>
+                                                    환승역 3연타석인 충무로역 - 동대문역사문화공원역 - 동대문역과 비교해도 꿇리지 않을 레벨이지만,<br>
+                                                    이용객수는 훨씬 레벨이 높다.</q>
+                                                </div>
+                                                <div class ="hashtag">
+                                                    <button class = "hash"> #명동 </button>
+                                                    <button class = "hash"> #명동길거리음식 </button>
+                                                    <button class = "hash"> #서울관광지 </button>
+                                                    <button class = "hash"> #4호선 </button>
+                                                </div>
+                                            </div>
+                                     </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </form>
+        </div>
+    </div>
+
+    <ul class="panel_wrap">
+        <li class="panel_item" style="display: block;">
+            <div class="panel_inner" role="tabpanel" aria-controls="ones">
+                <div class="ones_text">
+                    <div class="input_row" id="id_line">
+                        <div class="icon_cell" id="id_cell">
+                            <div class="container5">
+                                <div class="chart_box">
+                                    <canvas id="myChart1" width="800px" height="500px"></canvas>
+                                    <script>
+                                        var myChart1 = echarts.init(document.getElementById('myChart1'));
+
+                                        var option1 = {
+                                            title: {
+                                                text: '명동 관광객',
+                                            },
+                                            tooltip: {
+                                                trigger: 'axis',
+                                                axisPointer: {
+                                                    type: 'cross',
+                                                    label: {
+                                                        backgroundColor: '#283b56'
+                                                    }
+                                                }
+                                            },
+                                            legend: {
+                                                data:['외국인비율', '관광객']
+                                            },
+                                            dataZoom: {
+                                                show: false,
+                                                start: 0,
+                                                end: 100
+                                            },
+                                            xAxis: [
+                                                {
+                                                    type: 'category',
+                                                    boundaryGap: true,
+                                                    data: (function (){
+                                                        var now = new Date();
+                                                        var res = [];
+                                                        var len = 20;
+                                                        while (len--) {
+                                                            res.unshift(now.toLocaleTimeString().replace(/^\D*/,''));
+                                                            now = new Date(now - 2000);
+                                                        }
+                                                        return res;
+                                                    })()
+                                                },
+                                            ],
+                                            yAxis: [
+                                                {
+                                                    type: 'value',
+                                                    scale: true,
+                                                    name: '외국인 비율',
+                                                    max: 30,
+                                                    min: 0,
+                                                    boundaryGap: [0.2, 0.2],
+                                                    axisLabel: {
+                                                        formatter: '{value} %'
+                                                    },
+                                                },
+                                                {
+                                                    type: 'value',
+                                                    scale: true,
+                                                    name: '관광객',
+                                                    max: 1200,
+                                                    min: 0,
+                                                    boundaryGap: [0.2, 0.2]
+                                                }
+                                            ],
+                                            series: [
+                                                {
+                                                    name: '외국인비율',
+                                                    type: 'line',
+                                                    lineStyle:{
+                                                        color:'#c8ffff' //line차트 색상 변경
+                                                    },
+                                                    smooth: true, //부드러운 line 표현
+                                                    yAxisIndex: 0, //yAxis 1번째 사용
+                                                    data: (function (){
+                                                        var res = [];
+                                                        var len = 0;
+                                                        while (len < 20) {
+                                                            res.push((Math.random()*10 + 5).toFixed(1) - 0); //랜덤 데이터 생성
+                                                            len++;
+                                                        }
+                                                        return res;
+                                                    })()
+                                                },
+                                                {
+                                                    name: '관광객',
+                                                    type: 'bar',
+                                                    yAxisIndex: 1, //yAxis 2번째 사용
+                                                    itemStyle:{
+                                                        color:'#2962ff' //bar 색상 변경
+                                                    },
+                                                    data: (function (){
+                                                        var res = [];
+                                                        var len = 20;
+                                                        while (len--) {
+                                                            res.push(Math.round(Math.random() * 1000)); //랜덤 데이터 생성
+                                                        }
+                                                        return res;
+                                                    })()
+                                                },
+                                            ]
+                                        };
+
+                                        // 위에서 설정한 속성을 차트에 반영합니다.
+                                        myChart1.setOption(option1);
+
+                                        //데이터를 생성하고 삭제합니다.
+                                        setInterval(function (){
+                                            //x축에 실시간 데이터 생성
+                                            var axisData1 = (new Date()).toLocaleTimeString().replace(/^\D*/, '');
+
+                                            var data2 = option1.series[1].data; //순수익 데이터
+                                            var data3 = option1.series[0].data; //총 수익 데이터
+
+                                            //데이터의 가장 왼쪽 값을 제거
+                                            data2.shift();
+                                            //데이터의 가장 오른쪽 값을 추가
+                                            data2.push(Math.round(Math.random() * 1000));
+                                            data3.shift();
+                                            data3.push((Math.random() * 10 + 5).toFixed(1) - 0);
+
+
+                                            //x축에 시간 데이터 추가
+                                            option1.xAxis[0].data.shift();
+                                            option1.xAxis[0].data.push(axisData1);
+
+                                            //차트에 반영
+                                            myChart1.setOption(option1);
+                                        }, 2100);
+                                    </script>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </li>
+    </ul>
+</div>
+<script>
+    // 강남 관광객 메뉴를 클릭했을 때 실행될 함수
+    document.getElementById('loinid').addEventListener('click', function() {
+        // 강남 관광객 차트를 보입니다.
+        document.getElementById('m_img_box').style.display = 'block';
+        // 명동 관광객 차트를 숨깁니다.
+        document.getElementById('myChart1').style.display = 'none';
+    });
+
+    // 명동 관광객 메뉴를 클릭했을 때 실행될 함수
+    document.getElementById('ones').addEventListener('click', function() {
+        // 명동 관광객 차트를 보입니다.
+        document.getElementById('myChart1').style.display = 'block';
+        // 강남 관광객 차트를 숨깁니다.
+        document.getElementById('m_img_box').style.display = 'none';
+    });
+</script>
+</div>
+<div class = container3>
+    <div class="area_info">
+        <div class="list_zone">
+            <div class="area_btn">
+                <div class="swiper-container tab">
+                    <div class="swiper-wrapper">
+                        <div id="zone1" class="swiper-slide" data-areaCode="1">
+                            <a href="javascript:" class="seoul on" onclick="areaClickEvent(this);">
+                                <div class="imgbox"><img src="../public/images/m2.jpg" alt=""></div>
+                                <button><span>신세계백화점</span></button>
+                            </a>
+                        </div>
+                        <div id="zone4" class="swiper-slide" data-areaCode="2">
+                            <a href="javascript:;" class="incheon" onclick="areaClickEvent(this);">
+                                <div class="imgbox"><img src="../public/images/m4.jpg" alt=""></div>
+                                    <button><span>명동성당</span></button>
+                            </a>
+                        </div>
+                        <div id="zone6" class="swiper-slide" data-areaCode="3">
+                            <a href="javascript:;" class="daejeon" onclick="areaClickEvent(this);">
+                                <div class="imgbox"><img src="../public/images/m5.jpg" alt=""></div>
+                                <button><span>남산벚꽃</span></button>
+                            </a>
+                        </div>
+                        <div id="zone3" class="swiper-slide" data-areaCode="4">
+                            <a href="javascript:" class="daegu" onclick="areaClickEvent(this);">
+                                <div class="imgbox"><img src="../public/images/m1.jpg" alt=""></div>
+                                <button><span>롯데백화점</span></button>
+                            </a>
+                        </div>
+                        <div id="zone9" class="swiper-slide" data-areaCode="31">
+                            <a href="javascript:;" class="gyeonggi" onclick="areaClickEvent(this);">
+                                <div class="imgbox"><img src="../public/images/m6.jpg" alt=""></div>
+                                <button><span>숭례문</span></button>
+                            </a>
+                        </div>
+                        <div id="zone2" class="swiper-slide" data-areaCode="6">
+                            <a href="javascript:;" class="busan" onclick="areaClickEvent(this);">
+                                <div class="imgbox"><img src="../public/images/m7.jpg" alt=""></div>
+                                <button><span>남대문수입상가</span></button>
+                            </a>
+                        </div>
+                        <div id="zone7" class="swiper-slide" data-areaCode="7">
+                            <a href="javascript:;" class="ulsan" onclick="areaClickEvent(this);">
+                                <div class="imgbox"><img src="../public/images/m3.jpg" alt=""></div>
+                                <button><span>명동거리</span></button>
+                            </a>
+                        </div>
+                        <div id="zone5" class="swiper-slide" data-areaCode="5">
+                            <a href="javascript:;" class="gwangju" onclick="areaClickEvent(this);">
+                                <div class="imgbox"><img src="../public/images/m8.jpg" alt=""></div>
+                                <button><span>만화거리</span></button>
+                            </a>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="zone_box">
+                    <div id="boxLogo" class="box_logo">
+                        <div id="areaTitleNext" style="display:none"></div>
+                        <div class="switch_wrap" style="display:none">
+                            <label class="switch"><em>내위치</em></label>
+                            <span class="tog_wrap">
+								<input type="checkbox" id="switch1" name="switch1" title="내위치">
+								<span class="slider"></span>
+							</span>
+                        </div>
+                    </div>
+                    <div id="zoneCont" class="zone_cont on">
+                        <div class="swiper-container">
+                        <div class="list_sub">
+                            <strong><em></em> <a href = "https://www.junggu.seoul.kr/tour/content.do?cmsid=14818">지역 문화관광 홈페이지 바로가기</a></strong>
+                            <div class="inr">
+                                <ul class="clfix" id="sigungulist">
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function initMap() {
+        // 지도를 표시할 div 요소를 선택하고 Leaflet 맵 객체를 생성합니다.
+        var map = L.map('map').setView([37.5635, 126.9865], 16); // [위도, 경도], 줌 레벨 설정
+
+        // Leaflet을 통해 지도에 타일 레이어를 추가합니다.
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+        // 지도에 마커를 추가할 수도 있습니다.
+        var marker = L.marker([37.5610, 126.9865]).addTo(map); // [위도, 경도]
+        var marker1 = L.marker([37.5633, 126.9870]).addTo(map);
+        var marker2 = L.marker([37.5650, 126.9818]).addTo(map);
+    }
+
+    // initMap 함수를 로드할 때마다 호출하여 지도를 초기화합니다.
+    window.onload = initMap;
+</script>
+<div class = "map_container">
+<button class="button1"><h3>지도부터 살펴볼까?</h3></button>
+<div onload="initMap()">
+<div class="map1" id="map" style= "width: 800px; height: 400px;"></div>
+</div>
+</div>
+<!-- contents -->
+<div class = "button_box1">
+    <button class="button1"><h3>우리 지역 핫플이 궁금해?</h3></button>
+</div>
+<div id="contents" class="wide">
+    <div id="hotPl" class="area_hotplace">
+        <div class="inr">
+                <div class="cont">
+                    <h4><strong class="areaName"></strong> 추천 여행지</h4>
+                    <ul>
+                    </ul>
+                    <div id="mQuration">
+                        <div class="q1"><div class = "tourimg"><img src = "../public/images/m1.jpg"></div> 롯데백화점 </div>
+                        <div class="q2"><div class = "tourimg"><img src = "../public/images/m2.jpg" href="https://www.shinsegae.com/store/main.do?storeCd=SC00001"></div> 신세계백화점 </div>
+                        <div class="q2"><div class = "tourimg"><img src = "../public/images/m4.jpg"></div> 명동성당 </div>
+                    </div>
+                </div>
+                <div class="cont pc">
+                    <h4><strong class="areaName"></strong> 추천 맛집</h4>
+                    <ul>
+                    </ul>
+                    <div id="mQuration1">
+                        <div class="q1"><div class = "tourimg"><img src = "../public/images/m1_1.jpg" href="http://www.mdkj.co.kr/"></div> 명동교자 </div>
+                        <div class="q2"><div class = "tourimg"><img src = "../public/images/m2_1.jpg"></div> 명동돈까스 </div>
+                        <div class="q2"><div class = "tourimg"><img src = "../public/images/m3_1.jpg"></div> 하동관 </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<!--    <div class="kockoc_banner">-->
+<!--        <div class="swiper-container">-->
+<!--            <ul class="swiper-wrapper">-->
+<!--                <li class="swiper-slide cont1">-->
+<!--                    <strong>핫플콕콕</strong>-->
+<!--                    <p>요즘 인기있는 여행지는 다 모였네!<br>-->
+<!--                        지역별 핫플을 알려드려요!-->
+<!--                    </p>-->
+<!--                    <a href="/main/cr_main.do?type=place">바로가기</a>-->
+<!--                </li>-->
+<!--                <li class="swiper-slide cont2">-->
+<!--                    <strong>AI콕콕 플래너</strong>-->
+<!--                    <p>어떤 지역을 여행하고 싶으신가요?<br>-->
+<!--                        맞춤형 여행 코스 대기 중!-->
+<!--                    </p>-->
+<!--                    <a href="/main/cr_main.do?type=abc">바로가기</a>-->
+<!--                </li>-->
+<!--                <li class="swiper-slide cont3">-->
+<!--                    <strong>AI콕콕</strong>-->
+<!--                    <p>나의 여행 성향을 분석한 <br>-->
+<!--                        나만의 맞춤형 여행지 추천!-->
+<!--                    </p>-->
+<!--                    <a href="/main/cr_main.do?type=ai">바로가기</a>-->
+<!--                </li>-->
+<!--            </ul>-->
+<!--        </div>-->
+<!--    </div>-->
+
+<!--    <div class="festival_calendar">-->
+<!--        <h3><strong></strong>축제&middot;행사 어디까지 가봤니?</h3>-->
+<!--        <div class="calendar">-->
+<!--            <button class="prev" type="button" onclick="_monthUtil.fnPreDay();">이전</button>-->
+<!--            <button class="next" type="button" onclick="_monthUtil.fnNextDay();">다음</button>-->
+<!--            <ul id="dayList">-->
+<!--            </ul>-->
+<!--            <div class="wrap">-->
+<!--                <div id="datePickerPC"></div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--        <div class="mo_calendar">-->
+<!--            <div class="control">-->
+<!--                <button type="button" class="prev">이전</button>-->
+<!--                <span id="dateTxt"></span>-->
+<!--                <button type="button" class="next">다음</button>-->
+<!--            </div>-->
+<!--            <div id="datePickerM"></div>-->
+<!--        </div>-->
+<!--        <div id="festivalCon" class="poster">-->
+<!--            <div class="swiper-container">-->
+<!--                <div class="swiper-wrapper">-->
+<!--                </div>-->
+<!--                <div class="swiper-button-prev">이전</div>-->
+<!--                <div class="swiper-button-next">다음</div>-->
+<!--                <div class="page_box">-->
+<!--                    <div class="swiper-pagination"></div>-->
+<!--                    <div class="num"><strong class="current"></strong>/<span class="total"></span></div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="no_list" style="display:none">-->
+<!--                <strong>앗! 아쉽지만 찾으신 날짜에 <br class="mo">진행중인 축제&middot;행사가 없어요.</strong>-->
+<!--                <p>다른 축제&middot;행사를 살펴보는건 어떨까요?</p>-->
+<!--                <a href="/other/festivalCalendar.do"><strong>축제·행사달력</strong> 바로가기</a>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--        <div class="btn_shortcut"><a href="/other/festivalCalendar.do"><strong>축제&middot;행사달력</strong> 바로가기</a></div>-->
+<!--        <a href="/list/all_list.do?searchTag=%EC%B6%95%EC%A0%9C%7C%EA%B3%B5%EC%97%B0/%ED%96%89%EC%82%AC" class="more" title="측제,행사 페이지로 이동">더보기</a>-->
+<!--    </div>-->
+
+</div>
+            </div>
+<div class="container1">
+    <div class="chat-bar collapsed">
+        <div class="btn3">
+            <button><i class="fa-sharp fa-solid fa-comments">chat us!</i></button>
+        </div>
+        <div class="content">
+            <div class="full-chat-block">
+                <div class="outer-container">
+                    <div class="chat-container">
+                        <div id="chatbox">
+                            <h5 id="chat-timestamp"></h5>
+                            <p id="botStarterMessage" class="botText"><span>Loading...</span></p>
+                        </div>
+                        <div class="chat-bar-input-block">
+                            <div id="userInput">
+                                <input id="textInput" class="input-box" type="text" name="msg" placeholder="엔터(Enter)키를 눌러 메세지를 보내세요!">
+                                <p></p>
+                            </div>
+                            <div class="chat-bar-icons">
+                                <i id="chat-icon" style="color: crimson;" class="fa fa-fw fa-heart" onclick="heartButton()"></i>
+                                <i id="chat-icon" style="color: #333;" class="fa fa-fw fa-send" onclick="sendButton()"></i>
+                            </div>
+                        </div>
+                        <div id="chat-bar-bottom">
+                            <p></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../public/js/chat.js"></script>
+<script src="../public/js/Reply.js"></script>
+</body>
+</html>
+</DOCTYPE>

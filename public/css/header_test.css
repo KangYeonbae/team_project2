@@ -8,7 +8,7 @@
     margin: auto;
     justify-content: center;
     text-align: center;
-    height: 70px;
+    height: 90px;
 }
 .container1_1 .nav-item1-left{
     float: left;
@@ -17,13 +17,15 @@
 .container1_1 .nav-item1-center{
     float: none;
     margin: auto;
-
+}
+.nav-link1 img{
+    width: 200px;
+    height: 80px;
 
 }
 .container1_1 .my_page, .nav-item1{
     float: right;
     margin: auto 50px;
-
 }
 *{
     font-family: 'SeoulHangangM';
@@ -37,7 +39,7 @@ a, a:link, a:visited{
 }
 .container {
     width: 100%;
-    margin: 70px auto;
+    margin: 90px auto;
     position: absolute;
     top: 0;
     color: wheat;

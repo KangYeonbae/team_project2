@@ -1,0 +1,98 @@
+@font-face {
+    font-family: 'SeoulHangangM';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/SeoulHangangM.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* 전반적인 스타일 */
+* {
+    font-family: 'SeoulHangangM';
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+a, a:link, a:visited {
+    color: inherit;
+    text-decoration: none;
+}
+
+body {
+    background-color: #f5f5f5; /* 배경색 추가 */
+}
+
+/* 네비게이션 바 */
+.head_nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 70px;
+    background-color: #fff; /* 배경색 추가 */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* 그림자 효과 추가 */
+}
+
+.head_nav .nav-item {
+    padding: 0 20px; /* 좀 더 여백을 줌 */
+    font-weight: bold;
+    position: relative;
+}
+
+.head_nav .nav-item:first-child {
+    margin-left: 20px; /* 좌측 여백 추가 */
+}
+
+.head_nav .nav-item:last-child {
+    margin-right: 20px; /* 우측 여백 추가 */
+}
+
+.head_nav .nav-item h1, .head_nav .nav-item h2 {
+    margin: 0;
+    font-size: 1.6rem;
+}
+
+.sub-nav {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 1000; /* 다른 요소 위에 나타나도록 설정 */
+    background-color: #fff; /* 배경색 추가 */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* 그림자 효과 추가 */
+}
+
+.sub-nav .nav-item {
+    display: block;
+    padding: 10px;
+    font-size: 1.4rem;
+    color: #333; /* 글자색 변경 */
+}
+
+/* 호버 효과 */
+.nav-item:hover .sub-nav {
+    display: block;
+}
+
+.container {
+    width: 100%;
+    max-width: 1200px; /* 너비 제한 */
+    margin: 0 auto; /* 가운데 정렬 */
+    padding: 20px; /* 내부 여백 */
+    background-color: #fff; /* 배경색 추가 */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* 그림자 효과 추가 */
+    border-radius: 10px; /* 모서리를 둥글게 만듦 */
+    margin-top: 20px; /* 네비게이션 바와의 간격 */
+}
+
+.container h1 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+.container a {
+    color: #333;
+}
+
+.container a:hover {
+    color: #000;
+}

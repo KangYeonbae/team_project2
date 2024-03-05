@@ -1,0 +1,124 @@
+@font-face {
+    font-family: 'SeoulHangangM';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/SeoulHangangM.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+.head_nav{
+    margin: auto;
+    justify-content: center;
+    text-align: center;
+    height: 90px;
+}
+.container1_1 .nav-item1-left{
+    float: left;
+    margin: auto 50px;
+}
+.container1_1 .nav-item1-center{
+    float: none;
+    margin: auto;
+
+
+}
+.container1_1 .my_page, .nav-item1{
+    float: right;
+    margin: auto 50px;
+
+}
+*{
+    font-family: 'SeoulHangangM';
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+a, a:link, a:visited{
+    color: inherit;
+    text-decoration: none;
+}
+.nav-link1 img{
+    width: 200px;
+    height: 80px;
+}
+.container {
+    width: 100%;
+    margin-top : 90px;
+    position: absolute;
+    top: 0;
+    color: wheat;
+    font-weight: bold;
+    text-shadow: -1px 0px black, 0px 1px black, 1px 0px black, 0px -1px black;
+    padding: 1rem;
+    z-index: 1;
+    background: #54CAF5;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+.nav-item {
+    padding: 10px;
+    position: relative;
+    font-weight: bold;
+}
+.nav-item1 {
+    border: 2px solid #54CAF5;
+    border-radius: 30px;
+    padding: 10px 20px;
+    position: relative;
+}
+.nav-item1 .sub-nav{
+    width: 100px;
+    font-size: 15px;
+    color: wheat;
+}
+
+.nav-item h1 {
+    margin: 0;
+    padding-right: 20px; /* "Trip" 텍스트와 다음 요소 간의 간격을 설정 */
+}
+
+.nav-item:first-child {
+    margin-right: auto; /* 마지막 요소를 오른쪽으로 밀어줍니다. */
+}
+
+nav h2 {
+    float: right;
+    margin: 0;
+    font-size: 1.5rem;
+}
+
+.sub-nav {
+    display: none;
+    width: 150px;
+    height: auto;
+    background: none;
+    padding: 10px;
+    position: absolute;
+    top: 100%;
+    left: 0;
+}
+.sub-nav .nav-item{
+    display: inline-block;
+}
+.sub-nav .nav-item1{
+    display: inline-block;
+}
+.nav-item:hover .sub-nav {
+    display: block;
+}
+.nav-item1:hover .sub-nav {
+    display: block;
+}
+.container a:hover{
+    color: yellow;
+}
+.container1_1 a:hover{
+    text-shadow: -1px 0px black, 0px 1px black, 1px 0px black, 0px -1px black;
+    color: white;
+    font-weight: bold;
+}

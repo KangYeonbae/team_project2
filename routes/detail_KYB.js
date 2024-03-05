@@ -28,9 +28,10 @@ router.get('/:id', async (req, res) => {
         );
         console.log('여기옴2')
 
+
         // 게시글 정보 가져오기
         const noticeResult = await conn.execute(
-            `SELECT n.id, n.title, u.username AS author, n.content, TO_CHAR(n.created_at, 'YYYY-MM-DD') AS created_at, n.views, n.class_post
+            `SELECT n.id, n.title, u.username AS author, n.content, TO_CHAR(n.created_at, 'YYYY-MM-DD') AS created_at, n.views, n.class_post, n.FILE_ORIGINAL_NAME, n.FILE_STORED_NAME
              FROM notice n
                       JOIN users u ON n.author_id = u.id
              WHERE n.id = :id`,
@@ -82,10 +83,12 @@ router.get('/:id', async (req, res) => {
             id: noticeResult.rows[0][0],
             title: noticeResult.rows[0][1],
             username: noticeResult.rows[0][2],
-            content: noticeResult.rows[0][3],
+            content: noticeResult.rows[0][3].replace(/<br\s*\/?>/gi, '<br>'),
             created_at: noticeResult.rows[0][4],
             views:noticeResult.rows[0][5],
             class_post : noticeResult.rows[0][6],
+            file_original_name : noticeResult.rows[0][7],
+            file_stored_name : noticeResult.rows[0][8]
         };
 
         console.log(`notice: ${notice}, comments: ${comments}`);

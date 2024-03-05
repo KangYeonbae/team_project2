@@ -8,7 +8,7 @@ const multer = require('multer');
 
 const router = express.Router();
 const UPLOADS_FOLDER = path.join(__dirname, '../','uploads');
-const upload = multer({ dest: UPLOADS_FOLDER, encoding: 'utf8' });
+const upload = multer({ dest: path.join(__dirname, 'temp'), encoding: 'utf8' });
 
 router.get('/', (req, res) => {
     res.render('create_kyb', {
@@ -21,6 +21,8 @@ router.get('/', (req, res) => {
 router.post('/', upload.array('files', 5), async (req, res) => {
     console.log('Debug: post create');
     const { title, content, class_post} = req.body; // Added class_post
+
+    const convertedContent = content.replace(/\n/g, '<br>');
 
     const files = req.files.map(file => {
         return {
@@ -40,13 +42,14 @@ router.post('/', upload.array('files', 5), async (req, res) => {
         const noticeId = result.rows[0][0];
         console.log(authorId)
         await conn.execute(
-            `INSERT INTO notice (id, author_id,class_post, title, content, file_original_name, file_stored_name) VALUES (:id, :author_id, :class_post, :title, :content, :file_original_name, :file_stored_name)`,
+            `INSERT INTO notice (id, author_id,class_post, title, content, file_original_name, file_stored_name)
+             VALUES (:id, :author_id, :class_post, :title, :content, :file_original_name, :file_stored_name)`,
             {
                 id: noticeId,
                 author_id: authorId,
                 class_post: class_post, // Used class_post from req.body
                 title: title,
-                content: content,
+                content: convertedContent,
                 file_original_name: files.map(file => file.originalName).join(';'),
                 file_stored_name: files.map(file => file.storedName).join(';')
             });
@@ -59,6 +62,7 @@ router.post('/', upload.array('files', 5), async (req, res) => {
             const targetFilePath = path.join(UPLOADS_FOLDER, file.filename);
             fs.renameSync(tempFilePath, targetFilePath);
         }
+
 
         // 게시글 작성 후 게시판 메인 페이지로 리다이렉트
         res.redirect('/boardkyb');
