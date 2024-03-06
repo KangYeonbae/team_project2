@@ -57,9 +57,9 @@
 움직이는 그래프중 2개는 실제데이터값을 db에 입력하여 값을받아오는 형식으로 만든 그래프입니다.
 
 
-![gr](readmeimg/LJW.gif)
+<img src="readmeimg/LJW1.gif" alt="gr" width="300">
 
-![gr](readmeimg/KYB1.gif)
+<img src="readmeimg/KYB1.gif" alt="gr" width="300">
 
 
 
