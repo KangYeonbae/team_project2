@@ -88,9 +88,13 @@
 
 
 ### 4가지 게시판
+<img src="readmeimg/게시판.png" alt="gr" width="550">
+<img src="readmeimg/게시판1.jpg" alt="gr" width="550">
+<img src="readmeimg/게시판2.JPG" alt="gr" width="550">
+<img src="readmeimg/게시판3.JPG" alt="gr" width="550">
 
-
-
+팀원별로 개인게시판을 제작하였습니다.
+모두 글읽기와 덧글쓰기, 글삭제등 모두 구현가능합니다.
 
 
 ## 2월 14일 
