@@ -88,7 +88,10 @@
 
 
 ### 4가지 게시판
-
+<img src="readmeimg/게시판.png" alt="gr" width="550">
+<img src="readmeimg/게시판(1).JPG" alt="gr" width="550">
+<img src="readmeimg/게시판(2).JPG" alt="gr" width="550">
+<img src="readmeimg/게시판(3).JPG" alt="gr" width="550">
 
 
 
