@@ -87,6 +87,11 @@
 <img src="readmeimg/signup.gif" alt="gr" width="550">
 
 
+### 4가지 게시판
+
+
+
+
 
 ## 2월 14일 
 공공데이터포털(www.data.go.kr) 에서 서울시 승하차유동인구로 데이터를 뽑아 여행에 추천할만한 12개역을 뽑았습니다. 
