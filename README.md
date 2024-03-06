@@ -56,12 +56,24 @@
 
 움직이는 그래프중 2개는 실제데이터값을 db에 입력하여 값을받아오는 형식으로 만든 그래프입니다.
 
+실데이터 그래프
+
 
 <img src="readmeimg/LJW1.gif" alt="gr" width="400">
 
 <hr>
 
 <img src="readmeimg/KYB1.gif" alt="gr" width="400">
+
+
+
+랜덤값으로 가는 그래프
+
+<img src="readmeimg/KYB2.gif" alt="gr" width="400">
+
+<hr>
+
+<img src="readmeimg/KYB3.gif" alt="gr" width="400">
 
 
 
