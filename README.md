@@ -57,10 +57,22 @@
 움직이는 그래프중 2개는 실제데이터값을 db에 입력하여 값을받아오는 형식으로 만든 그래프입니다.
 
 
-<img src="readmeimg/LJW1.gif" alt="gr" width="300">
+<img src="readmeimg/LJW1.gif" alt="gr" width="400">
 
-<img src="readmeimg/KYB1.gif" alt="gr" width="300">
+<hr>
 
+<img src="readmeimg/KYB1.gif" alt="gr" width="400">
+
+
+
+### 로그인 & 회원가입
+
+로그인과 회원가입페이지도 구현하였습니다.
+
+
+<img src="readmeimg/login.gif" alt="gr" width="550">
+
+<img src="readmeimg/signup.gif" alt="gr" width="550">
 
 
 
