@@ -1,36 +1,3 @@
-# 프로젝트 
-
-## 회원가입
-
-![이미지 1](readmeimg/회원가입.png)
-
-## 회원가입후로그인
-
-![이미지 2](readmeimg/회원가입후로그인.png)
-
-## 자유게시판
-
-![이미지 3](readmeimg/LJW_MAINBOARD.png)
-
-## 좋아요기능구현
-
-![이미지 4](readmeimg/좋아요.png)
-
-## 좋아요중복x
-
-![이미지 5](readmeimg/좋아요중복체크x.png)
-
-
-
-
-
-
-
-
-
-
-
-
 ## 2월13일 첫 회의부터 2월 14일까지의 회의
 2차 프로젝트는 
 ![HTML Badge](https://img.shields.io/badge/HTML5-E34F26?style=flat&logo=HTML5&logoColor=white)
