@@ -26,6 +26,7 @@
 ## 화면구조
 
 ![first](readmeimg/1.JPG)  
+<img src="readmeimg/1.jpg" alt="gr" width="550">
 
 첫화면은 주제가 서울여행인만큼 메인 페이지는 들어가자마자 서울 홍보영상이 플레이되며,
 
@@ -63,21 +64,21 @@
 실데이터 그래프
 
 
-<img src="readmeimg/LJW1.gif" alt="gr" width="400">
+<img src="readmeimg/LJW1.gif" alt="gr" width="550">
 
 <hr>
 
-<img src="readmeimg/KYB1.gif" alt="gr" width="400">
+<img src="readmeimg/KYB1.gif" alt="gr" width="550">
 
 
 
 랜덤값으로 가는 그래프
 
-<img src="readmeimg/KYB2.gif" alt="gr" width="400">
+<img src="readmeimg/KYB2.gif" alt="gr" width="550">
 
 <hr>
 
-<img src="readmeimg/KYB3.gif" alt="gr" width="400">
+<img src="readmeimg/KYB3.gif" alt="gr" width="550">
 
 
 
@@ -99,6 +100,19 @@
 
 팀원별로 개인게시판을 제작하였습니다.
 모두 글읽기와 덧글쓰기, 글삭제등 모두 구현가능합니다.
+
+
+### 명동과 강남 디테일 페이지
+사진상으론 명동만 들어가있지만 실제페이지에서는 강남페이지도 동일한구성으로 되어져있습니다.
+
+<img src="readmeimg/B1.jpg" alt="gr" width="550">
+<img src="readmeimg/B2.jpg" alt="gr" width="550">
+<img src="readmeimg/B3.jpg" alt="gr" width="550">
+
+
+### 챗봇
+<img src="readmeimg/chat.jpg" alt="gr" width="550">
+<img src="readmeimg/chat1.jpg" alt="gr" width="550">
 
 
 ## 2월 14일 
