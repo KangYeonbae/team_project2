@@ -9,7 +9,7 @@ const oracledb = require("oracledb");
 
 // app.use(cookieParser());
 
-oracledb.initOracleClient({ libDir: 'C:\\instantclient_21_13' });
+oracledb.initOracleClient({ libDir: 'D:\\instantclient_21_13' });
 oracledb.autoCommit = true;
 
 const port = 3000;
