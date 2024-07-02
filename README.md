@@ -105,14 +105,14 @@
 ### 명동과 강남 디테일 페이지
 사진상으론 명동만 들어가있지만 실제페이지에서는 강남페이지도 동일한구성으로 되어져있습니다.
 
-<img src="readmeimg/B1.jpg" alt="gr" width="550">
-<img src="readmeimg/B2.jpg" alt="gr" width="550">
-<img src="readmeimg/B3.jpg" alt="gr" width="550">
+<img src="readmeimg/B1.JPG" alt="gr" width="550">
+<img src="readmeimg/B2.JPG" alt="gr" width="550">
+<img src="readmeimg/B3.JPG" alt="gr" width="550">
 
 
 ### 챗봇
-<img src="readmeimg/chat.jpg" alt="gr" width="550">
-<img src="readmeimg/chat1.jpg" alt="gr" width="550">
+<img src="readmeimg/chat.JPG" alt="gr" width="550">
+<img src="readmeimg/chat1.JPG" alt="gr" width="550">
 
 
 ## 2월 14일 
