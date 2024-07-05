@@ -55,6 +55,19 @@
 >> 모두다 취합하여 원활하게 페이지가 돌아갈수 있도록 잘 처리하엿습니다.
 
 
+
+### 메인페이지 & 로그인 & 회원가입
+
+로그인과 회원가입페이지도 구현하였습니다.
+
+
+<img src="readmeimg/login.gif" alt="gr" width="700">
+
+<img src="readmeimg/signup.gif" alt="gr" width="550">
+
+
+
+
 ### 그래프들
 그래프는 총 6개가 들어갔습니다.
 그중 4개가 모두 움직이는 그래프이며,
@@ -79,17 +92,6 @@
 <hr>
 
 <img src="readmeimg/KYB3.gif" alt="gr" width="550">
-
-
-
-### 로그인 & 회원가입
-
-로그인과 회원가입페이지도 구현하였습니다.
-
-
-<img src="readmeimg/login.gif" alt="gr" width="550">
-
-<img src="readmeimg/signup.gif" alt="gr" width="550">
 
 
 ### 4가지 게시판
