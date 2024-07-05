@@ -25,8 +25,7 @@
 
 ## 화면구조
 
-![first](readmeimg/1.JPG)  
-<img src="readmeimg/1.jpg" alt="gr" width="550">
+![first](readmeimg/1.JPG) 
 
 첫화면은 주제가 서울여행인만큼 메인 페이지는 들어가자마자 서울 홍보영상이 플레이되며,
 
