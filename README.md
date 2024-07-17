@@ -5,7 +5,7 @@
 ![JavaScript Badge](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat&logo=JavaScript&logoColor=white)
 ![JQuery Badge](https://img.shields.io/badge/jQuery-0769AD?style=flat&logo=jQuery&logoColor=white)
 ![NODE JS](https://img.shields.io/badge/Node.js-339933?style=flat-square&logo=Node.js&logoColor=white)
-를 사용하여 1차프로젝트때 하였던것에 게시판과, 로그인을 백앤드와 연결하여 사용자 편의 사이트를 제작하는 프로젝트를 진행하였습니다.
+를 사용하여 1차프로젝트때 하였던것을 그대로 ejs로 구현하되, 게시판과, 로그인을 백앤드와 연결하여 사용자 편의 사이트를 제작하는 프로젝트를 진행하였습니다.
 
 대부분 프로젝트 주제를 변경하는반면
 저희조는 1차때 하였던 여행이라는 주제를 가지고 계속하여 진행하는 방향으로 결정되어진 첫 회의였습니다.
